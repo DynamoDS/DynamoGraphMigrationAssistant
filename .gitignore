@@ -1,52 +1,67 @@
-# Prerequisites
-*.d
-
-# Object files
-*.o
-*.ko
-*.obj
-*.elf
-
-# Linker output
-*.ilk
-*.map
-*.exp
-
-# Precompiled Headers
-*.gch
-*.pch
-
-# Libraries
-*.lib
-*.a
-*.la
-*.lo
-
-# Shared objects (inc. Windows DLLs)
+# Compiled source #
+###################
+*.com
+*.class
 *.dll
-*.so
-*.so.*
-*.dylib
-
-# Executables
 *.exe
-*.out
-*.app
-*.i*86
-*.x86_64
-*.hex
+*.msi
+*.o
+*.so
+bin/
+obj/
+dist/
+packages/
 
-# Debug files
-*.dSYM/
-*.su
-*.idb
+#find -type d -name bin -exec git rm -r {} \;
+
+# Packages #
+############
+# it's better to unpack these files and commit the raw source
+# git has its own built in compression methods
+*.7z
+*.dmg
+*.gz
+*.iso
+*.jar
+*.rar
+*.tar
+*.zip
+
+# Logs and databases #
+######################
+*.log
+*.sql
+*.sqlite
+*.vc.db
+
+# OS generated files #
+######################
+.DS_Store*
+ehthumbs.db
+Icon?
+Thumbs.db
+
+# DEBUG FILES #
+###############
 *.pdb
+*.cache
+*.suo
+*.user
+*.opendb
+.vs
 
-# Kernel Module Compile Results
-*.mod*
-*.cmd
-.tmp_versions/
-modules.order
-Module.symvers
-Mkfile.old
-dkms.conf
+# PYTHON #
+###############
+*.pyc
+
+# RESHARPER #
+###############
+*_ReSharper*
+
+#documentation files
+doc/html/
+Dynamo.sln.DotSettings
+*.opensdf
+*.sdf
+*.backup
+*.pdf
