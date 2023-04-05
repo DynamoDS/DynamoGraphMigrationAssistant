@@ -7,7 +7,7 @@
     <ProjectGuid>{A8041356-BBBA-4B62-BF09-78C2011137DF}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>DynamoGraphUpdaterViewExtension</RootNamespace>
+    <RootNamespace>DynamoGraphUpdater</RootNamespace>
     <AssemblyName>DynamoGraphUpdaterViewExtension</AssemblyName>
     <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
@@ -141,6 +141,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="images\logo.png" />
+    <Content Include="manifest\DynamoGraphUpdater_ViewExtensionDefinition.xml" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
@@ -158,5 +159,6 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

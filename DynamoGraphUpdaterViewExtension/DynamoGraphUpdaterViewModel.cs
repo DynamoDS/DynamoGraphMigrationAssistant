@@ -4,7 +4,7 @@ using Dynamo.Graph.Workspaces;
 using Dynamo.ViewModels;
 using Dynamo.Wpf.Extensions;
 
-namespace DynamoGraphUpdaterViewExtension
+namespace DynamoGraphUpdater
 {
     public class DynamoGraphUpdaterViewModel : NotificationObject, IDisposable
     {

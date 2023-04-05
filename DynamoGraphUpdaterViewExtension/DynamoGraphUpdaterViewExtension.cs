@@ -1,13 +1,9 @@
 ﻿using Dynamo.Wpf.Extensions;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Controls;
-using static Dynamo.ViewModels.SearchViewModel;
 
-namespace DynamoGraphUpdaterViewExtension
+namespace DynamoGraphUpdater
 {
     public class DynamoGraphUpdaterViewExtension : ViewExtensionBase, IViewExtension
     {
@@ -46,8 +42,16 @@ namespace DynamoGraphUpdaterViewExtension
 
             // Add a button to Dynamo View menu to manually show the window
             DynamoGraphUpdaterMenuItem = new MenuItem { Header = Properties.Resources.HeaderText };
-            
+
+            DynamoGraphUpdaterMenuItem.Click += DynamoGraphUpdaterMenuItemOnClick;
+
+
             _viewLoadedParamsReference.AddExtensionMenuItem(DynamoGraphUpdaterMenuItem);
+        }
+
+        private void DynamoGraphUpdaterMenuItemOnClick(object sender, RoutedEventArgs e)
+        {
+            View.ShowDialog();
         }
 
         public void Shutdown()
@@ -59,12 +63,7 @@ namespace DynamoGraphUpdaterViewExtension
             ViewModel = new DynamoGraphUpdaterViewModel(_viewLoadedParamsReference);
             View = new DynamoGraphUpdaterView(ViewModel);
         }
-        private void AddToSidebar()
-        {
-            InitializeViewExtension();
-
-            _viewLoadedParamsReference?.AddToExtensionsSideBar(this, View);
-        }
+       
         public override void Closed()
         {
             if (DynamoGraphUpdaterMenuItem != null) DynamoGraphUpdaterMenuItem.IsChecked = false;
