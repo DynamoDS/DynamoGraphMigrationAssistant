@@ -36,7 +36,21 @@ namespace DynamoGraphUpdater
             string versionString = (string)o.SelectToken("View.Dynamo.Version");
             Version version = Version.Parse(versionString);
 
-            return version;
+            return new Version(version.Major,version.Minor);
+        }
+        /// <summary>
+        /// Returns the truncated version for the given graph path.
+        /// </summary>
+        /// <param name="graphPath">The path of the dyn</param>
+        /// <returns></returns>
+        public static string GetDynamoTruncatedVersionForGraph(string graphPath)
+        {
+            var jsonText = File.ReadAllText(graphPath);
+            JObject o = JObject.Parse(jsonText);
+            string versionString = (string)o.SelectToken("View.Dynamo.Version");
+            Version version = Version.Parse(versionString);
+
+            return $"{version.Major}.{version.Minor}.x";
         }
     }
 }

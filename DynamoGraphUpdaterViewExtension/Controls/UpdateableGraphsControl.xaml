@@ -38,7 +38,7 @@
             FontSize="14px"
             Foreground="#3C3C3C"
             TextWrapping="Wrap" 
-            Text="{Binding CurrentVersion, StringFormat={}Current Version: {0}, Mode=OneWay}"/>
+            Text="{Binding TruncatedVersion, StringFormat={}Current Version: {0}, Mode=OneWay}"/>
 
         <!--Recommended Fixes-->
         <Grid Grid.Row="1" Grid.Column="1">

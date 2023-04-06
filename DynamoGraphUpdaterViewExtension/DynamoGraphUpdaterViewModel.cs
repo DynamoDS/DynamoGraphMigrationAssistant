@@ -1,19 +1,12 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
-using System.IO;
 using System.Linq;
-using System.Windows.Controls;
-using Dynamo.Controls;
 using Dynamo.Core;
 using Dynamo.Graph.Workspaces;
-using Dynamo.Logging;
 using Dynamo.ViewModels;
 using Dynamo.Wpf.Extensions;
 using DynamoGraphUpdater.Controls;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
 
 namespace DynamoGraphUpdater
 {

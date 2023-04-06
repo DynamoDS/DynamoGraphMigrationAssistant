@@ -10,6 +10,8 @@ namespace DynamoGraphUpdater.Controls
     public class UpdateableGraphViewModel : NotificationObject
     {
         public Version CurrentVersion { get; set; }
+        public string TruncatedVersion { get; set; }
+        public UpdateableGraphViewModel() { }
         public Version TargetVersion { get; set; }
         public bool Update { get; set; }
         public bool PythonFixes { get; set; }
@@ -21,6 +23,7 @@ namespace DynamoGraphUpdater.Controls
         public UpdateableGraphViewModel(Version currentVersion, List<string> dynamoGraphs)
         {
             CurrentVersion = currentVersion;
+            TruncatedVersion = $"{currentVersion.Major}.{currentVersion.Minor}.x";
             PythonFixes = true;
             IfNodes = true;
             NodeSpacing = true;
