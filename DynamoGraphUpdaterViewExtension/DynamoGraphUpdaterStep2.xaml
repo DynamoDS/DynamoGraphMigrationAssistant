@@ -26,6 +26,7 @@
             <RowDefinition Height="24"/>
             <RowDefinition Height="48"/>
             <RowDefinition Height="*"/>
+            <RowDefinition Height="24"/>
         </Grid.RowDefinitions>
 
         <TextBlock Name="StepTextBlock"
@@ -51,11 +52,22 @@
                       FontSize="12px"
                       VerticalAlignment="Center"/>
         </Grid>
+        <ScrollViewer Grid.Row="2" HorizontalScrollBarVisibility="Disabled">
+            <ItemsControl Name="UpdateableGraphsStackPanel" ItemsSource="{Binding UpdateableGraphs}">
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <controls:UpdateableGraphsControl></controls:UpdateableGraphsControl>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
+        </ScrollViewer>
 
-        <StackPanel Grid.Row="2" Name="UpdateableGraphsStackPanel">
-            <controls:UpdateableGraphsControl></controls:UpdateableGraphsControl>
-        </StackPanel>
 
-
+        <TextBlock Grid.Row="3"
+                   FontFamily="{StaticResource ArtifaktElementRegular}"
+                   FontSize="16px"
+                   Foreground="#3C3C3C"
+                   TextWrapping="Wrap" 
+                   Text="{Binding UpdateableGraphs.Count, StringFormat={}{0} graphs selected, Mode=OneWay}"/>
     </Grid>
 </Page>

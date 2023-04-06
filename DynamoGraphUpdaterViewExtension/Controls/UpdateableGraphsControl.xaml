@@ -7,6 +7,7 @@
              xmlns:ui="clr-namespace:Dynamo.UI;assembly=DynamoCoreWpf"
              Height="auto" 
              Width="auto">
+
     <Grid Margin="12">
         <Grid.Resources>
             <ResourceDictionary>
@@ -19,20 +20,28 @@
             </ResourceDictionary>
         </Grid.Resources>
         <Grid.RowDefinitions>
-                <RowDefinition Height="24"/>
-                <RowDefinition Height="auto"/>
-                <RowDefinition Height="100"/>
+            <RowDefinition Height="28"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="8"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
 
-        <TextBlock 
+
+        <Border Grid.Row="0" Grid.RowSpan="3" Grid.Column="0" HorizontalAlignment="Left" Background="#F5F5F5" Width="2"/>
+
+
+        <TextBlock Grid.Row="0" Grid.Column="1" 
             FontFamily="{StaticResource ArtifaktElementRegular}"
-            FontSize="12px"
+            FontSize="14px"
             Foreground="#3C3C3C"
             TextWrapping="Wrap" 
-            Text="Current Version:"/>
+            Text="{Binding CurrentVersion, StringFormat={}Current Version: {0}, Mode=OneWay}"/>
 
         <!--Recommended Fixes-->
-        <Grid Grid.Row="1">
+        <Grid Grid.Row="1" Grid.Column="1">
             <Grid.RowDefinitions>
                 <RowDefinition Height="24"/>
                 <RowDefinition Height="24"/>
@@ -44,6 +53,7 @@
             </Grid.ColumnDefinitions>
             <TextBlock
                 Grid.Row="0"
+                Margin="12 0 0 0"
                 FontFamily="{StaticResource ArtifaktElementRegular}"
                 FontSize="12px"
                 Foreground="#3C3C3C"
@@ -55,27 +65,31 @@
                       Foreground="#3C3C3C"
                       FontFamily="{StaticResource ArtifaktElementRegular}"
                       FontSize="12px"
-                      Content="Python"/>
+                      Content="Python"
+                      IsChecked="{Binding PythonFixes}"/>
             <CheckBox Grid.Row="1" Grid.Column="1"
                       Foreground="#3C3C3C"
                       FontFamily="{StaticResource ArtifaktElementRegular}"
                       FontSize="12px"
-                      Content="If Nodes"/>
+                      Content="If Nodes"
+                      IsChecked="{Binding IfNodes}"/>
             <CheckBox Grid.Row="2" Grid.Column="1"
                       Foreground="#3C3C3C"
                       FontFamily="{StaticResource ArtifaktElementRegular}"
                       FontSize="12px"
-                      Content="Node Spacing"/>
+                      Content="Node Spacing"
+                      IsChecked="{Binding NodeSpacing}"/>
 
         </Grid>
-       
 
-
-        <Expander Grid.Row="2" Header="Files" 
+        <Expander Grid.Row="2" Grid.Column="1" Header="Files" 
                   FontFamily="{StaticResource ArtifaktElementRegular}"
                   FontSize="12px"
                   Foreground="#3C3C3C"
                   Background="#F5F5F5">
+            <ListView ItemsSource="{Binding DynamoGraphs}" DisplayMemberPath="Name"></ListView>
         </Expander>
     </Grid>
+
+
 </UserControl>

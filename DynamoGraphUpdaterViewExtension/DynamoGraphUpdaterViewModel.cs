@@ -93,12 +93,9 @@ namespace DynamoGraphUpdater
 
             foreach (var dynGroup in groupedDyns.OrderBy(g => g.Key))
             {
-                UpdateableGraphViewModel viewModel = new UpdateableGraphViewModel
-                {
-                    DynamoVersion = dynGroup.Key,
-                    DynamoGraphs = dynGroup.ToList()
-                };
-                UpdateableGraphs.Add(viewModel);
+                UpdateableGraphViewModel updateableGraphViewModel = new UpdateableGraphViewModel(dynGroup.Key, dynGroup.ToList());
+              
+                UpdateableGraphs.Add(updateableGraphViewModel);
             }
 
             RaisePropertyChanged(nameof(UpdateableGraphs));
