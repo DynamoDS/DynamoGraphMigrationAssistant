@@ -5,8 +5,9 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:DynamoGraphUpdater"
              xmlns:ui="clr-namespace:Dynamo.UI;assembly=DynamoCoreWpf"
+             xmlns:controls="clr-namespace:DynamoGraphUpdater.Controls"
              Height="auto" 
-             Width="500">
+             Width="auto">
     <Page.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
@@ -17,7 +18,7 @@
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Page.Resources>
-    <Grid>
+    <Grid x:Name="MainGrid" >
         <Grid.RowDefinitions>
             <RowDefinition Height="24"/>
             <RowDefinition Height="36"/>
@@ -39,9 +40,8 @@
         <Grid Grid.Row="2">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="120"/>
-                <ColumnDefinition Width="24"/>
-                <ColumnDefinition Width="212"/>
                 <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="24"/>
             </Grid.ColumnDefinitions>
 
             <RadioButton Grid.Column="0"
@@ -52,9 +52,12 @@
                                      FontSize="12"
                                      FontFamily="{StaticResource ArtifaktElementRegular}" GroupName="FileScope"/>
 
-            <ComboBox Grid.Column="2" Width="212" 
+
+            <controls:FolderPathViewControl Grid.Column="1" DataContext="{Binding SourcePathViewModel}" IsEnabled="{Binding IsChecked, ElementName=FromFolderRadioButton , TargetNullValue=false}"></controls:FolderPathViewControl>
+
+            <!--<ComboBox Grid.Column="2" Width="212" 
                                   IsEnabled="{Binding IsChecked, ElementName=FromFolderRadioButton , TargetNullValue=false}"
-                                  FontFamily="{StaticResource ArtifaktElementRegular}"/>
+                                  FontFamily="{StaticResource ArtifaktElementRegular}"/>-->
         </Grid>
     </Grid>
 </Page>

@@ -123,4 +123,10 @@
   <data name="HeaderText" xml:space="preserve">
     <value>Dynamo Graph Updater</value>
   </data>
+  <data name="SelectFolderMsg" xml:space="preserve">
+    <value>Select folder ..</value>
+  </data>
+  <data name="UpdatePathTooltip" xml:space="preserve">
+    <value>Select folder.</value>
+  </data>
 </root>

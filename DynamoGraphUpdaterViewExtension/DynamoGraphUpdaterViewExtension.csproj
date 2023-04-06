@@ -111,6 +111,7 @@
     <Reference Include="System.Runtime.CompilerServices.Unsafe, Version=4.0.4.1, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
       <HintPath>packages\System.Runtime.CompilerServices.Unsafe.4.5.3\lib\net461\System.Runtime.CompilerServices.Unsafe.dll</HintPath>
     </Reference>
+    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Windows.Interactivity, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>packages\Prism.4.1.0.0\lib\NET40\System.Windows.Interactivity.dll</HintPath>
     </Reference>
@@ -127,6 +128,11 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Controls\FolderPathViewControl.xaml.cs">
+      <DependentUpon>FolderPathViewControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\PathViewModel.cs" />
+    <Compile Include="Controls\UpdateableGraphViewModel.cs" />
     <Compile Include="DynamoGraphUpdaterStep2.xaml.cs">
       <DependentUpon>DynamoGraphUpdaterStep2.xaml</DependentUpon>
     </Compile>
@@ -144,9 +150,10 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
-    <Compile Include="UpdateableGraphs.xaml.cs">
-      <DependentUpon>UpdateableGraphs.xaml</DependentUpon>
+    <Compile Include="Controls\UpdateableGraphsControl.xaml.cs">
+      <DependentUpon>UpdateableGraphsControl.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Utilities.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="images\logo.png" />
@@ -158,11 +165,15 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Properties\Resources.resx">
-      <Generator>ResXFileCodeGenerator</Generator>
+      <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
+    <Page Include="Controls\FolderPathViewControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="DynamoGraphUpdaterStep2.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -175,7 +186,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="UpdateableGraphs.xaml">
+    <Page Include="Controls\UpdateableGraphsControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

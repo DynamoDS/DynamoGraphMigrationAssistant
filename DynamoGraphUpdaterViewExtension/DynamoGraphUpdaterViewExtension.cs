@@ -22,10 +22,6 @@ namespace DynamoGraphUpdater
         internal DynamoGraphUpdaterView View;
         internal DynamoGraphUpdaterViewModel ViewModel;
 
-        public DynamoGraphUpdaterViewExtension()
-        {
-            InitializeViewExtension();
-        }
 
         public override void Dispose()
         {
@@ -45,8 +41,9 @@ namespace DynamoGraphUpdater
 
             DynamoGraphUpdaterMenuItem.Click += DynamoGraphUpdaterMenuItemOnClick;
 
-
             _viewLoadedParamsReference.AddExtensionMenuItem(DynamoGraphUpdaterMenuItem);
+
+            InitializeViewExtension();
         }
 
         private void DynamoGraphUpdaterMenuItemOnClick(object sender, RoutedEventArgs e)

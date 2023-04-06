@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.ComponentModel;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
@@ -24,7 +25,17 @@ namespace DynamoGraphUpdater
             StepsPages.Add(new DynamoGraphUpdaterStep2(vm));
 
             NavigationFrame.Navigate(new DynamoGraphUpdaterStep1(vm));
+
+            this.IsVisibleChanged += OnIsVisibleChanged;
         }
+
+        private void OnIsVisibleChanged(object sender, DependencyPropertyChangedEventArgs e)
+        {
+            viewModel.CurrentPageIndex = 0;
+            NavigationFrame.Navigate(StepsPages[0]);
+        }
+
+        
         private void CloseButton_OnClick(object sender, RoutedEventArgs e)
         {
             Hide();

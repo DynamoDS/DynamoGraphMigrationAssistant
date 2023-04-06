@@ -5,8 +5,9 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:DynamoGraphUpdater"
              xmlns:ui="clr-namespace:Dynamo.UI;assembly=DynamoCoreWpf"
+             xmlns:controls="clr-namespace:DynamoGraphUpdater.Controls"
              Height="auto" 
-             Width="500">
+             Width="auto">
     <Page.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
@@ -18,6 +19,9 @@
         </ResourceDictionary>
     </Page.Resources>
     <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="24"/>
             <RowDefinition Height="48"/>
@@ -30,12 +34,12 @@
                                Foreground="#3C3C3C"
                                TextWrapping="Wrap" Text="Select version and update options"/>
 
-      <Grid Grid.Row="1" Grid.Margin="12">
-          <Grid.ColumnDefinitions>
-              <ColumnDefinition Width="120"/>
-              <ColumnDefinition Width="100"/>
+        <Grid Grid.Row="1" Grid.Margin="12">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="120"/>
+                <ColumnDefinition Width="100"/>
             </Grid.ColumnDefinitions>
-          <TextBlock 
+            <TextBlock 
                      FontFamily="{StaticResource ArtifaktElementRegular}"
                      FontSize="12px"
                      Foreground="#3C3C3C"
@@ -47,7 +51,11 @@
                       FontSize="12px"
                       VerticalAlignment="Center"/>
         </Grid>
-     <local:UpdateableGraphs Grid.Row="2"></local:UpdateableGraphs>
+
+        <StackPanel Grid.Row="2" Name="UpdateableGraphsStackPanel">
+            <controls:UpdateableGraphsControl></controls:UpdateableGraphsControl>
+        </StackPanel>
+
 
     </Grid>
 </Page>

@@ -10,7 +10,6 @@ namespace DynamoGraphUpdater
         public DynamoGraphUpdaterStep1(DynamoGraphUpdaterViewModel vm)
         {
             InitializeComponent();
-
             DataContext = vm;
         }
     }
