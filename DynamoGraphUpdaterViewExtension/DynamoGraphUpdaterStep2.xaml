@@ -5,7 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:DynamoGraphUpdater"
              xmlns:ui="clr-namespace:Dynamo.UI;assembly=DynamoCoreWpf"
-             Height="200" 
+             Height="auto" 
              Width="500">
     <Page.Resources>
         <ResourceDictionary>
@@ -20,15 +20,15 @@
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="24"/>
-            <RowDefinition Height="42"/>
-            <RowDefinition Height="24"/>
+            <RowDefinition Height="48"/>
+            <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
         <TextBlock Name="StepTextBlock"
                                FontFamily="{StaticResource ArtifaktElementBold}"
                                FontSize="16px"
                                Foreground="#3C3C3C"
-                               TextWrapping="Wrap" Text="Select Version and Update Option(s)"/>
+                               TextWrapping="Wrap" Text="Select version and update options"/>
 
       <Grid Grid.Row="1" Grid.Margin="12">
           <Grid.ColumnDefinitions>
@@ -36,15 +36,18 @@
               <ColumnDefinition Width="100"/>
             </Grid.ColumnDefinitions>
           <TextBlock 
-                     FontFamily="{StaticResource ArtifaktElementBold}"
+                     FontFamily="{StaticResource ArtifaktElementRegular}"
                      FontSize="12px"
                      Foreground="#3C3C3C"
-                     TextWrapping="Wrap" Text="Target Version"/>
+                     TextWrapping="Wrap" 
+                     VerticalAlignment="Center"
+                     Text="Target Version"/>
             <ComboBox Grid.Column="1" 
                       FontFamily="{StaticResource ArtifaktElementBold}"
-                      FontSize="12px"/>
+                      FontSize="12px"
+                      VerticalAlignment="Center"/>
         </Grid>
-     
+     <local:UpdateableGraphs Grid.Row="2"></local:UpdateableGraphs>
 
     </Grid>
 </Page>

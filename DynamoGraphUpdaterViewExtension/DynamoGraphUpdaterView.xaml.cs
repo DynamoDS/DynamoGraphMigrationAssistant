@@ -20,7 +20,6 @@ namespace DynamoGraphUpdater
             viewModel = vm;
             DataContext = vm;
 
-
             StepsPages.Add(new DynamoGraphUpdaterStep1(vm));
             StepsPages.Add(new DynamoGraphUpdaterStep2(vm));
 
@@ -43,20 +42,20 @@ namespace DynamoGraphUpdater
 
         private void NextButton_OnClick(object sender, RoutedEventArgs e)
         {
-            if (viewModel.CurrentPage == StepsPages.Count) return;
+            if (viewModel.CurrentPageIndex == (StepsPages.Count-1)) return;
 
-            viewModel.CurrentPage++;
+            viewModel.CurrentPageIndex++;
 
-            this.NavigationFrame.Navigate(StepsPages[viewModel.CurrentPage]);
+            this.NavigationFrame.Navigate(StepsPages[viewModel.CurrentPageIndex]);
         }
 
         private void BackButton_OnClick(object sender, RoutedEventArgs e)
         {
-            if (viewModel.CurrentPage == 0) return;
+            if (viewModel.CurrentPageIndex == 0) return;
 
-            viewModel.CurrentPage--;
+            viewModel.CurrentPageIndex--;
 
-            this.NavigationFrame.Navigate(StepsPages[viewModel.CurrentPage]);
+            this.NavigationFrame.Navigate(StepsPages[viewModel.CurrentPageIndex]);
         }
     }
 }

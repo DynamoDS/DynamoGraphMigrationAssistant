@@ -5,7 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:DynamoGraphUpdater"
              xmlns:ui="clr-namespace:Dynamo.UI;assembly=DynamoCoreWpf"
-             Height="200" 
+             Height="auto" 
              Width="500">
     <Page.Resources>
         <ResourceDictionary>
@@ -23,7 +23,6 @@
             <RowDefinition Height="36"/>
             <RowDefinition Height="36"/>
             <RowDefinition Height="*"/>
-            <RowDefinition Height="48"/>
         </Grid.RowDefinitions>
 
         <TextBlock Name="StepTextBlock"

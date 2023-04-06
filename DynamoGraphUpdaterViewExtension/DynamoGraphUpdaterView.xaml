@@ -32,14 +32,14 @@
         <Border Name="MainBorder" Style="{StaticResource NoStyleWindowBorderStyle}">
             <Grid x:Name="LayoutRoot">
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="80"/>
                     <RowDefinition Height="*"/>
                     <RowDefinition Height="64"/>
                 </Grid.RowDefinitions>
 
                 <!--  Title Bar + Close Button  -->
                 <DockPanel Grid.Row="0"
-                           Margin="18 20 0 35"
+                           Margin="24"
                            HorizontalAlignment="Stretch">
                     <Image Name="MessageBoxImageIcon"
                            Width="24"
@@ -60,15 +60,19 @@
                     <Button Name="CloseButton"
                             Click="CloseButton_OnClick"
                             DockPanel.Dock="Right"
-                            Margin="160 0 0 0"
+                            VerticalAlignment="Center"
+                            Margin="180 0 0 0"
                             Style="{StaticResource CloseButtonStyle}" />
                 </DockPanel>
                 <Rectangle Style="{StaticResource DividerRectangleStyle}" Grid.Row="0"/>
 
                 <!--  Navigation Grid  -->
-                <DockPanel Grid.Row="1" Margin="12">
-                    <Frame x:Name="NavigationFrame" NavigationUIVisibility="Hidden" />
-                </DockPanel>
+               
+                    <DockPanel Margin="24 0" Grid.Row="1">
+                        <Frame x:Name="NavigationFrame" NavigationUIVisibility="Hidden" />
+                    </DockPanel>
+         
+                   
 
 
                 <!--  Step Count and Buttons  -->
@@ -80,7 +84,10 @@
                         <ColumnDefinition Width="120"/>
                         <ColumnDefinition Width="10"/>
                     </Grid.ColumnDefinitions>
-                    <TextBlock Name="StepCountTextBlock" FontFamily="{StaticResource ArtifaktElementRegular}" FontSize="11px" Foreground="#3C3C3C" TextWrapping="Wrap" Text="1 of 5" VerticalAlignment="Center" Margin="16 0 0 0"/>
+                    <TextBlock Name="StepCountTextBlock" FontFamily="{StaticResource ArtifaktElementRegular}" FontSize="11px" Foreground="#3C3C3C" TextWrapping="Wrap" 
+                               Text="{Binding CurrentPage, StringFormat={}{0} of 5, Mode=OneWay}"
+                               VerticalAlignment="Center" 
+                               Margin="16 0 0 0"/>
 
                     <Button Name="BackButton" 
                             Grid.Column="2"
@@ -101,7 +108,7 @@
                             Content="Next"
                             Click="NextButton_OnClick"/>
                 </Grid>
-              
+
 
             </Grid>
         </Border>

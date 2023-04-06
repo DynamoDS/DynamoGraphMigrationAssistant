@@ -21,13 +21,18 @@ namespace DynamoGraphUpdater
         /// </summary>
         public ObservableCollection<Page> NavigationPages { get; set; }
 
+        private int _currentPageIndex;
+        public int CurrentPageIndex
+        {
+            get { return _currentPageIndex; }
+            set { _currentPageIndex = value; RaisePropertyChanged(nameof(CurrentPageIndex)); RaisePropertyChanged(nameof(CurrentPage)); }
+        }
         private int _currentPage;
         public int CurrentPage
         {
-            get { return _currentPage; }
-            set { _currentPage = value; }
+            get { return _currentPageIndex + 1; }
+            set { _currentPage = value; RaisePropertyChanged(nameof(CurrentPage)); }
         }
-
 
 
         public DynamoGraphUpdaterViewModel(ViewLoadedParams p)
@@ -35,7 +40,7 @@ namespace DynamoGraphUpdater
             if (p == null) return;
             _viewLoadedParamsInstance = p;
 
-            CurrentPage = 0;
+            CurrentPageIndex = 0;
         }
         public void Dispose()
         {
