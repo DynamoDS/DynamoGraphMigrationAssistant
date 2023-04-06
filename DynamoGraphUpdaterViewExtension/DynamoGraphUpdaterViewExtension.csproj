@@ -127,6 +127,12 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DynamoGraphUpdaterStep2.xaml.cs">
+      <DependentUpon>DynamoGraphUpdaterStep2.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="DynamoGraphUpdaterStep1.xaml.cs">
+      <DependentUpon>DynamoGraphUpdaterStep1.xaml</DependentUpon>
+    </Compile>
     <Compile Include="DynamoGraphUpdaterView.xaml.cs">
       <DependentUpon>DynamoGraphUpdaterView.xaml</DependentUpon>
     </Compile>
@@ -137,6 +143,9 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="UpdateableGraphs.xaml.cs">
+      <DependentUpon>UpdateableGraphs.xaml</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
@@ -154,7 +163,19 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
+    <Page Include="DynamoGraphUpdaterStep2.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="DynamoGraphUpdaterStep1.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="DynamoGraphUpdaterView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UpdateableGraphs.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

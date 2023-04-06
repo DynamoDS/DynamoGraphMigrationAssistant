@@ -65,48 +65,11 @@
                 </DockPanel>
                 <Rectangle Style="{StaticResource DividerRectangleStyle}" Grid.Row="0"/>
 
-                <!--  Step 1 Grid  -->
-                <Grid Grid.Row="1" x:Name="ContentGrid" Margin="24 12 12 12">
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="24"/>
-                        <RowDefinition Height="36"/>
-                        <RowDefinition Height="36"/>
-                        <RowDefinition Height="*"/>
-                        <RowDefinition Height="48"/>
-                    </Grid.RowDefinitions>
+                <!--  Navigation Grid  -->
+                <DockPanel Grid.Row="1" Margin="12">
+                    <Frame x:Name="NavigationFrame" NavigationUIVisibility="Hidden" />
+                </DockPanel>
 
-                    <TextBlock Name="StepTextBlock"
-                               FontFamily="{StaticResource ArtifaktElementBold}"
-                               FontSize="16px"
-                               Foreground="#3C3C3C"
-                               TextWrapping="Wrap" Text="Select File(s)"/>
-                    <RadioButton Grid.Row="1" 
-                                 Content="Current File" 
-                                 VerticalAlignment="Center" 
-                                 Margin="16 0 0 0"
-                                 FontSize="12"
-                                 FontFamily="{StaticResource ArtifaktElementRegular}" GroupName="FileScope" IsChecked="True"/>
-                    <Grid Grid.Row="2">
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="120"/>
-                            <ColumnDefinition Width="24"/>
-                            <ColumnDefinition Width="212"/>
-                            <ColumnDefinition Width="*"/>
-                        </Grid.ColumnDefinitions>
-
-                        <RadioButton Grid.Column="0"
-                                     Name="FromFolderRadioButton"
-                                     Content="From Folder" 
-                                     VerticalAlignment="Center" 
-                                     Margin="16 0 0 0"
-                                     FontSize="12"
-                                     FontFamily="{StaticResource ArtifaktElementRegular}" GroupName="FileScope"/>
-
-                        <ComboBox Grid.Column="2" Width="212" 
-                                  IsEnabled="{Binding IsChecked, ElementName=FromFolderRadioButton , TargetNullValue=false}"
-                                  FontFamily="{StaticResource ArtifaktElementRegular}"/>
-                    </Grid>
-                </Grid>
 
                 <!--  Step Count and Buttons  -->
                 <Grid Grid.Row="2" Margin="8">
@@ -126,7 +89,8 @@
                             BorderBrush="#BFBFBF"  
                             Foreground="#3C3C3C"
                             Background="White"
-                            Content="Back"/>
+                            Content="Back"
+                            Click="BackButton_OnClick"/>
                     <Button Name="NextButton"
                             Grid.Column="3"
                             Width="100"
@@ -134,8 +98,11 @@
                             BorderBrush="#BFBFBF"  
                             Foreground="White"
                             Background="#0696D7"
-                            Content="Next"/>
+                            Content="Next"
+                            Click="NextButton_OnClick"/>
                 </Grid>
+              
+
             </Grid>
         </Border>
     </Grid>
