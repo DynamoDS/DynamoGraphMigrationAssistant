@@ -2,10 +2,12 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.IO;
 using System.Linq;
 using System.Windows;
 using Dynamo.Core;
 using Dynamo.Graph.Workspaces;
+using Dynamo.Utilities;
 using Dynamo.ViewModels;
 using Dynamo.Wpf.Extensions;
 using DynamoGraphUpdater.Controls;
@@ -29,7 +31,7 @@ namespace DynamoGraphUpdater
         /// <summary>
         /// The potential target versions
         /// </summary>
-        public ObservableCollection<Version> TargetVersions { get; set; }
+        public ObservableCollection<TargetDynamoVersion> TargetVersions { get; set; }
 
         private int _currentPageIndex;
         public int CurrentPageIndex
@@ -53,7 +55,7 @@ namespace DynamoGraphUpdater
         {
             if (p == null) return;
             _viewLoadedParamsInstance = p;
-
+            
             //store our source path and subscribe to changed event
             SourcePathViewModel = new PathViewModel
             { Type = PathType.Source, Owner = _viewLoadedParamsInstance.DynamoWindow };
@@ -61,6 +63,22 @@ namespace DynamoGraphUpdater
             SourcePathViewModel.PropertyChanged += SourcePathPropertyChanged;
 
             CurrentPageIndex = 0;
+
+            //Load our target versions from json TODO: make this read extra folder
+            TargetVersions = new ObservableCollection<TargetDynamoVersion>()
+            {
+                new TargetDynamoVersion("2.5","Revit", "2021",false,false,true),
+                new TargetDynamoVersion("2.6","Revit", "2021.1",false,false,true),
+                new TargetDynamoVersion("2.10","Revit", "2022",false,false,true),
+                new TargetDynamoVersion("2.12","Revit", "2022.1",false,true,true),
+                new TargetDynamoVersion("2.13","Revit", "2023",true,true,true),
+                new TargetDynamoVersion("2.14","Revit"," 2024",true,true,true),
+
+                new TargetDynamoVersion("2.10","Civil3D", "2022",false,false,true),
+                new TargetDynamoVersion("2.13","Civil3D", "2023",true,true,true),
+                new TargetDynamoVersion("2.14","Civil3D"," 2024",true,true,true),
+            };
+
         }
         // Handles source path changed
         private void SourcePathPropertyChanged(object sender, PropertyChangedEventArgs propertyChangedEventArgs)
@@ -109,6 +127,8 @@ namespace DynamoGraphUpdater
 
             RaisePropertyChanged(nameof(UpdateableGraphs));
         }
+
+
         public void Dispose()
         {
             CurrentWorkspace = null;

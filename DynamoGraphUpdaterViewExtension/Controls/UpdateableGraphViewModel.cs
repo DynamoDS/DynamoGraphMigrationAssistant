@@ -12,7 +12,7 @@ namespace DynamoGraphUpdater.Controls
         public string Product { get; set; }
         public Version CurrentVersion { get; set; }
         public Version TruncatedVersion { get; set; }
-        public Version TargetVersion { get; set; }
+        public TargetDynamoVersion TargetDynamoVersion { get; set; }
         public bool Update { get; set; }
 
         public int PythonNodesChangedCount { get; set; }

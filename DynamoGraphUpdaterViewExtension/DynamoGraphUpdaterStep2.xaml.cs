@@ -13,5 +13,16 @@ namespace DynamoGraphUpdater
 
             DataContext = vm;
         }
+
+        private void Selector_OnSelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (!IsLoaded) return;
+            var viewModel = DataContext as DynamoGraphUpdaterViewModel;
+
+            foreach (var graph in viewModel.UpdateableGraphs)
+            {
+                graph.TargetVersion = this.TargetVersionComboBox.SelectedItem as TargetDynamoVersion;
+            }
+        }
     }
 }

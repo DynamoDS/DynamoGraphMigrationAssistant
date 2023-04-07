@@ -17,6 +17,7 @@
                     <ui:SharedResourceDictionary Source="{x:Static ui:SharedDictionaryManager.DynamoColorsAndBrushesDictionaryUri}" />
                     <ui:SharedResourceDictionary Source="{x:Static ui:SharedDictionaryManager.MenuStyleDictionaryUri}" />
                 </ResourceDictionary.MergedDictionaries>
+                <BooleanToVisibilityConverter x:Key="BoolToVis" />
             </ResourceDictionary>
         </Grid.Resources>
         <Grid.RowDefinitions>
@@ -40,12 +41,10 @@
             TextWrapping="Wrap" 
             Text="{Binding TruncatedVersion, StringFormat={}Current Version: {0}, Mode=OneWay}"/>
 
-        
+
         <Grid Grid.Row="1" Grid.Column="1">
             <Grid.RowDefinitions>
-                <RowDefinition Height="24"/>
-                <RowDefinition Height="24"/>
-                <RowDefinition Height="24"/>
+                <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="130"/>
@@ -62,27 +61,29 @@
                 FontSize="14px"
                 Foreground="#3C3C3C"
                 TextWrapping="Wrap"
-                VerticalAlignment="Center"
+                VerticalAlignment="Top"
                 Text="Recommended:"/>
-            <CheckBox Grid.Row="0" Grid.Column="1"  
-                      VerticalAlignment="Center"
-                      Foreground="#3C3C3C"
-                      FontFamily="{StaticResource ArtifaktElementRegular}"
-                      FontSize="12px"
-                      Content="Python"
-                      IsChecked="{Binding PythonFixes}"/>
-            <CheckBox Grid.Row="1" Grid.Column="1"
-                      Foreground="#3C3C3C"
-                      FontFamily="{StaticResource ArtifaktElementRegular}"
-                      FontSize="12px"
-                      Content="If Nodes"
-                      IsChecked="{Binding IfNodes}"/>
-            <CheckBox Grid.Row="2" Grid.Column="1"
-                      Foreground="#3C3C3C"
-                      FontFamily="{StaticResource ArtifaktElementRegular}"
-                      FontSize="12px"
-                      Content="Node Spacing"
-                      IsChecked="{Binding NodeSpacing}"/>
+            <StackPanel Grid.Column="1" Grid.Row="0">
+                <CheckBox  Margin="0 0 0 4"
+                    Foreground="#3C3C3C"
+                          FontFamily="{StaticResource ArtifaktElementRegular}"
+                          FontSize="12px"
+                          Content="Python"
+                          IsChecked="{Binding PythonFixes, Mode=TwoWay}"/>
+                <CheckBox Margin="0 0 0 4"
+                          Foreground="#3C3C3C"
+                          FontFamily="{StaticResource ArtifaktElementRegular}"
+                          FontSize="12px"
+                          Content="If Nodes"
+                          IsChecked="{Binding IfNodes, Mode=TwoWay}" Visibility="{Binding Path=IfVisibility, Converter={StaticResource BoolToVis}}"/>
+                <CheckBox Margin="0 0 0 4"
+                          Foreground="#3C3C3C"
+                          FontFamily="{StaticResource ArtifaktElementRegular}"
+                          FontSize="12px"
+                          Content="Node Spacing"
+                          IsChecked="{Binding NodeSpacing, Mode=TwoWay}" Visibility="{Binding Path=NodeSpacingVisibility, Converter={StaticResource BoolToVis}}"/>
+            </StackPanel>
+
 
             <!--Optional Fixes-->
             <TextBlock
@@ -93,16 +94,17 @@
                 FontSize="14px"
                 Foreground="#3C3C3C"
                 TextWrapping="Wrap"
-                VerticalAlignment="Center"
+                VerticalAlignment="Top"
                 Text="Optional:"/>
-            <CheckBox Grid.Row="0" Grid.Column="3"  
-                      VerticalAlignment="Center"
-                      Foreground="#3C3C3C"
-                      FontFamily="{StaticResource ArtifaktElementRegular}"
-                      FontSize="12px"
-                      Content="Input Order"
-                      IsChecked="{Binding InputOrder}"/>
-
+            <StackPanel Grid.Column="3" Grid.Row="0">
+                <CheckBox   Margin="0 0 0 4"
+                            VerticalAlignment="Center"
+                            Foreground="#3C3C3C"
+                            FontFamily="{StaticResource ArtifaktElementRegular}"
+                            FontSize="12px"
+                            Content="Input Order"
+                            IsChecked="{Binding InputOrder, Mode=TwoWay}"/>
+            </StackPanel>
         </Grid>
 
         <Expander Grid.Row="2" Grid.Column="1" Header="Files" 
@@ -110,7 +112,8 @@
                   FontSize="12px"
                   Foreground="#3C3C3C"
                   Background="#F5F5F5">
-            <ListView ItemsSource="{Binding UpdateableGraphs}" DisplayMemberPath="Name"></ListView>
+            <ListView ItemsSource="{Binding UpdateableGraphs}" DisplayMemberPath="Name">
+            </ListView>
         </Expander>
     </Grid>
 
