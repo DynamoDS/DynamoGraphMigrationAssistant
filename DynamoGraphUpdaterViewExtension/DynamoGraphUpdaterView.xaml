@@ -26,6 +26,7 @@
                 <ui:SharedResourceDictionary Source="{x:Static ui:SharedDictionaryManager.DynamoColorsAndBrushesDictionaryUri}" />
                 <ui:SharedResourceDictionary Source="{x:Static ui:SharedDictionaryManager.MenuStyleDictionaryUri}" />
             </ResourceDictionary.MergedDictionaries>
+            
         </ResourceDictionary>
     </Window.Resources>
     <Grid x:Name="MainGrid" Background="Transparent" MouseDown="UIElement_OnMouseDown">

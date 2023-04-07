@@ -17,6 +17,7 @@
                 <ui:SharedResourceDictionary Source="{x:Static ui:SharedDictionaryManager.DynamoColorsAndBrushesDictionaryUri}" />
                 <ui:SharedResourceDictionary Source="{x:Static ui:SharedDictionaryManager.DynamoModernDictionaryUri}" />
             </ResourceDictionary.MergedDictionaries>
+
             <Style x:Key="GraphUpdaterFolderStyle" TargetType="Button">
                 <Setter Property="Cursor" Value="Hand"/>
                 <Setter Property="Template">

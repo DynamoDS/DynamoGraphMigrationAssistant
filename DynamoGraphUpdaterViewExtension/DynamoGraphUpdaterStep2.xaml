@@ -6,7 +6,7 @@
              xmlns:local="clr-namespace:DynamoGraphUpdater"
              xmlns:ui="clr-namespace:Dynamo.UI;assembly=DynamoCoreWpf"
              xmlns:controls="clr-namespace:DynamoGraphUpdater.Controls"
-             Height="400" 
+             Height="500" 
              Width="auto">
     <Page.Resources>
         <ResourceDictionary>
@@ -16,6 +16,7 @@
                 <ui:SharedResourceDictionary Source="{x:Static ui:SharedDictionaryManager.DynamoColorsAndBrushesDictionaryUri}" />
                 <ui:SharedResourceDictionary Source="{x:Static ui:SharedDictionaryManager.MenuStyleDictionaryUri}" />
             </ResourceDictionary.MergedDictionaries>
+            <controls:ConditionalCountConverter x:Key="CountConverter" />
         </ResourceDictionary>
     </Page.Resources>
     <Grid>
@@ -69,6 +70,6 @@
                    FontSize="16px"
                    Foreground="#3C3C3C"
                    TextWrapping="Wrap" 
-                   Text="{Binding UpdateableGraphs.Count, StringFormat={}{0} graphs selected, Mode=OneWay}"/>
+                   Text="{Binding UpdateableGraphs, Converter={StaticResource CountConverter}, Mode=OneWay}" />
     </Grid>
 </Page>

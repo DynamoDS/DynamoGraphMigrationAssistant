@@ -65,11 +65,13 @@ namespace DynamoGraphUpdater
 
             _viewLoadedParamsReference.AddExtensionMenuItem(DynamoGraphUpdaterMenuItem);
 
-            InitializeViewExtension();
+            //InitializeViewExtension();
         }
 
         private void DynamoGraphUpdaterMenuItemOnClick(object sender, RoutedEventArgs e)
         {
+            ViewModel = new DynamoGraphUpdaterViewModel(_viewLoadedParamsReference);
+            View = new DynamoGraphUpdaterView(ViewModel);
             View.Owner = _viewLoadedParamsReference.DynamoWindow;
 
             View.ShowDialog();
@@ -81,8 +83,7 @@ namespace DynamoGraphUpdater
         }
         private void InitializeViewExtension()
         {
-            ViewModel = new DynamoGraphUpdaterViewModel(_viewLoadedParamsReference);
-            View = new DynamoGraphUpdaterView(ViewModel);
+            
         }
        
         public override void Closed()

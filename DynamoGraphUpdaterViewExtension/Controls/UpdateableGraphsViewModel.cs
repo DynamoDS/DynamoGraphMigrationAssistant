@@ -100,6 +100,10 @@ namespace DynamoGraphUpdater.Controls
             //for if node
             IfVisibility = targetVersion >= ifNodeRefactored && TruncatedVersion <= targetVersion;
 
+            //for versions already in target
+            PythonFixes = targetVersion != TruncatedVersion;
+            IfNodes = targetVersion != TruncatedVersion;
+            NodeSpacing = targetVersion != TruncatedVersion;
         }
     }
 }

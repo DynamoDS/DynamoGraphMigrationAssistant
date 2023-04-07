@@ -128,10 +128,10 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Controls\ConditionalCountConverter.cs" />
     <Compile Include="Controls\FolderPathViewControl.xaml.cs">
       <DependentUpon>FolderPathViewControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Controls\GraphUpdaterResolution.cs" />
     <Compile Include="Controls\PathViewModel.cs" />
     <Compile Include="Controls\UpdateableGraphsViewModel.cs" />
     <Compile Include="Controls\UpdateableGraphViewModel.cs" />

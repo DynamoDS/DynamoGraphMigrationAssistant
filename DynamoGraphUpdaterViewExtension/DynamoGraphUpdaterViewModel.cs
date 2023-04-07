@@ -31,6 +31,7 @@ namespace DynamoGraphUpdater
         /// <summary>
         /// The potential target versions
         /// </summary>
+         public ObservableCollection<TargetDynamoVersion> PotentialTargetVersions { get; set; }
         public ObservableCollection<TargetDynamoVersion> TargetVersions { get; set; }
 
         private int _currentPageIndex;
@@ -65,19 +66,21 @@ namespace DynamoGraphUpdater
             CurrentPageIndex = 0;
 
             //Load our target versions from json TODO: make this read extra folder
-            TargetVersions = new ObservableCollection<TargetDynamoVersion>()
+            PotentialTargetVersions = new ObservableCollection<TargetDynamoVersion>()
             {
-                new TargetDynamoVersion("2.5","Revit", "2021",false,false,true),
-                new TargetDynamoVersion("2.6","Revit", "2021.1",false,false,true),
-                new TargetDynamoVersion("2.10","Revit", "2022",false,false,true),
-                new TargetDynamoVersion("2.12","Revit", "2022.1",false,true,true),
-                new TargetDynamoVersion("2.13","Revit", "2023",true,true,true),
-                new TargetDynamoVersion("2.14","Revit"," 2024",true,true,true),
+                new TargetDynamoVersion("2.5", "Revit", "2021", false, false, true),
+                new TargetDynamoVersion("2.6", "Revit", "2021.1", false, false, true),
+                new TargetDynamoVersion("2.10", "Revit", "2022", false, false, true),
+                new TargetDynamoVersion("2.12", "Revit", "2022.1", false, true, true),
+                new TargetDynamoVersion("2.16", "Revit", "2023", true, true, true),
+                new TargetDynamoVersion("2.17", "Revit", " 2024", true, true, true),
 
-                new TargetDynamoVersion("2.10","Civil3D", "2022",false,false,true),
-                new TargetDynamoVersion("2.13","Civil3D", "2023",true,true,true),
-                new TargetDynamoVersion("2.14","Civil3D"," 2024",true,true,true),
+                new TargetDynamoVersion("2.10", "Civil3D", "2022", false, false, true),
+                new TargetDynamoVersion("2.13", "Civil3D", "2023", true, true, true),
+                new TargetDynamoVersion("2.17", "Civil3D", " 2024", true, true, true),
             };
+
+          
 
         }
         // Handles source path changed
@@ -125,6 +128,19 @@ namespace DynamoGraphUpdater
                 UpdateableGraphs.Add(updateableGraph);
             }
 
+
+            //pick the potential versions from what our graphs mostly consist of
+            var whatProductIsUsedMost = graphs.GroupBy(g => g.Product).OrderByDescending(g => g.Count()).FirstOrDefault()?.Key;
+
+            if (whatProductIsUsedMost is null)
+            {
+                TargetVersions = PotentialTargetVersions;
+            }
+            else
+            {
+                TargetVersions = new ObservableCollection<TargetDynamoVersion>(PotentialTargetVersions.Where(p => p.Host.Equals(whatProductIsUsedMost)));
+            }
+            RaisePropertyChanged(nameof(TargetVersions));
             RaisePropertyChanged(nameof(UpdateableGraphs));
         }
 

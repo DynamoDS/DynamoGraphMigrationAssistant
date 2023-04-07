@@ -18,7 +18,70 @@
                     <ui:SharedResourceDictionary Source="{x:Static ui:SharedDictionaryManager.MenuStyleDictionaryUri}" />
                 </ResourceDictionary.MergedDictionaries>
                 <BooleanToVisibilityConverter x:Key="BoolToVis" />
+                <Style TargetType="CheckBox">
+                    <Setter Property="FontFamily" Value="{StaticResource ArtifaktElementRegular}" />
+                    <Setter Property="Foreground" Value="{StaticResource DarkGreyBrush}" />
+                    <Setter Property="Margin" Value="0" />
+                    <Setter Property="Template">
+                        <Setter.Value>
+                            <ControlTemplate TargetType="{x:Type CheckBox}">
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="20px" />
+                                        <ColumnDefinition Width="Auto" />
+                                    </Grid.ColumnDefinitions>
+                                    <Rectangle x:Name="outerRectangle"
+                                               Grid.Column="0"
+                                               Width="14px"
+                                               Height="14px"
+                                               Stroke="{StaticResource PrimaryCharcoal300Brush}"
+                                               StrokeThickness="1" />
+                                    <Rectangle x:Name="highlightRectangle"
+                                               Grid.Column="0"
+                                               Width="14px"
+                                               Height="14px"
+                                               Fill="Transparent"
+                                               Stroke="{StaticResource PrimaryCharcoal300Brush}"
+                                               StrokeThickness="1" />
+                                    <Path x:Name="tick"
+                                          Grid.Column="0"
+                                          Width="14px"
+                                          Height="14px"
+                                          Data="M3,7 l3,3 l5,-6"
+                                          Opacity="0"
+                                          Stretch="None"
+                                          Stroke="White"
+                                          StrokeThickness="2" />
+                                    <ContentPresenter x:Name="content"
+                                                      Grid.Column="1"
+                                                      Margin="4,0,0,0"
+                                                      HorizontalAlignment="Center"
+                                                      VerticalAlignment="Center"
+                                                      TextBlock.Foreground="{StaticResource DarkGreyBrush}" />
+                                </Grid>
+                                <ControlTemplate.Triggers>
+                                    <Trigger Property="IsMouseOver" Value="True">
+                                        <Setter TargetName="highlightRectangle" Property="Fill" Value="LightGray" />
+                                    </Trigger>
+                                    <Trigger Property="IsChecked" Value="True">
+                                        <Setter TargetName="outerRectangle" Property="Fill" Value="{StaticResource PortUseLevelsCheckBoxColor}" />
+                                        <Setter TargetName="tick" Property="Opacity" Value="1.0" />
+                                    </Trigger>
+                                    <Trigger Property="IsChecked" Value="False">
+                                        <Setter TargetName="outerRectangle" Property="Fill" Value="Transparent" />
+                                        <Setter TargetName="tick" Property="Opacity" Value="0.0" />
+                                    </Trigger>
+                                    <Trigger Property="IsEnabled" Value="False">
+                                        <Setter TargetName="highlightRectangle" Property="Stroke" Value="LightGray" />
+                                        <Setter TargetName="content" Property="TextBlock.Foreground" Value="LightGray" />
+                                    </Trigger>
+                                </ControlTemplate.Triggers>
+                            </ControlTemplate>
+                        </Setter.Value>
+                    </Setter>
+                </Style>
             </ResourceDictionary>
+
         </Grid.Resources>
         <Grid.RowDefinitions>
             <RowDefinition Height="28"/>
@@ -35,7 +98,7 @@
 
 
         <TextBlock Grid.Row="0" Grid.Column="1" 
-            FontFamily="{StaticResource ArtifaktElementRegular}"
+            FontFamily="{StaticResource ArtifaktElementBold}"
             FontSize="14px"
             Foreground="#3C3C3C"
             TextWrapping="Wrap" 
@@ -67,19 +130,19 @@
                 <CheckBox  Margin="0 0 0 4"
                     Foreground="#3C3C3C"
                           FontFamily="{StaticResource ArtifaktElementRegular}"
-                          FontSize="12px"
+                          FontSize="14px"
                           Content="Python"
                           IsChecked="{Binding PythonFixes, Mode=TwoWay}"/>
                 <CheckBox Margin="0 0 0 4"
                           Foreground="#3C3C3C"
                           FontFamily="{StaticResource ArtifaktElementRegular}"
-                          FontSize="12px"
+                          FontSize="14px"
                           Content="If Nodes"
                           IsChecked="{Binding IfNodes, Mode=TwoWay}" Visibility="{Binding Path=IfVisibility, Converter={StaticResource BoolToVis}}"/>
                 <CheckBox Margin="0 0 0 4"
                           Foreground="#3C3C3C"
                           FontFamily="{StaticResource ArtifaktElementRegular}"
-                          FontSize="12px"
+                          FontSize="14px"
                           Content="Node Spacing"
                           IsChecked="{Binding NodeSpacing, Mode=TwoWay}" Visibility="{Binding Path=NodeSpacingVisibility, Converter={StaticResource BoolToVis}}"/>
             </StackPanel>
@@ -101,20 +164,34 @@
                             VerticalAlignment="Center"
                             Foreground="#3C3C3C"
                             FontFamily="{StaticResource ArtifaktElementRegular}"
-                            FontSize="12px"
+                            FontSize="14px"
                             Content="Input Order"
                             IsChecked="{Binding InputOrder, Mode=TwoWay}"/>
             </StackPanel>
         </Grid>
 
-        <Expander Grid.Row="2" Grid.Column="1" Header="Files" 
+
+        <TreeView Grid.Row="2" Grid.Column="1" BorderBrush="Transparent">
+            <TreeViewItem Header="{Binding UpdateableGraphs.Count}" HeaderStringFormat="Graphs ({0})" IsExpanded="False" BorderBrush="Transparent">
+                <ListBox ItemsSource="{Binding UpdateableGraphs}" BorderBrush="Transparent">
+                    <ListBox.ItemTemplate>
+                        <DataTemplate>
+                            <StackPanel>
+                                <CheckBox Content="{Binding Name}" IsChecked="{Binding Update, Mode=TwoWay}" ToolTip="{Binding FullName}" FontSize="12"/>
+                            </StackPanel>
+                        </DataTemplate>
+                    </ListBox.ItemTemplate>
+                </ListBox>
+            </TreeViewItem>
+        </TreeView>
+        <!--<Expander Grid.Row="2" Grid.Column="1" Header="Graphs" 
                   FontFamily="{StaticResource ArtifaktElementRegular}"
                   FontSize="12px"
                   Foreground="#3C3C3C"
                   Background="#F5F5F5">
             <ListView ItemsSource="{Binding UpdateableGraphs}" DisplayMemberPath="Name">
             </ListView>
-        </Expander>
+        </Expander>-->
     </Grid>
 
 

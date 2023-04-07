@@ -13,14 +13,21 @@ namespace DynamoGraphUpdater.Controls
         public Version CurrentVersion { get; set; }
         public Version TruncatedVersion { get; set; }
         public TargetDynamoVersion TargetDynamoVersion { get; set; }
-        public bool Update { get; set; }
-
+        private bool _update;
+        public bool Update
+        {
+            get { return _update; }
+            set { _update = value; 
+                RaisePropertyChanged(nameof(Update));
+            }
+        }
         public int PythonNodesChangedCount { get; set; }
         public int IfNodesChangedCount { get; set; }
         public int NodeSpaceChangedCount { get; set; }
 
         public FileInfo DynamoGraph { get; set; }
         public string Name => DynamoGraph.Name;
+        public string FullName => DynamoGraph.FullName;
 
         public UpdateableGraphViewModel(Version currentVersion, string dynamoGraph)
         {
@@ -28,6 +35,7 @@ namespace DynamoGraphUpdater.Controls
             TruncatedVersion = new Version(currentVersion.Major,currentVersion.Minor);
             DynamoGraph = new FileInfo(dynamoGraph);
             CalculateDynamoProduct();
+            Update = true;
         }
 
         public void CalculateDynamoProduct()

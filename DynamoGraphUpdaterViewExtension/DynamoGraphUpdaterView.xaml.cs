@@ -39,7 +39,7 @@ namespace DynamoGraphUpdater
         
         private void CloseButton_OnClick(object sender, RoutedEventArgs e)
         {
-            Hide();
+            Close();
         }
         /// <summary>
         /// Lets the user drag this window around with their left mouse button.
