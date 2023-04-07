@@ -6,22 +6,27 @@ namespace DynamoGraphUpdater.Controls
 {
     public class UpdateableGraphsViewModel : NotificationObject
     {
+       
         public Version CurrentVersion { get; set; }
-        public string TruncatedVersion { get; set; }
+        public Version TruncatedVersion { get; set; }
         public Version TargetVersion { get; set; }
-        List<UpdateableGraphViewModel> UpdateableGraphs { get; set; }
+        public List<UpdateableGraphViewModel> UpdateableGraphs { get; set; }
         public bool PythonFixes { get; set; }
         public bool IfNodes { get; set; }
         public bool NodeSpacing { get; set; }
+        public bool InputOrder { get; set; }
 
-        public UpdateableGraphsViewModel(string truncatedVersion, List<UpdateableGraphViewModel> updatableGraphs)
+        public UpdateableGraphsViewModel(Version truncatedVersion, List<UpdateableGraphViewModel> updateableGraphs)
         {
             TruncatedVersion = truncatedVersion;
-            UpdateableGraphs = updatableGraphs;
+            UpdateableGraphs = updateableGraphs;
 
             PythonFixes = true;
             IfNodes = true;
             NodeSpacing = true;
+            InputOrder = false;
         }
+
+        
     }
 }

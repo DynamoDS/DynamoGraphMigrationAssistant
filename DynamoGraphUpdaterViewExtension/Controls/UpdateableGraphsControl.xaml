@@ -40,7 +40,7 @@
             TextWrapping="Wrap" 
             Text="{Binding TruncatedVersion, StringFormat={}Current Version: {0}, Mode=OneWay}"/>
 
-        <!--Recommended Fixes-->
+        
         <Grid Grid.Row="1" Grid.Column="1">
             <Grid.RowDefinitions>
                 <RowDefinition Height="24"/>
@@ -48,14 +48,18 @@
                 <RowDefinition Height="24"/>
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="130"/>
                 <ColumnDefinition Width="120"/>
+                <ColumnDefinition Width="90"/>
                 <ColumnDefinition Width="120"/>
             </Grid.ColumnDefinitions>
+
+            <!--Recommended Fixes-->
             <TextBlock
                 Grid.Row="0"
                 Margin="12 0 0 0"
                 FontFamily="{StaticResource ArtifaktElementRegular}"
-                FontSize="12px"
+                FontSize="14px"
                 Foreground="#3C3C3C"
                 TextWrapping="Wrap"
                 VerticalAlignment="Center"
@@ -79,6 +83,25 @@
                       FontSize="12px"
                       Content="Node Spacing"
                       IsChecked="{Binding NodeSpacing}"/>
+
+            <!--Optional Fixes-->
+            <TextBlock
+                Grid.Row="0"
+                Grid.Column="2"
+                Margin="12 0 0 0"
+                FontFamily="{StaticResource ArtifaktElementRegular}"
+                FontSize="14px"
+                Foreground="#3C3C3C"
+                TextWrapping="Wrap"
+                VerticalAlignment="Center"
+                Text="Optional:"/>
+            <CheckBox Grid.Row="0" Grid.Column="3"  
+                      VerticalAlignment="Center"
+                      Foreground="#3C3C3C"
+                      FontFamily="{StaticResource ArtifaktElementRegular}"
+                      FontSize="12px"
+                      Content="Input Order"
+                      IsChecked="{Binding InputOrder}"/>
 
         </Grid>
 

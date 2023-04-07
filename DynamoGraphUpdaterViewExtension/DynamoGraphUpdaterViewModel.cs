@@ -19,12 +19,17 @@ namespace DynamoGraphUpdater
         internal DynamoViewModel DynamoViewModel;
         internal HomeWorkspaceModel CurrentWorkspace;
         #endregion
-        
+
 
         /// <summary>
-        /// Collection of graphs loaded for exporting
+        /// Collection of graphs loaded for upgrading
         /// </summary>
         public ObservableCollection<UpdateableGraphsViewModel> UpdateableGraphs { get; set; }
+
+        /// <summary>
+        /// The potential target versions
+        /// </summary>
+        public ObservableCollection<Version> TargetVersions { get; set; }
 
         private int _currentPageIndex;
         public int CurrentPageIndex
@@ -85,17 +90,17 @@ namespace DynamoGraphUpdater
             if (files == null)
                 return;
 
-
             var graphs = new List<UpdateableGraphViewModel>();
 
             foreach (var file in files)
             {
-                graphs.Add(new UpdateableGraphViewModel(Utilities.GetDynamoVersionForGraph(file),file));
+                graphs.Add(new UpdateableGraphViewModel(Utilities.GetDynamoVersionForGraph(file), file));
+
             }
 
             var groupedByVersion = graphs.GroupBy(g => g.TruncatedVersion);
 
-            foreach (var group in groupedByVersion)
+            foreach (var group in groupedByVersion.OrderBy(g => g.Key.Major).ThenBy(g => g.Key.Minor))
             {
                 var updateableGraph = new UpdateableGraphsViewModel(group.Key, group.ToList());
 

@@ -131,6 +131,7 @@
     <Compile Include="Controls\FolderPathViewControl.xaml.cs">
       <DependentUpon>FolderPathViewControl.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Controls\GraphUpdaterResolution.cs" />
     <Compile Include="Controls\PathViewModel.cs" />
     <Compile Include="Controls\UpdateableGraphsViewModel.cs" />
     <Compile Include="Controls\UpdateableGraphViewModel.cs" />
@@ -157,7 +158,6 @@
     <Compile Include="Utilities.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="images\logo.png" />
     <Content Include="manifest\DynamoGraphUpdater_ViewExtensionDefinition.xml" />
   </ItemGroup>
   <ItemGroup>
