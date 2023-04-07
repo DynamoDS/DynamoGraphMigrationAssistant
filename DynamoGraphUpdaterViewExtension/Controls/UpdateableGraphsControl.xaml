@@ -184,14 +184,6 @@
                 </ListBox>
             </TreeViewItem>
         </TreeView>
-        <!--<Expander Grid.Row="2" Grid.Column="1" Header="Graphs" 
-                  FontFamily="{StaticResource ArtifaktElementRegular}"
-                  FontSize="12px"
-                  Foreground="#3C3C3C"
-                  Background="#F5F5F5">
-            <ListView ItemsSource="{Binding UpdateableGraphs}" DisplayMemberPath="Name">
-            </ListView>
-        </Expander>-->
     </Grid>
 
 
