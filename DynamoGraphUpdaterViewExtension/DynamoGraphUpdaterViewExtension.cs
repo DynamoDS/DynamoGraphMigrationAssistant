@@ -48,6 +48,8 @@ namespace DynamoGraphUpdater
 
         private void DynamoGraphUpdaterMenuItemOnClick(object sender, RoutedEventArgs e)
         {
+            View.Owner = _viewLoadedParamsReference.DynamoWindow;
+
             View.ShowDialog();
         }
 

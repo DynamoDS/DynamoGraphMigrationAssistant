@@ -14,6 +14,7 @@ namespace DynamoGraphUpdater
     {
         private List<Page> StepsPages = new List<Page>();
         DynamoGraphUpdaterViewModel viewModel;
+
         public DynamoGraphUpdaterView(DynamoGraphUpdaterViewModel vm)
         {
             InitializeComponent();

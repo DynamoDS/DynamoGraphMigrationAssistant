@@ -2,6 +2,7 @@
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
+using System.Windows;
 using Dynamo.Core;
 using Dynamo.Graph.Workspaces;
 using Dynamo.ViewModels;
@@ -17,6 +18,7 @@ namespace DynamoGraphUpdater
         internal DynamoViewModel DynamoViewModel;
         internal HomeWorkspaceModel CurrentWorkspace;
         #endregion
+        
 
         /// <summary>
         /// Collection of graphs loaded for exporting
