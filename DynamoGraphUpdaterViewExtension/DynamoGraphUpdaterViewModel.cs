@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
@@ -23,7 +24,7 @@ namespace DynamoGraphUpdater
         /// <summary>
         /// Collection of graphs loaded for exporting
         /// </summary>
-        public ObservableCollection<UpdateableGraphViewModel> UpdateableGraphs { get; set; }
+        public ObservableCollection<UpdateableGraphsViewModel> UpdateableGraphs { get; set; }
 
         private int _currentPageIndex;
         public int CurrentPageIndex
@@ -78,19 +79,27 @@ namespace DynamoGraphUpdater
         // Update graphs if source folder is changed by the UI
         private void SourceFolderChanged(PathViewModel pathVM)
         {
-            UpdateableGraphs = new ObservableCollection<UpdateableGraphViewModel>();
+            UpdateableGraphs = new ObservableCollection<UpdateableGraphsViewModel>();
 
             var files = Utilities.GetAllFilesOfExtension(pathVM.FolderPath)?.OrderBy(x => x);
             if (files == null)
                 return;
 
-            var groupedDyns = files.GroupBy(Utilities.GetDynamoVersionForGraph);
 
-            foreach (var dynGroup in groupedDyns.OrderBy(g => g.Key))
+            var graphs = new List<UpdateableGraphViewModel>();
+
+            foreach (var file in files)
             {
-                UpdateableGraphViewModel updateableGraphViewModel = new UpdateableGraphViewModel(dynGroup.Key, dynGroup.ToList());
-              
-                UpdateableGraphs.Add(updateableGraphViewModel);
+                graphs.Add(new UpdateableGraphViewModel(Utilities.GetDynamoVersionForGraph(file),file));
+            }
+
+            var groupedByVersion = graphs.GroupBy(g => g.TruncatedVersion);
+
+            foreach (var group in groupedByVersion)
+            {
+                var updateableGraph = new UpdateableGraphsViewModel(group.Key, group.ToList());
+
+                UpdateableGraphs.Add(updateableGraph);
             }
 
             RaisePropertyChanged(nameof(UpdateableGraphs));

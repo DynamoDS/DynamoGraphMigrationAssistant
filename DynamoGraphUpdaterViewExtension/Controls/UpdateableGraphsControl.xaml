@@ -87,7 +87,7 @@
                   FontSize="12px"
                   Foreground="#3C3C3C"
                   Background="#F5F5F5">
-            <ListView ItemsSource="{Binding DynamoGraphs}" DisplayMemberPath="Name"></ListView>
+            <ListView ItemsSource="{Binding UpdateableGraphs}" DisplayMemberPath="Name"></ListView>
         </Expander>
     </Grid>
 

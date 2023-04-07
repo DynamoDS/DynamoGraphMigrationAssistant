@@ -6,7 +6,7 @@
              xmlns:local="clr-namespace:DynamoGraphUpdater"
              xmlns:ui="clr-namespace:Dynamo.UI;assembly=DynamoCoreWpf"
              xmlns:controls="clr-namespace:DynamoGraphUpdater.Controls"
-             Height="auto" 
+             Height="400" 
              Width="auto">
     <Page.Resources>
         <ResourceDictionary>
