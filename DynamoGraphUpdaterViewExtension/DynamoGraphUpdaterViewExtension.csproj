@@ -135,6 +135,7 @@
     <Compile Include="Controls\PathViewModel.cs" />
     <Compile Include="Controls\UpdateableGraphsViewModel.cs" />
     <Compile Include="Controls\UpdateableGraphViewModel.cs" />
+    <Compile Include="DynamoGraphUpdaterModel.cs" />
     <Compile Include="DynamoGraphUpdaterStep2.xaml.cs">
       <DependentUpon>DynamoGraphUpdaterStep2.xaml</DependentUpon>
     </Compile>

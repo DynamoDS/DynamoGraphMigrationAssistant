@@ -23,12 +23,14 @@ namespace DynamoGraphUpdater
         private ViewLoadedParams _viewLoadedParamsReference;
 
         internal DynamoGraphUpdaterView View;
+        internal DynamoGraphUpdaterModel Model;
         internal DynamoGraphUpdaterViewModel ViewModel;
 
 
         public override void Dispose()
         {
             // Cleanup
+            //Model?.Dispose();
             ViewModel?.Dispose();
             View = null;
             ViewModel = null;
@@ -70,7 +72,8 @@ namespace DynamoGraphUpdater
 
         private void DynamoGraphUpdaterMenuItemOnClick(object sender, RoutedEventArgs e)
         {
-            ViewModel = new DynamoGraphUpdaterViewModel(_viewLoadedParamsReference);
+            Model = new DynamoGraphUpdaterModel(_viewLoadedParamsReference);
+            ViewModel = new DynamoGraphUpdaterViewModel(Model);
             View = new DynamoGraphUpdaterView(ViewModel);
             View.Owner = _viewLoadedParamsReference.DynamoWindow;
 

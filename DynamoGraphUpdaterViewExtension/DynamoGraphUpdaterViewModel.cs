@@ -2,12 +2,9 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
-using System.IO;
 using System.Linq;
-using System.Windows;
 using Dynamo.Core;
 using Dynamo.Graph.Workspaces;
-using Dynamo.Utilities;
 using Dynamo.ViewModels;
 using Dynamo.Wpf.Extensions;
 using DynamoGraphUpdater.Controls;
@@ -17,8 +14,7 @@ namespace DynamoGraphUpdater
     public class DynamoGraphUpdaterViewModel : NotificationObject, IDisposable
     {
         #region Fields and Properties
-        private readonly ViewLoadedParams _viewLoadedParamsInstance;
-        internal DynamoViewModel DynamoViewModel;
+        private DynamoGraphUpdaterModel _model;
         internal HomeWorkspaceModel CurrentWorkspace;
         #endregion
 
@@ -48,19 +44,17 @@ namespace DynamoGraphUpdater
         }
 
         /// <summary>
-        ///     The source path containing dynamo graphs to be exported
+        /// The source path containing dynamo graphs to be exported
         /// </summary>
         public PathViewModel SourcePathViewModel { get; set; }
 
-        public DynamoGraphUpdaterViewModel(ViewLoadedParams p)
+        public DynamoGraphUpdaterViewModel(DynamoGraphUpdaterModel model)
         {
-            if (p == null) return;
-            _viewLoadedParamsInstance = p;
+            if (model == null) return;
+            _model = model;
             
             //store our source path and subscribe to changed event
-            SourcePathViewModel = new PathViewModel
-            { Type = PathType.Source, Owner = _viewLoadedParamsInstance.DynamoWindow };
-
+            SourcePathViewModel = _model.SourcePathViewModel();
             SourcePathViewModel.PropertyChanged += SourcePathPropertyChanged;
 
             CurrentPageIndex = 0;
@@ -148,7 +142,7 @@ namespace DynamoGraphUpdater
         public void Dispose()
         {
             CurrentWorkspace = null;
-            DynamoViewModel = null;
+            _model = null;
         }
     }
 }
