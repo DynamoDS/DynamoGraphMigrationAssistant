@@ -1,4 +1,5 @@
-﻿using System.Windows.Controls;
+﻿using System.Windows;
+using System.Windows.Controls;
 
 namespace DynamoGraphUpdater
 {
@@ -11,6 +12,21 @@ namespace DynamoGraphUpdater
         {
             InitializeComponent();
             DataContext = vm;
+            this.Loaded += OnLoaded;
+        }
+
+        private void OnLoaded(object sender, RoutedEventArgs e)
+        {
+            DynamoGraphUpdaterViewModel vm = DataContext as DynamoGraphUpdaterViewModel;
+
+            if (vm.SingleGraphMode)
+            {
+                this.CurrentFileRadioButton.IsChecked = true;
+            }
+            else
+            {
+                this.FromFolderRadioButton.IsChecked = true;
+            }
         }
     }
 }

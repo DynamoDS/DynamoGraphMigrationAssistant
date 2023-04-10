@@ -54,11 +54,11 @@
                       FontSize="12px"
                       VerticalAlignment="Center" ItemsSource="{Binding TargetVersions}" DisplayMemberPath="DisplayName" SelectionChanged="Selector_OnSelectionChanged"/>
         </Grid>
-        <ScrollViewer Grid.Row="2" HorizontalScrollBarVisibility="Disabled">
+        <ScrollViewer Grid.Row="2">
             <ItemsControl Name="UpdateableGraphsStackPanel" ItemsSource="{Binding UpdateableGraphs}">
                 <ItemsControl.ItemTemplate>
                     <DataTemplate>
-                        <controls:UpdateableGraphsControl></controls:UpdateableGraphsControl>
+                        <controls:UpdateableGraphsControl Width="500"/>
                     </DataTemplate>
                 </ItemsControl.ItemTemplate>
             </ItemsControl>

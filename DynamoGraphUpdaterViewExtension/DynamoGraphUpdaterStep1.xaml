@@ -32,11 +32,14 @@
                                Foreground="#3C3C3C"
                                TextWrapping="Wrap" Text="Select File(s)"/>
         <RadioButton Grid.Row="1" 
+                                 Name="CurrentFileRadioButton"
                                  Content="Current File" 
                                  VerticalAlignment="Center" 
                                  Margin="16 0 0 0"
                                  FontSize="12"
-                                 FontFamily="{StaticResource ArtifaktElementRegular}" GroupName="FileScope" IsChecked="True"/>
+                                 FontFamily="{StaticResource ArtifaktElementRegular}" 
+                                 GroupName="FileScope" 
+                                 IsChecked="{Binding SingleGraphMode, Mode=TwoWay}"/>
         <Grid Grid.Row="2">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="120"/>
@@ -50,7 +53,9 @@
                                      VerticalAlignment="Center" 
                                      Margin="16 0 0 0"
                                      FontSize="12"
-                                     FontFamily="{StaticResource ArtifaktElementRegular}" GroupName="FileScope"/>
+                                     FontFamily="{StaticResource ArtifaktElementRegular}"
+                                     GroupName="FileScope"
+                                     IsChecked="{Binding MultipleGraphMode, Mode=TwoWay}"/>
 
 
             <controls:FolderPathViewControl Grid.Column="1" DataContext="{Binding SourcePathViewModel}" IsEnabled="{Binding IsChecked, ElementName=FromFolderRadioButton , TargetNullValue=false}"></controls:FolderPathViewControl>

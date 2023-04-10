@@ -15,7 +15,6 @@ namespace DynamoGraphUpdater
     {
         #region Fields and Properties
         private DynamoGraphUpdaterModel _model;
-        internal HomeWorkspaceModel CurrentWorkspace;
         #endregion
 
 
@@ -43,6 +42,20 @@ namespace DynamoGraphUpdater
             set { _currentPage = value; RaisePropertyChanged(nameof(CurrentPage)); }
         }
 
+        private bool _singleGraphMode;
+        public bool SingleGraphMode
+        {
+            get { return _singleGraphMode; }
+            set { _singleGraphMode = value; RaisePropertyChanged(nameof(SingleGraphMode));}
+        }
+
+        private bool _multipleGraphMode;
+        public bool MultipleGraphMode
+        {
+            get { return _multipleGraphMode; }
+            set { _multipleGraphMode = value; RaisePropertyChanged(nameof(MultipleGraphMode)); }
+        }
+
         /// <summary>
         /// The source path containing dynamo graphs to be exported
         /// </summary>
@@ -58,6 +71,17 @@ namespace DynamoGraphUpdater
             SourcePathViewModel.PropertyChanged += SourcePathPropertyChanged;
 
             CurrentPageIndex = 0;
+
+            if (_model.CurrentWorkspace != null)
+            {
+                SingleGraphMode = true;
+                MultipleGraphMode = false;
+            }
+            else
+            {
+                MultipleGraphMode = true;
+                SingleGraphMode = false;
+            }
 
             //Load our target versions from json TODO: make this read extra folder
             PotentialTargetVersions = new ObservableCollection<TargetDynamoVersion>()
@@ -141,7 +165,7 @@ namespace DynamoGraphUpdater
 
         public void Dispose()
         {
-            CurrentWorkspace = null;
+            //CurrentWorkspace = null;
             _model = null;
         }
     }

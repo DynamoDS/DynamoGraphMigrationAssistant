@@ -120,6 +120,9 @@
   <data name="ExtensionName" xml:space="preserve">
     <value>Dynamo Graph Updater</value>
   </data>
+  <data name="GraphsSelectedText" xml:space="preserve">
+    <value>graphs selected for update.</value>
+  </data>
   <data name="HeaderText" xml:space="preserve">
     <value>Dynamo Graph Updater</value>
   </data>

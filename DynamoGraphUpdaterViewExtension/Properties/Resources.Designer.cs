@@ -70,6 +70,15 @@ namespace DynamoGraphUpdater.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to graphs selected for update..
+        /// </summary>
+        public static string GraphsSelectedText {
+            get {
+                return ResourceManager.GetString("GraphsSelectedText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Dynamo Graph Updater.
         /// </summary>
         public static string HeaderText {

@@ -1,4 +1,5 @@
 ﻿using System.IO;
+using System.Linq;
 using Dynamo.Graph.Workspaces;
 using Dynamo.ViewModels;
 using Dynamo.Wpf.Extensions;
@@ -14,6 +15,14 @@ namespace DynamoGraphUpdater
         public DynamoGraphUpdaterModel(ViewLoadedParams viewLoadedParams)
         {
             _viewLoadedParamsInstance = viewLoadedParams;
+            if (_viewLoadedParamsInstance.CurrentWorkspaceModel is HomeWorkspaceModel homeWorkspaceModel)
+            {
+                if (homeWorkspaceModel.Nodes.Any())
+                {
+                    CurrentWorkspace = homeWorkspaceModel;
+                }
+               
+            }
 
             DynamoViewModel = _viewLoadedParamsInstance.DynamoWindow.DataContext as DynamoViewModel;
         }
