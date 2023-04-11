@@ -60,6 +60,7 @@ namespace DynamoGraphUpdater
             viewModel.CurrentPageIndex++;
 
             this.NavigationFrame.Navigate(StepsPages[viewModel.CurrentPageIndex]);
+            SetButtonText();
         }
 
         private void BackButton_OnClick(object sender, RoutedEventArgs e)
@@ -69,6 +70,28 @@ namespace DynamoGraphUpdater
             viewModel.CurrentPageIndex--;
 
             this.NavigationFrame.Navigate(StepsPages[viewModel.CurrentPageIndex]);
+            SetButtonText();
+        }
+
+        private void SetButtonText()
+        {
+
+            //set the button text
+            switch (viewModel.CurrentPageIndex)
+            {
+                case 0:
+                    this.NextButton.Content = "Next";
+                    break;
+                case 1:
+                    this.NextButton.Content = "Next";
+                    break;
+                case 2:
+                    this.NextButton.Content = "Upgrade";
+                    break;
+                case 3:
+                    this.NextButton.Content = "Finished";
+                    break;
+            }
         }
     }
 }

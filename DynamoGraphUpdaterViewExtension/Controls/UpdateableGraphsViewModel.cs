@@ -24,6 +24,19 @@ namespace DynamoGraphUpdater.Controls
         }
         public List<UpdateableGraphViewModel> UpdateableGraphs { get; set; }
 
+
+        //python fixes
+        private bool _inTargetVersion;
+        public bool InTargetVersion
+        {
+            get => _inTargetVersion;
+            set
+            {
+                _inTargetVersion = value;
+                RaisePropertyChanged(nameof(InTargetVersion));
+            }
+        }
+
         //python fixes
         private bool _pythonFixes;
         public bool PythonFixes 
@@ -104,6 +117,9 @@ namespace DynamoGraphUpdater.Controls
             PythonFixes = targetVersion != TruncatedVersion;
             IfNodes = targetVersion != TruncatedVersion;
             NodeSpacing = targetVersion != TruncatedVersion;
+
+
+            InTargetVersion = targetVersion == TruncatedVersion;
         }
     }
 }
