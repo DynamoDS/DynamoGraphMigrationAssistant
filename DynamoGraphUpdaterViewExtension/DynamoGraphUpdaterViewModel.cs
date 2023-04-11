@@ -3,8 +3,10 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
+using System.Windows.Documents;
 using Dynamo.Core;
 using Dynamo.Graph.Workspaces;
+using Dynamo.Logging;
 using Dynamo.ViewModels;
 using Dynamo.Wpf.Extensions;
 using DynamoGraphUpdater.Controls;
@@ -29,6 +31,19 @@ namespace DynamoGraphUpdater
          public ObservableCollection<TargetDynamoVersion> PotentialTargetVersions { get; set; }
         public ObservableCollection<TargetDynamoVersion> TargetVersions { get; set; }
 
+
+        private string _targetPath;
+        public string TargetPath
+        {
+            get { return _targetPath + 1; }
+            set { _targetPath = value; RaisePropertyChanged(nameof(TargetPath)); }
+        }
+        private bool _saveInNewLocation;
+        public bool SaveInNewLocation
+        {
+            get { return _saveInNewLocation; }
+            set { _saveInNewLocation = value; RaisePropertyChanged(nameof(SaveInNewLocation)); }
+        }
         private int _currentPageIndex;
         public int CurrentPageIndex
         {
@@ -61,6 +76,11 @@ namespace DynamoGraphUpdater
         /// </summary>
         public PathViewModel SourcePathViewModel { get; set; }
 
+        /// <summary>
+        /// The source path containing dynamo graphs to be exported
+        /// </summary>
+        public PathViewModel TargetPathViewModel { get; set; }
+
         public DynamoGraphUpdaterViewModel(DynamoGraphUpdaterModel model)
         {
             if (model == null) return;
@@ -69,6 +89,11 @@ namespace DynamoGraphUpdater
             //store our source path and subscribe to changed event
             SourcePathViewModel = _model.SourcePathViewModel();
             SourcePathViewModel.PropertyChanged += SourcePathPropertyChanged;
+
+            //store our target path and subscribe to changed event
+            TargetPathViewModel = _model.TargetPathViewModel();
+            TargetPathViewModel.PropertyChanged += SourcePathPropertyChanged;
+
 
             CurrentPageIndex = 0;
 
@@ -82,6 +107,9 @@ namespace DynamoGraphUpdater
                 MultipleGraphMode = true;
                 SingleGraphMode = false;
             }
+
+            //pre-select save as new as that is preferred
+            SaveInNewLocation = true;
 
             //Load our target versions from json TODO: make this read extra folder
             PotentialTargetVersions = new ObservableCollection<TargetDynamoVersion>()
@@ -104,28 +132,28 @@ namespace DynamoGraphUpdater
         // Handles source path changed
         private void SourcePathPropertyChanged(object sender, PropertyChangedEventArgs propertyChangedEventArgs)
         {
-            var pathVM = sender as PathViewModel;
-            if (pathVM == null) return;
+            var pathVm = sender as PathViewModel;
+            if (pathVm == null) return;
             if (propertyChangedEventArgs.PropertyName == nameof(PathViewModel.FolderPath))
             {
-                if (pathVM.Type == PathType.Source)
+                if (pathVm.Type == PathType.Source)
                 {
-                    SourceFolderChanged(pathVM);
+                    SourceFolderChanged(pathVm);
                 }
                 else
                 {
-                    //TargetFolderChanged();
+                    TargetFolderChanged(pathVm);
                 }
 
                 //RaisePropertyChanged(nameof(CanExport));
             }
         }
         // Update graphs if source folder is changed by the UI
-        private void SourceFolderChanged(PathViewModel pathVM)
+        private void SourceFolderChanged(PathViewModel pathVm)
         {
             UpdateableGraphs = new ObservableCollection<UpdateableGraphsViewModel>();
 
-            var files = Utilities.GetAllFilesOfExtension(pathVM.FolderPath)?.OrderBy(x => x);
+            var files = Utilities.GetAllFilesOfExtension(pathVm.FolderPath)?.OrderBy(x => x);
             if (files == null)
                 return;
 
@@ -146,7 +174,6 @@ namespace DynamoGraphUpdater
                 UpdateableGraphs.Add(updateableGraph);
             }
 
-
             //pick the potential versions from what our graphs mostly consist of
             var whatProductIsUsedMost = graphs.GroupBy(g => g.Product).OrderByDescending(g => g.Count()).FirstOrDefault()?.Key;
 
@@ -161,7 +188,11 @@ namespace DynamoGraphUpdater
             RaisePropertyChanged(nameof(TargetVersions));
             RaisePropertyChanged(nameof(UpdateableGraphs));
         }
-
+        private void TargetFolderChanged(PathViewModel pathVm)
+        {
+            TargetPath = pathVm.FolderPath;
+            RaisePropertyChanged(nameof(TargetPath));
+        }
 
         public void Dispose()
         {

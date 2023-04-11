@@ -136,6 +136,9 @@
     <Compile Include="Controls\UpdateableGraphsViewModel.cs" />
     <Compile Include="Controls\UpdateableGraphViewModel.cs" />
     <Compile Include="DynamoGraphUpdaterModel.cs" />
+    <Compile Include="DynamoGraphUpdaterStep3.xaml.cs">
+      <DependentUpon>DynamoGraphUpdaterStep3.xaml</DependentUpon>
+    </Compile>
     <Compile Include="DynamoGraphUpdaterStep2.xaml.cs">
       <DependentUpon>DynamoGraphUpdaterStep2.xaml</DependentUpon>
     </Compile>
@@ -176,6 +179,10 @@
     <Page Include="Controls\FolderPathViewControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="DynamoGraphUpdaterStep3.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="DynamoGraphUpdaterStep2.xaml">
       <Generator>MSBuild:Compile</Generator>

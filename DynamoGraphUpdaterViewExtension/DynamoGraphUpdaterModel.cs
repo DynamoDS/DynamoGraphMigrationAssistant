@@ -51,5 +51,14 @@ namespace DynamoGraphUpdater
             return new PathViewModel
                 { Type = PathType.Source, Owner = _viewLoadedParamsInstance.DynamoWindow };
         }
+        /// <summary>
+        /// Build target path for graph location
+        /// </summary>
+        /// <returns></returns>
+        internal PathViewModel TargetPathViewModel()
+        {
+            return new PathViewModel
+                { Type = PathType.Target, Owner = _viewLoadedParamsInstance.DynamoWindow };
+        }
     }
 }

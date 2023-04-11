@@ -24,6 +24,7 @@ namespace DynamoGraphUpdater
 
             StepsPages.Add(new DynamoGraphUpdaterStep1(vm));
             StepsPages.Add(new DynamoGraphUpdaterStep2(vm));
+            StepsPages.Add(new DynamoGraphUpdaterStep3(vm));
 
             NavigationFrame.Navigate(new DynamoGraphUpdaterStep1(vm));
 
