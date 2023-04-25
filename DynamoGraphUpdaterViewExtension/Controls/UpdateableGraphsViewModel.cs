@@ -25,7 +25,7 @@ namespace DynamoGraphUpdater.Controls
         public List<UpdateableGraphViewModel> UpdateableGraphs { get; set; }
 
 
-        //python fixes
+        //is it in the target version already
         private bool _inTargetVersion;
         public bool InTargetVersion
         {

@@ -21,6 +21,8 @@ namespace DynamoGraphUpdater.Controls
                 RaisePropertyChanged(nameof(Update));
             }
         }
+
+       
         public int PythonNodesChangedCount { get; set; }
         public int IfNodesChangedCount { get; set; }
         public int NodeSpaceChangedCount { get; set; }
@@ -28,6 +30,7 @@ namespace DynamoGraphUpdater.Controls
         public FileInfo DynamoGraph { get; set; }
         public string Name => DynamoGraph.Name;
         public string FullName => DynamoGraph.FullName;
+        public string GraphJson { get; set; }
 
         public UpdateableGraphViewModel(Version currentVersion, string dynamoGraph)
         {
@@ -36,6 +39,8 @@ namespace DynamoGraphUpdater.Controls
             DynamoGraph = new FileInfo(dynamoGraph);
             CalculateDynamoProduct();
             Update = true;
+
+            GraphJson = File.ReadAllText(dynamoGraph);
         }
 
         public void CalculateDynamoProduct()
@@ -54,5 +59,7 @@ namespace DynamoGraphUpdater.Controls
             }
 
         }
+
+
     }
 }
