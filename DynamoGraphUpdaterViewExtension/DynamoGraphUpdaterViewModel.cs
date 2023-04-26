@@ -7,6 +7,7 @@ using System.Windows.Documents;
 using Dynamo.Core;
 using Dynamo.Graph.Workspaces;
 using Dynamo.Logging;
+using Dynamo.UI.Commands;
 using Dynamo.ViewModels;
 using Dynamo.Wpf.Extensions;
 using DynamoGraphUpdater.Controls;
@@ -80,6 +81,8 @@ namespace DynamoGraphUpdater
         /// The source path containing dynamo graphs to be exported
         /// </summary>
         public PathViewModel TargetPathViewModel { get; set; }
+        
+        public DelegateCommand PageNavigationCommand { get; set; }
 
         public DynamoGraphUpdaterViewModel(DynamoGraphUpdaterModel model)
         {
@@ -126,8 +129,8 @@ namespace DynamoGraphUpdater
                 new TargetDynamoVersion("2.17", "Civil3D", " 2024", true, true, true),
             };
 
-          
-
+            //commands
+            PageNavigationCommand = new DelegateCommand(PageNavigation);
         }
         // Handles source path changed
         private void SourcePathPropertyChanged(object sender, PropertyChangedEventArgs propertyChangedEventArgs)
@@ -199,5 +202,22 @@ namespace DynamoGraphUpdater
             //CurrentWorkspace = null;
             _model = null;
         }
-    }
+
+
+        #region Methods
+        /// <summary>
+        ///  To navigate pages
+        /// </summary>
+        /// <param name="obj"></param>
+        private void PageNavigation(object obj)
+        {
+            var stuff = SingleGraphMode;
+            if (CurrentPageIndex.Equals(2))
+            {
+                _model.UpgradeGraphs(UpdateableGraphs);
+            }
+        }
+
+        #endregion
+        }
 }

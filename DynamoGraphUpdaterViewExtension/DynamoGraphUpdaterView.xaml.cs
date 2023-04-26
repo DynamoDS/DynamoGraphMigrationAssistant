@@ -75,7 +75,6 @@ namespace DynamoGraphUpdater
 
         private void SetButtonText()
         {
-
             //set the button text
             switch (viewModel.CurrentPageIndex)
             {

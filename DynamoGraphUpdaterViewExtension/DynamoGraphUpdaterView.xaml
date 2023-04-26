@@ -112,7 +112,8 @@
                             Foreground="White"
                             Background="#0696D7"
                             Content="Next"
-                            Click="NextButton_OnClick"/>
+                            Click="NextButton_OnClick"
+                            Command="{Binding PageNavigationCommand}"/>
                 </Grid>
 
 
