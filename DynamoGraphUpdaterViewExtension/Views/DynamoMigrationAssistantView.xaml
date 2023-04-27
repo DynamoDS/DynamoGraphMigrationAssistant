@@ -1,9 +1,8 @@
-﻿<Window x:Class="DynamoGraphUpdater.DynamoGraphUpdaterView"
+﻿<Window x:Class="DynamoGraphMigrationAssistant.Views.DynamoMigrationAssistantView"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
-             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:local="clr-namespace:DynamoGraphUpdater"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:ui="clr-namespace:Dynamo.UI;assembly=DynamoCoreWpf"
              WindowStartupLocation="CenterOwner"
              WindowStyle="None"
@@ -63,7 +62,7 @@
                                FontFamily="{StaticResource ArtifaktElementRegular}"
                                FontSize="20px"
                                Foreground="#3C3C3C"
-                               TextWrapping="Wrap" Text="Dynamo Graph Updater"/>
+                               TextWrapping="Wrap" Text="Dynamo Graph Migration Assistant"/>
                     <Button Name="CloseButton"
                             Grid.Column="2"
                             Click="CloseButton_OnClick"
@@ -103,7 +102,7 @@
                             Foreground="#3C3C3C"
                             Background="White"
                             Content="Back"
-                            Click="BackButton_OnClick"/>
+                            Click="BackButton_OnClick" Visibility="Hidden"/>
                     <Button Name="NextButton"
                             Grid.Column="3"
                             Width="100"

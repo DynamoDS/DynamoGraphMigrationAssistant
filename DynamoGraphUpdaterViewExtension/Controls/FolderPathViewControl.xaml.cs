@@ -3,7 +3,7 @@ using System.Diagnostics;
 using System.Windows.Controls;
 using System.Windows.Input;
 
-namespace DynamoGraphUpdater.Controls
+namespace DynamoGraphMigrationAssistant.Controls
 {
     /// <summary>
     /// Interaction logic for PathViewControl.xaml

@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace DynamoGraphUpdater.Properties {
+namespace DynamoGraphMigrationAssistant.Properties {
     using System;
     
     
@@ -39,7 +39,7 @@ namespace DynamoGraphUpdater.Properties {
         public static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("DynamoGraphUpdater.Properties.Resources", typeof(Resources).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("DynamoGraphMigrationAssistant.Properties.Resources", typeof(Resources).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -61,7 +61,7 @@ namespace DynamoGraphUpdater.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Dynamo Graph Updater.
+        ///   Looks up a localized string similar to Dynamo Graph Migration Assistant.
         /// </summary>
         public static string ExtensionName {
             get {
@@ -79,7 +79,7 @@ namespace DynamoGraphUpdater.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Dynamo Graph Updater.
+        ///   Looks up a localized string similar to Dynamo Graph Migration Assistant.
         /// </summary>
         public static string HeaderText {
             get {

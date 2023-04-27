@@ -1,8 +1,6 @@
-﻿using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
+﻿using System.Windows.Controls;
 
-namespace DynamoGraphUpdater.Controls
+namespace DynamoGraphMigrationAssistant.Controls
 {
     /// <summary>
     /// Interaction logic for UpdateableGraphs.xaml

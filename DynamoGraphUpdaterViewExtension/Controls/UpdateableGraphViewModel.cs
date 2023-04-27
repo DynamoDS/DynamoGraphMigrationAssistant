@@ -1,11 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Linq;
 using Dynamo.Core;
-using Dynamo.ViewModels;
 
-namespace DynamoGraphUpdater.Controls
+namespace DynamoGraphMigrationAssistant.Controls
 {
     public class UpdateableGraphViewModel : NotificationObject
     {

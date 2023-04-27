@@ -118,13 +118,13 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="ExtensionName" xml:space="preserve">
-    <value>Dynamo Graph Updater</value>
+    <value>Dynamo Graph Migration Assistant</value>
   </data>
   <data name="GraphsSelectedText" xml:space="preserve">
     <value>graphs selected for update.</value>
   </data>
   <data name="HeaderText" xml:space="preserve">
-    <value>Dynamo Graph Updater</value>
+    <value>Dynamo Graph Migration Assistant</value>
   </data>
   <data name="SelectFolderMsg" xml:space="preserve">
     <value>Select folder ..</value>

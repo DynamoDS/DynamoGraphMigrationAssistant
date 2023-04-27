@@ -3,21 +3,16 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
-using System.Windows.Documents;
 using Dynamo.Core;
-using Dynamo.Graph.Workspaces;
-using Dynamo.Logging;
 using Dynamo.UI.Commands;
-using Dynamo.ViewModels;
-using Dynamo.Wpf.Extensions;
-using DynamoGraphUpdater.Controls;
+using DynamoGraphMigrationAssistant.Controls;
 
-namespace DynamoGraphUpdater
+namespace DynamoGraphMigrationAssistant.ViewModels
 {
-    public class DynamoGraphUpdaterViewModel : NotificationObject, IDisposable
+    public class DynamoGraphMigrationAssistantViewModel : NotificationObject, IDisposable
     {
         #region Fields and Properties
-        private DynamoGraphUpdaterModel _model;
+        private DynamoGraphMigrationAssistantModel _model;
         #endregion
 
 
@@ -84,7 +79,7 @@ namespace DynamoGraphUpdater
         
         public DelegateCommand PageNavigationCommand { get; set; }
 
-        public DynamoGraphUpdaterViewModel(DynamoGraphUpdaterModel model)
+        public DynamoGraphMigrationAssistantViewModel(DynamoGraphMigrationAssistantModel model)
         {
             if (model == null) return;
             _model = model;

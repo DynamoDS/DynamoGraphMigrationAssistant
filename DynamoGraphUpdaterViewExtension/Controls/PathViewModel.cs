@@ -5,7 +5,7 @@ using Dynamo.Core;
 using Dynamo.UI;
 using Dynamo.UI.Commands;
 
-namespace DynamoGraphUpdater.Controls
+namespace DynamoGraphMigrationAssistant.Controls
 {
     public enum PathType
     {

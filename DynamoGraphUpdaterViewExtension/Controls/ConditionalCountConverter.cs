@@ -4,7 +4,7 @@ using System.Globalization;
 using System.Linq;
 using System.Windows.Data;
 
-namespace DynamoGraphUpdater.Controls
+namespace DynamoGraphMigrationAssistant.Controls
 {
     public class ConditionalCountConverter : IValueConverter
     {

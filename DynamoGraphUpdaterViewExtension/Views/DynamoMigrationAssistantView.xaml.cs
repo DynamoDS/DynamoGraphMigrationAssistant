@@ -1,32 +1,32 @@
 ﻿using System.Collections.Generic;
-using System.ComponentModel;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
-using NUnit.Framework;
+using DynamoGraphMigrationAssistant.ViewModels;
+using DynamoGraphMigrationAssistant.Views.Steps;
 
-namespace DynamoGraphUpdater
+namespace DynamoGraphMigrationAssistant.Views
 {
     /// <summary>
     /// Interaction logic for DynamoGraphUpdaterView.xaml
     /// </summary>
-    public partial class DynamoGraphUpdaterView : Window
+    public partial class DynamoMigrationAssistantView : Window
     {
         private List<Page> StepsPages = new List<Page>();
-        DynamoGraphUpdaterViewModel viewModel;
+        DynamoGraphMigrationAssistantViewModel viewModel;
 
-        public DynamoGraphUpdaterView(DynamoGraphUpdaterViewModel vm)
+        public DynamoMigrationAssistantView(DynamoGraphMigrationAssistantViewModel vm)
         {
             InitializeComponent();
 
             viewModel = vm;
             DataContext = vm;
 
-            StepsPages.Add(new DynamoGraphUpdaterStep1(vm));
-            StepsPages.Add(new DynamoGraphUpdaterStep2(vm));
-            StepsPages.Add(new DynamoGraphUpdaterStep3(vm));
+            StepsPages.Add(new DynamoGraphMigrationAssistantStep1(vm));
+            StepsPages.Add(new DynamoGraphMigrationAssistantStep2(vm));
+            StepsPages.Add(new DynamoGraphMigrationAssistantStep3(vm));
 
-            NavigationFrame.Navigate(new DynamoGraphUpdaterStep1(vm));
+            NavigationFrame.Navigate(new DynamoGraphMigrationAssistantStep1(vm));
 
             this.IsVisibleChanged += OnIsVisibleChanged;
         }
@@ -80,15 +80,19 @@ namespace DynamoGraphUpdater
             {
                 case 0:
                     this.NextButton.Content = "Next";
+                    this.BackButton.Visibility = Visibility.Hidden;
                     break;
                 case 1:
                     this.NextButton.Content = "Next";
+                    this.BackButton.Visibility = Visibility.Visible;
                     break;
                 case 2:
                     this.NextButton.Content = "Upgrade";
+                    this.BackButton.Visibility = Visibility.Visible;
                     break;
                 case 3:
                     this.NextButton.Content = "Finished";
+                    this.BackButton.Visibility = Visibility.Visible;
                     break;
             }
         }

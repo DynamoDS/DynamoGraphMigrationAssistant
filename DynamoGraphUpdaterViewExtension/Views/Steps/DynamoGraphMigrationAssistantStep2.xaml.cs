@@ -1,13 +1,14 @@
 ﻿using System.Windows.Controls;
+using DynamoGraphMigrationAssistant.ViewModels;
 
-namespace DynamoGraphUpdater
+namespace DynamoGraphMigrationAssistant.Views.Steps
 {
     /// <summary>
-    /// Interaction logic for DynamoGraphUpdaterStep1.xaml
+    /// Interaction logic for DynamoMigrationAssistantStep1.xaml
     /// </summary>
-    public partial class DynamoGraphUpdaterStep2 : Page
+    public partial class DynamoGraphMigrationAssistantStep2 : Page
     {
-        public DynamoGraphUpdaterStep2(DynamoGraphUpdaterViewModel vm)
+        public DynamoGraphMigrationAssistantStep2(DynamoGraphMigrationAssistantViewModel vm)
         {
             InitializeComponent();
 
@@ -17,7 +18,7 @@ namespace DynamoGraphUpdater
         private void Selector_OnSelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             if (!IsLoaded) return;
-            var viewModel = DataContext as DynamoGraphUpdaterViewModel;
+            var viewModel = DataContext as DynamoGraphMigrationAssistantViewModel;
 
             foreach (var graph in viewModel.UpdateableGraphs)
             {

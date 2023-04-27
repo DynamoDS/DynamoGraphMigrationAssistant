@@ -1,14 +1,15 @@
 ﻿using System.Windows;
 using System.Windows.Controls;
+using DynamoGraphMigrationAssistant.ViewModels;
 
-namespace DynamoGraphUpdater
+namespace DynamoGraphMigrationAssistant.Views.Steps
 {
     /// <summary>
-    /// Interaction logic for DynamoGraphUpdaterStep1.xaml
+    /// Interaction logic for DynamoMigrationAssistantStep1.xaml
     /// </summary>
-    public partial class DynamoGraphUpdaterStep3 : Page
+    public partial class DynamoGraphMigrationAssistantStep3 : Page
     {
-        public DynamoGraphUpdaterStep3(DynamoGraphUpdaterViewModel vm)
+        public DynamoGraphMigrationAssistantStep3(DynamoGraphMigrationAssistantViewModel vm)
         {
             InitializeComponent();
             DataContext = vm;

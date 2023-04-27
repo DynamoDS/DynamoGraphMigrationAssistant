@@ -1,20 +1,19 @@
 ﻿using System.Collections.ObjectModel;
-using System.IO;
 using System.Linq;
 using System.Text.RegularExpressions;
 using Dynamo.Graph.Workspaces;
 using Dynamo.ViewModels;
 using Dynamo.Wpf.Extensions;
-using DynamoGraphUpdater.Controls;
+using DynamoGraphMigrationAssistant.Controls;
 
-namespace DynamoGraphUpdater
+namespace DynamoGraphMigrationAssistant
 {
-    public class DynamoGraphUpdaterModel
+    public class DynamoGraphMigrationAssistantModel
     {
         private readonly ViewLoadedParams _viewLoadedParamsInstance;
         internal DynamoViewModel DynamoViewModel;
         internal HomeWorkspaceModel CurrentWorkspace;
-        public DynamoGraphUpdaterModel(ViewLoadedParams viewLoadedParams)
+        public DynamoGraphMigrationAssistantModel(ViewLoadedParams viewLoadedParams)
         {
             _viewLoadedParamsInstance = viewLoadedParams;
             if (_viewLoadedParamsInstance.CurrentWorkspaceModel is HomeWorkspaceModel homeWorkspaceModel)

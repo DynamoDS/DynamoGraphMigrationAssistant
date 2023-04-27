@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using Dynamo.Core;
 
-namespace DynamoGraphUpdater.Controls
+namespace DynamoGraphMigrationAssistant.Controls
 {
     public class UpdateableGraphsViewModel : NotificationObject
     {
