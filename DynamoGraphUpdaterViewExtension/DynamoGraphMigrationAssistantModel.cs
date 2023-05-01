@@ -1,10 +1,13 @@
-﻿using System.Collections.ObjectModel;
+﻿using System;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text.RegularExpressions;
 using Dynamo.Graph.Workspaces;
 using Dynamo.ViewModels;
 using Dynamo.Wpf.Extensions;
 using DynamoGraphMigrationAssistant.Controls;
+using NUnit.Framework;
 
 namespace DynamoGraphMigrationAssistant
 {
@@ -28,13 +31,17 @@ namespace DynamoGraphMigrationAssistant
             DynamoViewModel = _viewLoadedParamsInstance.DynamoWindow.DataContext as DynamoViewModel;
         }
 
-        internal void UpgradeGraphs(ObservableCollection<UpdateableGraphsViewModel> updateableGraphs)
+        internal UpdateableGraphsViewModel UpgradeGraphs(ObservableCollection<UpdateableGraphsViewModel> updateableGraphs)
         {
+            var targetVersion = new Version();
+
+            List<UpdateableGraphViewModel> updatedGraphs = new List<UpdateableGraphViewModel>();
             foreach (var updateableGraphSet in updateableGraphs)
             {
                 //iterate through individual graphs
                 foreach (var updateableGraph in updateableGraphSet.UpdateableGraphs)
                 {
+                    targetVersion =  updateableGraph.TruncatedVersion;
                     if (updateableGraphSet.IfNodes)
                     {
                         ReplaceIfNodes(updateableGraph);
@@ -49,12 +56,16 @@ namespace DynamoGraphMigrationAssistant
                     {
                         FixNodeSpacing(updateableGraph);
                     }
+                    //add to output
+                    updatedGraphs.Add(updateableGraph);
 
                     //finally save it
 
                 }
                 
             }
+
+            return new UpdateableGraphsViewModel(targetVersion, updatedGraphs);
         }
 
 

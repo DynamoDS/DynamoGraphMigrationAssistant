@@ -161,6 +161,9 @@
     </Compile>
     <Compile Include="Utilities.cs" />
     <Compile Include="TargetDynamoVersion.cs" />
+    <Compile Include="Views\Steps\DynamoMigrationAssistantStep4.xaml.cs">
+      <DependentUpon>DynamoMigrationAssistantStep4.xaml</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Content Include="manifest\DynamoGraphMigrationAssistant_ViewExtensionDefinition.xml" />
@@ -197,6 +200,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Controls\UpdateableGraphsControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Steps\DynamoMigrationAssistantStep4.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

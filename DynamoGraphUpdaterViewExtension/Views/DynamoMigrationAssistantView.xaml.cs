@@ -25,10 +25,11 @@ namespace DynamoGraphMigrationAssistant.Views
             StepsPages.Add(new DynamoGraphMigrationAssistantStep1(vm));
             StepsPages.Add(new DynamoGraphMigrationAssistantStep2(vm));
             StepsPages.Add(new DynamoGraphMigrationAssistantStep3(vm));
+            StepsPages.Add(new DynamoGraphMigrationAssistantStep4(vm));
 
             NavigationFrame.Navigate(new DynamoGraphMigrationAssistantStep1(vm));
 
-            this.IsVisibleChanged += OnIsVisibleChanged;
+            //this.IsVisibleChanged += OnIsVisibleChanged;
         }
 
         private void OnIsVisibleChanged(object sender, DependencyPropertyChangedEventArgs e)

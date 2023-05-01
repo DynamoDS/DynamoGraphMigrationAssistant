@@ -19,10 +19,13 @@ namespace DynamoGraphMigrationAssistant.Controls
             }
         }
 
-       
-        public int PythonNodesChangedCount { get; set; }
-        public int IfNodesChangedCount { get; set; }
-        public int NodeSpaceChangedCount { get; set; }
+
+        public int PythonNodesChangedCount { get; set; } = 0;
+        public int IfNodesChangedCount { get; set; } = 0;
+        public int NodeSpaceChangedCount { get; set; } = 0;
+
+        public string GraphRevisionStatus =>
+            $"{NodeSpaceChangedCount} nodes resized. {PythonNodesChangedCount} Python nodes migrated. {IfNodesChangedCount} nodes updated.";
 
         public FileInfo DynamoGraph { get; set; }
         public string Name => DynamoGraph.Name;

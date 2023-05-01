@@ -21,10 +21,12 @@ namespace DynamoGraphMigrationAssistant.ViewModels
         /// </summary>
         public ObservableCollection<UpdateableGraphsViewModel> UpdateableGraphs { get; set; }
 
+        public UpdateableGraphsViewModel UpdatedGraphs { get; set; }
+
         /// <summary>
         /// The potential target versions
         /// </summary>
-         public ObservableCollection<TargetDynamoVersion> PotentialTargetVersions { get; set; }
+        public ObservableCollection<TargetDynamoVersion> PotentialTargetVersions { get; set; }
         public ObservableCollection<TargetDynamoVersion> TargetVersions { get; set; }
 
 
@@ -209,7 +211,7 @@ namespace DynamoGraphMigrationAssistant.ViewModels
             var stuff = SingleGraphMode;
             if (CurrentPageIndex.Equals(2))
             {
-                _model.UpgradeGraphs(UpdateableGraphs);
+                UpdatedGraphs = _model.UpgradeGraphs(UpdateableGraphs);
             }
         }
 
