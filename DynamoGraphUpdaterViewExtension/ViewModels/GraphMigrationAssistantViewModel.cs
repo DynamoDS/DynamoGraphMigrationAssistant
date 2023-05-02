@@ -10,6 +10,7 @@ using System.Windows;
 using System.Windows.Threading;
 using Dynamo.Controls;
 using Dynamo.Core;
+using Dynamo.Graph.Nodes;
 using Dynamo.Graph.Workspaces;
 using Dynamo.Models;
 using Dynamo.Scheduler;
@@ -35,11 +36,10 @@ namespace DynamoGraphMigrationAssistant.ViewModels
     {
 
         #region Fields and Properties
-
         private readonly ViewLoadedParams viewLoadedParamsInstance;
         internal DynamoViewModel DynamoViewModel;
         internal HomeWorkspaceModel CurrentWorkspace;
-        private  GraphMigrationAssistantModel _graphMigrationAssistantModel;
+        private GraphMigrationAssistantModel _graphMigrationAssistantModel;
         private Dictionary<int, GraphViewModel> graphDictionary = new Dictionary<int, GraphViewModel>();
         private MigrationPhase phase = MigrationPhase.Open;
         private bool locked = false;
@@ -131,7 +131,25 @@ namespace DynamoGraphMigrationAssistant.ViewModels
                 }
             }
         }
-
+        private bool fixInputOrder = true;
+        /// <summary>
+        /// Dynamo Player can now support input order alphabetically. Historically users created their inputs in order to fix this.
+        /// </summary>
+        public bool FixInputOrder
+        {
+            get
+            {
+                return fixInputOrder;
+            }
+            set
+            {
+                if (FixInputOrder != value)
+                {
+                    FixInputOrder = value;
+                    RaisePropertyChanged(nameof(FixInputOrder));
+                }
+            }
+        }
         private bool resume = false;
         /// <summary>
         ///     When this flag is set to true, will attempt to resume progress
@@ -252,8 +270,6 @@ namespace DynamoGraphMigrationAssistant.ViewModels
                 dispatcher = viewLoadedParamsInstance.DynamoWindow.Dispatcher;
                 scheduler = DynamoViewModel.Model.Scheduler;
             }
-
-            
 
             //if(DisablePrompts) DynamoViewModel.Model.DisablePrompts = true;
 
@@ -476,13 +492,11 @@ namespace DynamoGraphMigrationAssistant.ViewModels
         {
             phase = MigrationPhase.Save;
 
-            DynamoViewModel.SelectAllCommand.Execute(null);
-            DynamoViewModel.ZoomOutCommand.Execute(null);
 
             //replace if nodes
             if (ReplaceIfNodes)
             {
-                                    
+                MigrateIfToRefactoredIf();
             }
 
             //fix node spacing
@@ -491,29 +505,124 @@ namespace DynamoGraphMigrationAssistant.ViewModels
                 FixNodeSpacingForGraph();
             }
 
-            if (true)
+            if (FixInputOrder)
             {
-
+                FormatInputOrderForGraph();
             }
         }
 
+
+        public void MigrateIfToRefactoredIf()
+        {
+            int ifNodeReplacementCount = 0;
+
+            var nodeName = "CoreNodeModels.Logic.RefactoredIf";
+
+            var ifNodesToReplace = DynamoViewModel.CurrentSpaceViewModel.Nodes.Where(n =>
+                n.NodeModel.GetType().FullName.Equals("CoreNodeModels.Logic.If")).ToList();
+
+            foreach (var nodeViewModel in ifNodesToReplace)
+            {
+                List<DynamoModel.MakeConnectionCommand> connectionCommands = new List<DynamoModel.MakeConnectionCommand>();
+
+                var inports = nodeViewModel.NodeModel.InPorts.ToList();
+                var outports = nodeViewModel.NodeModel.OutPorts.ToList();
+
+                //zoom to node
+                DynamoViewModel.CurrentSpaceViewModel.FocusNodeCommand.Execute(nodeViewModel.NodeModel.GUID);
+
+                DynamoModel.CreateNodeCommand createRefactoredIf =
+                    new DynamoModel.CreateNodeCommand(Guid.NewGuid().ToString(), nodeName, nodeViewModel.X, nodeViewModel.Y, false, false);
+
+                DynamoViewModel.ExecuteCommand(createRefactoredIf);
+
+                NodeViewModel refactoredIfNode = DynamoViewModel.CurrentSpaceViewModel.Nodes.LastOrDefault();
+
+                //connect inports
+                foreach (var inport in inports)
+                {
+                    foreach (var connector in inport.Connectors)
+                    {
+                        var guid = connector.Start.Owner.GUID;
+
+                        var portIndex = connector.Start.Index;
+
+                        //begin the connection
+                        connectionCommands.Add(new DynamoModel.MakeConnectionCommand(guid, portIndex, PortType.Output,
+                            DynamoModel.MakeConnectionCommand.Mode.Begin));
+
+                        //end the connection
+                        connectionCommands.Add(
+                            new DynamoModel.MakeConnectionCommand(refactoredIfNode.NodeModel.GUID, connector.End.Index, PortType.Input,
+                                DynamoModel.MakeConnectionCommand.Mode.End));
+                    }
+                }
+                //connect outports
+                foreach (var outport in outports)
+                {
+                    foreach (var connector in outport.Connectors)
+                    {
+                        var guid = connector.End.Owner.GUID;
+
+                        var portIndex = connector.Start.Index;
+
+                        //begin the connection
+                        connectionCommands.Add(
+                            new DynamoModel.MakeConnectionCommand(refactoredIfNode.NodeModel.GUID, portIndex,
+                                PortType.Output,
+                                DynamoModel.MakeConnectionCommand.Mode.Begin));
+
+                        //end the connection
+                        connectionCommands.Add(new DynamoModel.MakeConnectionCommand(guid, connector.End.Index,
+                            PortType.Input,
+                            DynamoModel.MakeConnectionCommand.Mode.End));
+                    }
+                }
+
+                foreach (var connectionCommand in connectionCommands)
+                {
+                    DynamoViewModel.ExecuteCommand(connectionCommand);
+                }
+
+                DynamoModel.DeleteModelCommand delete = new DynamoModel.DeleteModelCommand(nodeViewModel.NodeModel.GUID);
+
+                DynamoViewModel.ExecuteCommand(delete);
+
+                ifNodeReplacementCount++;
+            }
+
+            //log the changes
+            EnterLog(string.Format(Properties.Resources.IfNodeReplacementLogMessage, ifNodeReplacementCount));
+        }
+
+        //TODO: tie this to settings
         private double xScaleFactor = 1.5;
         private double yScaleFactor = 2.25;
         private void FixNodeSpacingForGraph()
         {
+            int nodesMovedCount = 0;
+
             foreach (var nodeViewModel in DynamoViewModel.CurrentSpaceViewModel.Nodes)
             {
+                //zoom to node
+                DynamoViewModel.CurrentSpaceViewModel.FocusNodeCommand.Execute(nodeViewModel.NodeModel.GUID);
+
                 var originalX = nodeViewModel.X;
                 var originalY = nodeViewModel.Y;
 
-                nodeViewModel.X = originalX * xScaleFactor; 
+                nodeViewModel.X = originalX * xScaleFactor;
                 nodeViewModel.Y = originalY * yScaleFactor;
-                
+
                 nodeViewModel.NodeModel.ReportPosition();
+
+                nodesMovedCount++;
             }
 
             foreach (var noteViewModel in DynamoViewModel.CurrentSpaceViewModel.Notes)
             {
+                //zoom to node
+                DynamoViewModel.CurrentSpaceViewModel.FocusNodeCommand.Execute(noteViewModel.Model.GUID);
+
                 var originalX = noteViewModel.Left;
                 var originalY = noteViewModel.Top;
 
@@ -521,6 +630,28 @@ namespace DynamoGraphMigrationAssistant.ViewModels
                 noteViewModel.Top = originalY * yScaleFactor;
 
                 noteViewModel.Model.ReportPosition();
+
+                nodesMovedCount++;
+            }
+
+            //log the changes
+            EnterLog(string.Format(Properties.Resources.NodesMovedLogMessage, nodesMovedCount));
+        }
+
+
+        private void FormatInputOrderForGraph()
+        {
+            int startNumber = 1;//TODO: move to setttings
+            var padding = DynamoViewModel.CurrentSpaceViewModel.Nodes.Count.ToString().Length + 1;
+
+            foreach (var nodeViewModel in DynamoViewModel.CurrentSpaceViewModel.Nodes.OrderBy(n => n.Y))
+            {
+                if (nodeViewModel.IsSetAsInput)
+                {
+                    string currentName = nodeViewModel.Name;
+                    var next = startNumber++.ToString().PadLeft(padding,'0');
+                    nodeViewModel.NodeModel.Name = $"{next}| {currentName}";
+                }
             }
         }
 
@@ -529,7 +660,7 @@ namespace DynamoGraphMigrationAssistant.ViewModels
             phase = MigrationPhase.Open;
 
             var graphName = GetDynPath(CurrentWorkspace.FileName);
-          
+
             DynamoViewModel.SaveAsCommand.Execute(graphName);
         }
 

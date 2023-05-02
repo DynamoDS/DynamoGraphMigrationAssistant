@@ -139,6 +139,12 @@
   <data name="FinishSingleMsg" xml:space="preserve">
     <value>Successfully exported {0} image.</value>
   </data>
+  <data name="FixInputOrderCheckboxMsg" xml:space="preserve">
+    <value>Fix input order</value>
+  </data>
+  <data name="FixInputOrderCheckboxTooltip" xml:space="preserve">
+    <value>Force order of nodes marked as input by appending a prefix.</value>
+  </data>
   <data name="FixNodeSpacingCheckboxMsg" xml:space="preserve">
     <value>Fix node spacing.</value>
   </data>
@@ -151,6 +157,9 @@
   <data name="HeaderText" xml:space="preserve">
     <value>Dynamo Graph Migration Assistant</value>
   </data>
+  <data name="IfNodeReplacementLogMessage" xml:space="preserve">
+    <value>{0} if nodes migrated to refactored if.</value>
+  </data>
   <data name="KeepFolderStructureCheckboxMsg" xml:space="preserve">
     <value>Keep folder structure.</value>
   </data>
@@ -160,6 +169,9 @@
   <data name="MigrateGraphMsg" xml:space="preserve">
     <value>Graphs to Migrate</value>
   </data>
+  <data name="NodesMovedLogMessage" xml:space="preserve">
+    <value>{0} nodes and notes moved to prevent overlap.</value>
+  </data>
   <data name="NotificationMsg" xml:space="preserve">
     <value>The target folder contains {0} Dynamo graphs.</value>
   </data>
@@ -168,6 +180,12 @@
   </data>
   <data name="Progress_circle" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Progress circle.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="ReplaceIfNodesCheckboxMsg" xml:space="preserve">
+    <value>Migrate if nodes</value>
+  </data>
+  <data name="ReplaceIfNodesCheckboxTooltip" xml:space="preserve">
+    <value>Migrates if nodes from previous version to the refactored version.</value>
   </data>
   <data name="ResumeCheckboxMsg" xml:space="preserve">
     <value>Resume previous session.</value>

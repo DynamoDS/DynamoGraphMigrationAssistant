@@ -125,6 +125,24 @@ namespace DynamoGraphMigrationAssistant.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Fix input order.
+        /// </summary>
+        public static string FixInputOrderCheckboxMsg {
+            get {
+                return ResourceManager.GetString("FixInputOrderCheckboxMsg", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Force order of nodes marked as input by appending a prefix..
+        /// </summary>
+        public static string FixInputOrderCheckboxTooltip {
+            get {
+                return ResourceManager.GetString("FixInputOrderCheckboxTooltip", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Fix node spacing..
         /// </summary>
         public static string FixNodeSpacingCheckboxMsg {
@@ -161,6 +179,15 @@ namespace DynamoGraphMigrationAssistant.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to {0} if nodes migrated to refactored if..
+        /// </summary>
+        public static string IfNodeReplacementLogMessage {
+            get {
+                return ResourceManager.GetString("IfNodeReplacementLogMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Keep folder structure..
         /// </summary>
         public static string KeepFolderStructureCheckboxMsg {
@@ -184,6 +211,15 @@ namespace DynamoGraphMigrationAssistant.Properties {
         public static string MigrateGraphMsg {
             get {
                 return ResourceManager.GetString("MigrateGraphMsg", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to {0} nodes and notes moved to prevent overlap..
+        /// </summary>
+        public static string NodesMovedLogMessage {
+            get {
+                return ResourceManager.GetString("NodesMovedLogMessage", resourceCulture);
             }
         }
         
@@ -212,6 +248,24 @@ namespace DynamoGraphMigrationAssistant.Properties {
             get {
                 object obj = ResourceManager.GetObject("Progress_circle", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Migrate if nodes.
+        /// </summary>
+        public static string ReplaceIfNodesCheckboxMsg {
+            get {
+                return ResourceManager.GetString("ReplaceIfNodesCheckboxMsg", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Migrates if nodes from previous version to the refactored version..
+        /// </summary>
+        public static string ReplaceIfNodesCheckboxTooltip {
+            get {
+                return ResourceManager.GetString("ReplaceIfNodesCheckboxTooltip", resourceCulture);
             }
         }
         

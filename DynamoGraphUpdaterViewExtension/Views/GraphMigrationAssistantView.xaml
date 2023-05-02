@@ -54,7 +54,6 @@
                     <ColumnDefinition Width="*"></ColumnDefinition>
                 </Grid.ColumnDefinitions>
                 <StackPanel Grid.Column="0">
-
                     <CheckBox VerticalContentAlignment="Center"
                               IsChecked="{Binding IsKeepFolderStructure}" 
                               Margin="5 0">
@@ -87,7 +86,38 @@
                             </Label.ToolTip>
                         </Label>
                     </CheckBox>
-
+                    <CheckBox VerticalContentAlignment="Center"
+                              IsChecked="{Binding ReplaceIfNodes}" 
+                              Margin="5 0">
+                        <Label VerticalContentAlignment="Center">
+                            <TextBlock Text="{x:Static p:Resources.ReplaceIfNodesCheckboxMsg}"
+                                       VerticalAlignment="Center"
+                                       Margin="3 3 0 0"  
+                                       TextWrapping="WrapWithOverflow"
+                                       Foreground="{StaticResource PreferencesWindowFontColor}"
+                                       FontSize="10" />
+                            <Label.ToolTip>
+                                <ToolTip Content="{x:Static p:Resources.ReplaceIfNodesCheckboxTooltip}" 
+                                         Style="{StaticResource GenericToolTipLight}"/>
+                            </Label.ToolTip>
+                        </Label>
+                    </CheckBox>
+                    <CheckBox VerticalContentAlignment="Center"
+                              IsChecked="{Binding FixInputOrder}" 
+                              Margin="5 0">
+                        <Label VerticalContentAlignment="Center">
+                            <TextBlock Text="{x:Static p:Resources.FixInputOrderCheckboxMsg}"
+                                       VerticalAlignment="Center"
+                                       Margin="3 3 0 0"  
+                                       TextWrapping="WrapWithOverflow"
+                                       Foreground="{StaticResource PreferencesWindowFontColor}"
+                                       FontSize="10" />
+                            <Label.ToolTip>
+                                <ToolTip Content="{x:Static p:Resources.FixInputOrderCheckboxTooltip}" 
+                                         Style="{StaticResource GenericToolTipLight}"/>
+                            </Label.ToolTip>
+                        </Label>
+                    </CheckBox>
                 </StackPanel>
                 <StackPanel Grid.Column="1">
 
