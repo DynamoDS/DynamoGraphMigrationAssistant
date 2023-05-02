@@ -2,7 +2,7 @@
 
 DynamoGraphUpdater (DGU) is a View Extension for Dynamo which allows you to prepare your previous generation ui graphs for Dynamo versions 2.13.x and higher.
 
-<img src="https://user-images.githubusercontent.com/15744724/230224169-add98b47-34b3-4d09-b8ba-8c248cd7cf78.png"/>
+<img src="https://raw.githubusercontent.com/DynamoDS/DynamoGraphUpdater/master/doc/sample.gif"/>
 
 #### Workflow
 
