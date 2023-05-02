@@ -129,7 +129,6 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Controls\ConditionalCountConverter.cs" />
     <Compile Include="Controls\FolderPathViewControl.xaml.cs">
       <DependentUpon>FolderPathViewControl.xaml</DependentUpon>
     </Compile>
@@ -140,26 +139,12 @@
     <Compile Include="Controls\PathViewModel.cs" />
     <Compile Include="Controls\UpdateableGraphsViewModel.cs" />
     <Compile Include="Controls\UpdateableGraphViewModel.cs" />
-    <Compile Include="DynamoGraphMigrationAssistantModel.cs" />
     <Compile Include="Models\GraphMigrationAssistantModel.cs" />
     <Compile Include="ViewModels\GraphMigrationAssistantViewModel.cs" />
     <Compile Include="Views\GraphMigrationAssistantView.xaml.cs">
       <DependentUpon>GraphMigrationAssistantView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\Steps\DynamoGraphMigrationAssistantStep3.xaml.cs">
-      <DependentUpon>DynamoGraphMigrationAssistantStep3.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\Steps\DynamoGraphMigrationAssistantStep2.xaml.cs">
-      <DependentUpon>DynamoGraphMigrationAssistantStep2.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\Steps\DynamoGraphMigrationAssistantStep1.xaml.cs">
-      <DependentUpon>DynamoGraphMigrationAssistantStep1.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\DynamoMigrationAssistantView.xaml.cs">
-      <DependentUpon>DynamoMigrationAssistantView.xaml</DependentUpon>
-    </Compile>
     <Compile Include="DynamoGraphMigrationAssistantViewExtension.cs" />
-    <Compile Include="ViewModels\DynamoGraphMigrationAssistantViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -171,9 +156,6 @@
     </Compile>
     <Compile Include="Utilities.cs" />
     <Compile Include="TargetDynamoVersion.cs" />
-    <Compile Include="Views\Steps\DynamoMigrationAssistantStep4.xaml.cs">
-      <DependentUpon>DynamoMigrationAssistantStep4.xaml</DependentUpon>
-    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Content Include="manifest\DynamoGraphMigrationAssistant_ViewExtensionDefinition.xml" />
@@ -203,27 +185,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\Steps\DynamoGraphMigrationAssistantStep3.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Views\Steps\DynamoGraphMigrationAssistantStep2.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Views\Steps\DynamoGraphMigrationAssistantStep1.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Views\DynamoMigrationAssistantView.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="Controls\UpdateableGraphsControl.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Views\Steps\DynamoMigrationAssistantStep4.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
