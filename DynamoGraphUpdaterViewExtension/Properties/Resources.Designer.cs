@@ -61,11 +61,102 @@ namespace DynamoGraphMigrationAssistant.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Cancel.
+        /// </summary>
+        public static string CancelButtonText {
+            get {
+                return ResourceManager.GetString("CancelButtonText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        public static System.Drawing.Bitmap checkmark {
+            get {
+                object obj = ResourceManager.GetObject("checkmark", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Export.
+        /// </summary>
+        public static string ExportButtonText {
+            get {
+                return ResourceManager.GetString("ExportButtonText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Dynamo Graph Migration Assistant.
         /// </summary>
         public static string ExtensionName {
             get {
                 return ResourceManager.GetString("ExtensionName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Successfully migrated {0} graphs.
+        /// </summary>
+        public static string FinishMsg {
+            get {
+                return ResourceManager.GetString("FinishMsg", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Migration finished..
+        /// </summary>
+        public static string FinishMsgTitle {
+            get {
+                return ResourceManager.GetString("FinishMsgTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Successfully exported {0} image..
+        /// </summary>
+        public static string FinishSingleMsg {
+            get {
+                return ResourceManager.GetString("FinishSingleMsg", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Fix input order.
+        /// </summary>
+        public static string FixInputOrderCheckboxMsg {
+            get {
+                return ResourceManager.GetString("FixInputOrderCheckboxMsg", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Force order of nodes marked as input by appending a prefix..
+        /// </summary>
+        public static string FixInputOrderCheckboxTooltip {
+            get {
+                return ResourceManager.GetString("FixInputOrderCheckboxTooltip", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Fix node spacing..
+        /// </summary>
+        public static string FixNodeSpacingCheckboxMsg {
+            get {
+                return ResourceManager.GetString("FixNodeSpacingCheckboxMsg", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Account for the spacing of the larger nodes in Dynamo 2.13+ UI..
+        /// </summary>
+        public static string FixNodeSpacingTooltip {
+            get {
+                return ResourceManager.GetString("FixNodeSpacingTooltip", resourceCulture);
             }
         }
         
@@ -88,11 +179,138 @@ namespace DynamoGraphMigrationAssistant.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to {0} if nodes migrated to refactored if..
+        /// </summary>
+        public static string IfNodeReplacementLogMessage {
+            get {
+                return ResourceManager.GetString("IfNodeReplacementLogMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Keep folder structure..
+        /// </summary>
+        public static string KeepFolderStructureCheckboxMsg {
+            get {
+                return ResourceManager.GetString("KeepFolderStructureCheckboxMsg", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Retains the original folder/subfolder structure for graphs location..
+        /// </summary>
+        public static string KeepFolderStructureTooltip {
+            get {
+                return ResourceManager.GetString("KeepFolderStructureTooltip", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Graphs to Migrate.
+        /// </summary>
+        public static string MigrateGraphMsg {
+            get {
+                return ResourceManager.GetString("MigrateGraphMsg", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to {0} nodes and notes moved to prevent overlap..
+        /// </summary>
+        public static string NodesMovedLogMessage {
+            get {
+                return ResourceManager.GetString("NodesMovedLogMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The target folder contains {0} Dynamo graphs..
+        /// </summary>
+        public static string NotificationMsg {
+            get {
+                return ResourceManager.GetString("NotificationMsg", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Processed {0} out of {1} graphs..
+        /// </summary>
+        public static string ProcessMsg {
+            get {
+                return ResourceManager.GetString("ProcessMsg", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        public static System.Drawing.Bitmap Progress_circle {
+            get {
+                object obj = ResourceManager.GetObject("Progress_circle", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Migrate if nodes.
+        /// </summary>
+        public static string ReplaceIfNodesCheckboxMsg {
+            get {
+                return ResourceManager.GetString("ReplaceIfNodesCheckboxMsg", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Migrates if nodes from previous version to the refactored version..
+        /// </summary>
+        public static string ReplaceIfNodesCheckboxTooltip {
+            get {
+                return ResourceManager.GetString("ReplaceIfNodesCheckboxTooltip", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Resume previous session..
+        /// </summary>
+        public static string ResumeCheckboxMsg {
+            get {
+                return ResourceManager.GetString("ResumeCheckboxMsg", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Attempts to resume the progress from a previous run. The progress is stored within the &apos;log.txt&apos; file in the root Target folder..
+        /// </summary>
+        public static string ResumeTooltip {
+            get {
+                return ResourceManager.GetString("ResumeTooltip", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Select folder ...
         /// </summary>
         public static string SelectFolderMsg {
             get {
                 return ResourceManager.GetString("SelectFolderMsg", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Source folder.
+        /// </summary>
+        public static string SourceFolderMsg {
+            get {
+                return ResourceManager.GetString("SourceFolderMsg", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Target folder.
+        /// </summary>
+        public static string TargetFolderMsg {
+            get {
+                return ResourceManager.GetString("TargetFolderMsg", resourceCulture);
             }
         }
         
