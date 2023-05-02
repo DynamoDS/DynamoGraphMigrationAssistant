@@ -8,7 +8,6 @@ using System.Security.Permissions;
 using System.Text;
 using System.Windows;
 using System.Windows.Threading;
-using Dynamo.Controls;
 using Dynamo.Core;
 using Dynamo.Graph.Nodes;
 using Dynamo.Graph.Workspaces;
@@ -19,7 +18,6 @@ using Dynamo.Utilities;
 using Dynamo.ViewModels;
 using Dynamo.Wpf.Extensions;
 using Dynamo.Wpf.Utilities;
-using Dynamo.Wpf.ViewModels.Watch3D;
 using DynamoGraphMigrationAssistant.Controls;
 using DynamoGraphMigrationAssistant.Models;
 

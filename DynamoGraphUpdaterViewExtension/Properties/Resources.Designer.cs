@@ -297,6 +297,24 @@ namespace DynamoGraphMigrationAssistant.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Export current graph..
+        /// </summary>
+        public static string SingleExportCheckboxMsg {
+            get {
+                return ResourceManager.GetString("SingleExportCheckboxMsg", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Allows the migration of the current graph..
+        /// </summary>
+        public static string SingleExportTooltip {
+            get {
+                return ResourceManager.GetString("SingleExportTooltip", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Source folder.
         /// </summary>
         public static string SourceFolderMsg {

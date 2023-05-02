@@ -196,6 +196,12 @@
   <data name="SelectFolderMsg" xml:space="preserve">
     <value>Select folder ..</value>
   </data>
+  <data name="SingleExportCheckboxMsg" xml:space="preserve">
+    <value>Export current graph.</value>
+  </data>
+  <data name="SingleExportTooltip" xml:space="preserve">
+    <value>Allows the migration of the current graph.</value>
+  </data>
   <data name="SourceFolderMsg" xml:space="preserve">
     <value>Source folder</value>
   </data>
