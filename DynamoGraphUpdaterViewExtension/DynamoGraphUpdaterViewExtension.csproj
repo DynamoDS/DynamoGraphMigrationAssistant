@@ -101,6 +101,7 @@
       <HintPath>packages\System.Collections.Immutable.1.7.1\lib\net461\System.Collections.Immutable.dll</HintPath>
     </Reference>
     <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
     <Reference Include="System.Memory, Version=4.0.1.1, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>packages\System.Memory.4.5.4\lib\net461\System.Memory.dll</HintPath>
     </Reference>
@@ -132,10 +133,19 @@
     <Compile Include="Controls\FolderPathViewControl.xaml.cs">
       <DependentUpon>FolderPathViewControl.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Controls\GraphViewControl.xaml.cs">
+      <DependentUpon>GraphViewControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\GraphViewModel.cs" />
     <Compile Include="Controls\PathViewModel.cs" />
     <Compile Include="Controls\UpdateableGraphsViewModel.cs" />
     <Compile Include="Controls\UpdateableGraphViewModel.cs" />
     <Compile Include="DynamoGraphMigrationAssistantModel.cs" />
+    <Compile Include="Models\GraphMigrationAssistantModel.cs" />
+    <Compile Include="ViewModels\GraphMigrationAssistantViewModel.cs" />
+    <Compile Include="Views\GraphMigrationAssistantView.xaml.cs">
+      <DependentUpon>GraphMigrationAssistantView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\Steps\DynamoGraphMigrationAssistantStep3.xaml.cs">
       <DependentUpon>DynamoGraphMigrationAssistantStep3.xaml</DependentUpon>
     </Compile>
@@ -167,6 +177,8 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="manifest\DynamoGraphMigrationAssistant_ViewExtensionDefinition.xml" />
+    <None Include="Resources\Progress circle.png" />
+    <None Include="Resources\checkmark.png" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
@@ -180,6 +192,14 @@
   </ItemGroup>
   <ItemGroup>
     <Page Include="Controls\FolderPathViewControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\GraphViewControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\GraphMigrationAssistantView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

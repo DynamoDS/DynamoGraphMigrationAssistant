@@ -117,8 +117,33 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="CancelButtonText" xml:space="preserve">
+    <value>Cancel</value>
+  </data>
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="checkmark" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\checkmark.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="ExportButtonText" xml:space="preserve">
+    <value>Export</value>
+  </data>
   <data name="ExtensionName" xml:space="preserve">
     <value>Dynamo Graph Migration Assistant</value>
+  </data>
+  <data name="FinishMsg" xml:space="preserve">
+    <value>Successfully migrated {0} graphs</value>
+  </data>
+  <data name="FinishMsgTitle" xml:space="preserve">
+    <value>Migration finished.</value>
+  </data>
+  <data name="FinishSingleMsg" xml:space="preserve">
+    <value>Successfully exported {0} image.</value>
+  </data>
+  <data name="FixNodeSpacingCheckboxMsg" xml:space="preserve">
+    <value>Fix node spacing.</value>
+  </data>
+  <data name="FixNodeSpacingTooltip" xml:space="preserve">
+    <value>Account for the spacing of the larger nodes in Dynamo 2.13+ UI.</value>
   </data>
   <data name="GraphsSelectedText" xml:space="preserve">
     <value>graphs selected for update.</value>
@@ -126,8 +151,38 @@
   <data name="HeaderText" xml:space="preserve">
     <value>Dynamo Graph Migration Assistant</value>
   </data>
+  <data name="KeepFolderStructureCheckboxMsg" xml:space="preserve">
+    <value>Keep folder structure.</value>
+  </data>
+  <data name="KeepFolderStructureTooltip" xml:space="preserve">
+    <value>Retains the original folder/subfolder structure for graphs location.</value>
+  </data>
+  <data name="MigrateGraphMsg" xml:space="preserve">
+    <value>Graphs to Migrate</value>
+  </data>
+  <data name="NotificationMsg" xml:space="preserve">
+    <value>The target folder contains {0} Dynamo graphs.</value>
+  </data>
+  <data name="ProcessMsg" xml:space="preserve">
+    <value>Processed {0} out of {1} graphs.</value>
+  </data>
+  <data name="Progress_circle" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Progress circle.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="ResumeCheckboxMsg" xml:space="preserve">
+    <value>Resume previous session.</value>
+  </data>
+  <data name="ResumeTooltip" xml:space="preserve">
+    <value>Attempts to resume the progress from a previous run. The progress is stored within the 'log.txt' file in the root Target folder.</value>
+  </data>
   <data name="SelectFolderMsg" xml:space="preserve">
     <value>Select folder ..</value>
+  </data>
+  <data name="SourceFolderMsg" xml:space="preserve">
+    <value>Source folder</value>
+  </data>
+  <data name="TargetFolderMsg" xml:space="preserve">
+    <value>Target folder</value>
   </data>
   <data name="UpdatePathTooltip" xml:space="preserve">
     <value>Select folder.</value>

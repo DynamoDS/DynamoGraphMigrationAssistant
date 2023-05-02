@@ -24,10 +24,17 @@ namespace DynamoGraphMigrationAssistant
         public MenuItem DynamoMigrationAssistantMenuItem;
         private ViewLoadedParams _viewLoadedParamsReference;
 
-        internal DynamoMigrationAssistantView View;
-        internal DynamoGraphMigrationAssistantModel Model;
-        internal DynamoGraphMigrationAssistantViewModel ViewModel;
+        //internal DynamoMigrationAssistantView View;
+        //internal DynamoGraphMigrationAssistantModel Model;
+        //internal DynamoGraphMigrationAssistantViewModel ViewModel;
 
+        internal GraphMigrationAssistantView View;
+        internal GraphMigrationAssistantViewModel ViewModel;
+
+        public DynamoGraphMigrationAssistantViewExtension()
+        {
+            InitializeViewExtension();
+        }
 
         public override void Dispose()
         {
@@ -44,36 +51,46 @@ namespace DynamoGraphMigrationAssistant
             _viewLoadedParamsReference = viewLoadedParams;
 
             // Add a button to Dynamo View menu to manually show the window
-            DynamoMigrationAssistantMenuItem = new MenuItem { Header = Properties.Resources.HeaderText };
+            DynamoMigrationAssistantMenuItem = new MenuItem { Header = Properties.Resources.HeaderText, IsCheckable = true};
 
-            DynamoMigrationAssistantMenuItem.Click += DynamoMigrationAssistantMenuItemOnClick;
+            DynamoMigrationAssistantMenuItem.Checked += MenuItemCheckHandler;
+            DynamoMigrationAssistantMenuItem.Unchecked += MenuItemUnCheckHandler;
 
             _viewLoadedParamsReference.AddExtensionMenuItem(DynamoMigrationAssistantMenuItem);
 
             //InitializeViewExtension();
         }
 
-        private void DynamoMigrationAssistantMenuItemOnClick(object sender, RoutedEventArgs e)
-        {
-            Model = new DynamoGraphMigrationAssistantModel(_viewLoadedParamsReference);
-            ViewModel = new DynamoGraphMigrationAssistantViewModel(Model);
-            View = new DynamoMigrationAssistantView(ViewModel)
-            {
-                Owner = _viewLoadedParamsReference.DynamoWindow
-            };
-
-            View.ShowDialog();
-        }
+   
 
         public void Shutdown()
         {
             Dispose();
         }
+
+        private void MenuItemCheckHandler(object sender, RoutedEventArgs e)
+        {
+            AddToSidebar();
+        }
+
+        private void MenuItemUnCheckHandler(object sender, RoutedEventArgs e)
+        {
+            this.Dispose();
+
+            _viewLoadedParamsReference.CloseExtensioninInSideBar(this);
+        }
+
         private void InitializeViewExtension()
         {
-            
+            ViewModel = new GraphMigrationAssistantViewModel(_viewLoadedParamsReference);
+            View = new GraphMigrationAssistantView(ViewModel);
         }
-       
+        private void AddToSidebar()
+        {
+            InitializeViewExtension();
+
+            _viewLoadedParamsReference?.AddToExtensionsSideBar(this, View);
+        }
         public override void Closed()
         {
             if (DynamoMigrationAssistantMenuItem != null) DynamoMigrationAssistantMenuItem.IsChecked = false;

@@ -9,6 +9,15 @@ namespace DynamoGraphMigrationAssistant
     public class Utilities
     {
         /// <summary>
+        /// Returns true if both paths exist
+        /// </summary>
+        /// <param name="path"></param>
+        /// <returns></returns>
+        public static bool IsValidPath(string path)
+        {
+            return Directory.Exists(path);
+        }
+        /// <summary>
         ///     Returns a list of files of given path and extension
         /// </summary>
         /// <param name="path"></param>
