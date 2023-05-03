@@ -80,6 +80,15 @@ namespace DynamoGraphMigrationAssistant.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Target Dynamo Version.
+        /// </summary>
+        public static string DynamoVersionsMsg {
+            get {
+                return ResourceManager.GetString("DynamoVersionsMsg", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Export.
         /// </summary>
         public static string ExportButtonText {
@@ -125,6 +134,24 @@ namespace DynamoGraphMigrationAssistant.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Swap Linebreaks to Pinned Notes.
+        /// </summary>
+        public static string FixInputLinebreaksCheckboxMsg {
+            get {
+                return ResourceManager.GetString("FixInputLinebreaksCheckboxMsg", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to This will split the node name (by new line) to two chunks of text. The first chunk will be a pinned note, the second chunk will be the node name..
+        /// </summary>
+        public static string FixInputLinebreaksCheckboxTooltip {
+            get {
+                return ResourceManager.GetString("FixInputLinebreaksCheckboxTooltip", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Fix input order.
         /// </summary>
         public static string FixInputOrderCheckboxMsg {
@@ -134,7 +161,7 @@ namespace DynamoGraphMigrationAssistant.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Force order of nodes marked as input by appending a prefix..
+        ///   Looks up a localized string similar to Force order of nodes marked as input by appending a prefix. (Nodes are sorted by Y location values).
         /// </summary>
         public static string FixInputOrderCheckboxTooltip {
             get {
@@ -215,6 +242,15 @@ namespace DynamoGraphMigrationAssistant.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to General Settings.
+        /// </summary>
+        public static string MiscSettingsMsg {
+            get {
+                return ResourceManager.GetString("MiscSettingsMsg", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to {0} nodes and notes moved to prevent overlap..
         /// </summary>
         public static string NodesMovedLogMessage {
@@ -229,6 +265,24 @@ namespace DynamoGraphMigrationAssistant.Properties {
         public static string NotificationMsg {
             get {
                 return ResourceManager.GetString("NotificationMsg", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Optional Migration Tasks.
+        /// </summary>
+        public static string OptionalFixesMsg {
+            get {
+                return ResourceManager.GetString("OptionalFixesMsg", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to These migrations tasks are optional as they are more user-specific..
+        /// </summary>
+        public static string OptionalFixesTooltip {
+            get {
+                return ResourceManager.GetString("OptionalFixesTooltip", resourceCulture);
             }
         }
         
@@ -320,6 +374,24 @@ namespace DynamoGraphMigrationAssistant.Properties {
         public static string SourceFolderMsg {
             get {
                 return ResourceManager.GetString("SourceFolderMsg", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Suggested Migration Tasks.
+        /// </summary>
+        public static string SuggestedFixesMsg {
+            get {
+                return ResourceManager.GetString("SuggestedFixesMsg", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to These tasks are suggested based on the Dynamo version selected..
+        /// </summary>
+        public static string SuggestedFixesTooltip {
+            get {
+                return ResourceManager.GetString("SuggestedFixesTooltip", resourceCulture);
             }
         }
         

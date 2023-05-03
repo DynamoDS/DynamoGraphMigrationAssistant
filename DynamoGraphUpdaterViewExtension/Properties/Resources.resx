@@ -124,6 +124,9 @@
   <data name="checkmark" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\checkmark.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="DynamoVersionsMsg" xml:space="preserve">
+    <value>Target Dynamo Version</value>
+  </data>
   <data name="ExportButtonText" xml:space="preserve">
     <value>Export</value>
   </data>
@@ -139,11 +142,17 @@
   <data name="FinishSingleMsg" xml:space="preserve">
     <value>Successfully exported {0} image.</value>
   </data>
+  <data name="FixInputLinebreaksCheckboxMsg" xml:space="preserve">
+    <value>Swap Linebreaks to Pinned Notes</value>
+  </data>
+  <data name="FixInputLinebreaksCheckboxTooltip" xml:space="preserve">
+    <value>This will split the node name (by new line) to two chunks of text. The first chunk will be a pinned note, the second chunk will be the node name.</value>
+  </data>
   <data name="FixInputOrderCheckboxMsg" xml:space="preserve">
     <value>Fix input order</value>
   </data>
   <data name="FixInputOrderCheckboxTooltip" xml:space="preserve">
-    <value>Force order of nodes marked as input by appending a prefix.</value>
+    <value>Force order of nodes marked as input by appending a prefix. (Nodes are sorted by Y location values)</value>
   </data>
   <data name="FixNodeSpacingCheckboxMsg" xml:space="preserve">
     <value>Fix node spacing.</value>
@@ -169,11 +178,20 @@
   <data name="MigrateGraphMsg" xml:space="preserve">
     <value>Graphs to Migrate</value>
   </data>
+  <data name="MiscSettingsMsg" xml:space="preserve">
+    <value>General Settings</value>
+  </data>
   <data name="NodesMovedLogMessage" xml:space="preserve">
     <value>{0} nodes and notes moved to prevent overlap.</value>
   </data>
   <data name="NotificationMsg" xml:space="preserve">
     <value>The target folder contains {0} Dynamo graphs.</value>
+  </data>
+  <data name="OptionalFixesMsg" xml:space="preserve">
+    <value>Optional Migration Tasks</value>
+  </data>
+  <data name="OptionalFixesTooltip" xml:space="preserve">
+    <value>These migrations tasks are optional as they are more user-specific.</value>
   </data>
   <data name="ProcessMsg" xml:space="preserve">
     <value>Processed {0} out of {1} graphs.</value>
@@ -204,6 +222,12 @@
   </data>
   <data name="SourceFolderMsg" xml:space="preserve">
     <value>Source folder</value>
+  </data>
+  <data name="SuggestedFixesMsg" xml:space="preserve">
+    <value>Suggested Migration Tasks</value>
+  </data>
+  <data name="SuggestedFixesTooltip" xml:space="preserve">
+    <value>These tasks are suggested based on the Dynamo version selected.</value>
   </data>
   <data name="TargetFolderMsg" xml:space="preserve">
     <value>Target folder</value>

@@ -4,6 +4,7 @@ using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.IO;
 using System.Linq;
+using System.Reflection;
 using System.Security.Permissions;
 using System.Text;
 using System.Windows;
@@ -20,6 +21,7 @@ using Dynamo.Wpf.Extensions;
 using Dynamo.Wpf.Utilities;
 using DynamoGraphMigrationAssistant.Controls;
 using DynamoGraphMigrationAssistant.Models;
+using PythonNodeModels;
 
 namespace DynamoGraphMigrationAssistant.ViewModels
 {
@@ -129,7 +131,7 @@ namespace DynamoGraphMigrationAssistant.ViewModels
                 }
             }
         }
-        private bool fixInputOrder = true;
+        private bool fixInputOrder = false;
         /// <summary>
         /// Dynamo Player can now support input order alphabetically. Historically users created their inputs in order to fix this.
         /// </summary>
@@ -141,13 +143,34 @@ namespace DynamoGraphMigrationAssistant.ViewModels
             }
             set
             {
-                if (FixInputOrder != value)
+                if (fixInputOrder != value)
                 {
-                    FixInputOrder = value;
+                    fixInputOrder = value;
                     RaisePropertyChanged(nameof(FixInputOrder));
                 }
             }
         }
+
+        private bool fixInputLinebreaks = false;
+        /// <summary>
+        /// Previously users entered line breaks into inputs for directions. This offers a fix with new pinned notes.
+        /// </summary>
+        public bool FixInputLinebreaks
+        {
+            get
+            {
+                return fixInputLinebreaks;
+            }
+            set
+            {
+                if (fixInputLinebreaks != value)
+                {
+                    fixInputLinebreaks = value;
+                    RaisePropertyChanged(nameof(FixInputLinebreaks));
+                }
+            }
+        }
+
         private bool resume = false;
         /// <summary>
         ///     When this flag is set to true, will attempt to resume progress
@@ -507,6 +530,11 @@ namespace DynamoGraphMigrationAssistant.ViewModels
             {
                 FormatInputOrderForGraph();
             }
+
+            if (FixInputLinebreaks)
+            {
+                MigrateInputLinebreaksToPinnedNotes();
+            }
         }
 
 
@@ -636,7 +664,7 @@ namespace DynamoGraphMigrationAssistant.ViewModels
             EnterLog(string.Format(Properties.Resources.NodesMovedLogMessage, nodesMovedCount));
         }
 
-
+        //optional fixes
         private void FormatInputOrderForGraph()
         {
             int startNumber = 1;//TODO: move to setttings
@@ -647,10 +675,60 @@ namespace DynamoGraphMigrationAssistant.ViewModels
                 if (nodeViewModel.IsSetAsInput)
                 {
                     string currentName = nodeViewModel.Name;
-                    var next = startNumber++.ToString().PadLeft(padding,'0');
+                    var next = startNumber++.ToString().PadLeft(padding, '0');
                     nodeViewModel.NodeModel.Name = $"{next}| {currentName}";
                 }
             }
+        }
+        private void MigrateInputLinebreaksToPinnedNotes()
+        {
+
+            foreach (var nodeViewModel in DynamoViewModel.CurrentSpaceViewModel.Nodes)
+            {
+                if (nodeViewModel.IsSetAsInput && nodeViewModel.NodeModel.Name.Contains(Environment.NewLine))
+                {
+                   var bustedUpName =  nodeViewModel.NodeModel.Name.Split(
+                        new string[] { Environment.NewLine },
+                        StringSplitOptions.None);
+                    if(bustedUpName.Length < 2) { continue;}
+
+                   string textForNote = bustedUpName[0];
+                   string newNodeName = bustedUpName[1];
+
+                    //create our note
+                    var noteGuid = Guid.NewGuid();
+                    DynamoModel.RecordableCommand createNote = new DynamoModel.CreateNoteCommand(noteGuid, textForNote, nodeViewModel.X, nodeViewModel.Y - 35, false);
+
+                    DynamoViewModel.Model.ExecuteCommand(createNote);
+
+                    var newNote = DynamoViewModel.CurrentSpaceViewModel.Notes.First(note => note.Model.GUID.Equals(noteGuid));
+
+                    nodeViewModel.NodeModel.Select();
+
+                    MethodInfo pinToNode = typeof(NoteViewModel).GetMethod("PinToNode",
+                        BindingFlags.NonPublic | BindingFlags.Instance);
+                    pinToNode.Invoke(newNote, new object[] { nodeViewModel.NodeModel });
+
+
+                    //finally set the node name
+                    nodeViewModel.NodeModel.Name = newNodeName;
+                }
+            }
+        }
+
+
+        private void MigratePython()
+        {
+            //PythonMigrationAssistantViewModel
+            //foreach (var nodeViewModel in DynamoViewModel.CurrentSpaceViewModel.Nodes)
+            //{
+            //    if (nodeViewModel.NodeModel is PythonNode pythonNode)
+            //    {
+            //        pythonNode.M
+            //    }
+            //}
+
+            //PythonNode.
         }
 
         private void SaveGraph()

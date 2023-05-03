@@ -93,6 +93,15 @@
     <Reference Include="ProtoGeometry, Version=2.17.1.3967, Culture=neutral, processorArchitecture=AMD64">
       <HintPath>packages\DynamoVisualProgramming.ZeroTouchLibrary.2.17.2.4595\lib\net48\ProtoGeometry.dll</HintPath>
     </Reference>
+    <Reference Include="Python.Runtime">
+      <HintPath>C:\Users\johnpierson\Desktop\Autodesk\DynamoCoreRuntime2.17.0\Python.Runtime.dll</HintPath>
+    </Reference>
+    <Reference Include="PythonMigrationViewExtension">
+      <HintPath>C:\Users\johnpierson\Desktop\Autodesk\DynamoCoreRuntime2.17.0\PythonMigrationViewExtension.dll</HintPath>
+    </Reference>
+    <Reference Include="PythonNodeModels">
+      <HintPath>C:\Users\johnpierson\Desktop\Autodesk\DynamoCoreRuntime2.17.0\nodes\PythonNodeModels.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Buffers, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>packages\System.Buffers.4.5.1\lib\net461\System.Buffers.dll</HintPath>

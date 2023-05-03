@@ -26,6 +26,7 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="auto" />
             <RowDefinition Height="auto" />
+            <RowDefinition Height="auto" />
             <RowDefinition Height="*" />
             <RowDefinition Height="auto" />
         </Grid.RowDefinitions>
@@ -46,14 +47,43 @@
             <controls:FolderPathViewControl DataContext="{Binding TargetPathViewModel}" Margin="0 0 0 10" />
         </StackPanel>
 
+        <!-- Target Dynamo Version -->
+        <Label Grid.Row="1" VerticalContentAlignment="Center">
+            <StackPanel Orientation="Horizontal">
+                <TextBlock Text="{x:Static p:Resources.DynamoVersionsMsg}"
+                           VerticalAlignment="Center"
+                           Margin="3 3 0 0"  
+                           TextWrapping="WrapWithOverflow"
+                           Foreground="{StaticResource PreferencesWindowFontColor}"
+                           FontSize="10" />
+                <ComboBox Width="200" Margin="12 3 0 0"></ComboBox>
+            </StackPanel>
+            
+        </Label>
+        
+
+
         <!-- Export button -->
-        <StackPanel Orientation="Vertical" Grid.Row="1">
+        <StackPanel Orientation="Vertical" Grid.Row="2">
             <Grid>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*"></ColumnDefinition>
                     <ColumnDefinition Width="*"></ColumnDefinition>
                 </Grid.ColumnDefinitions>
                 <StackPanel Grid.Column="0">
+                    <!-- General Settings -->
+                    <Label VerticalContentAlignment="Center">
+                        <TextBlock Text="{x:Static p:Resources.MiscSettingsMsg}"
+                                   VerticalAlignment="Center"
+                                   Margin="3 3 0 0"  
+                                   TextWrapping="WrapWithOverflow"
+                                   Foreground="{StaticResource PreferencesWindowFontColor}"
+                                   FontSize="10" />
+                        <Label.ToolTip>
+                            <ToolTip Content="{x:Static p:Resources.KeepFolderStructureTooltip}" 
+                                     Style="{StaticResource GenericToolTipLight}"/>
+                        </Label.ToolTip>
+                    </Label>
                     <CheckBox VerticalContentAlignment="Center"
                               IsChecked="{Binding IsKeepFolderStructure}" 
                               Margin="5 0">
@@ -70,6 +100,36 @@
                             </Label.ToolTip>
                         </Label>
                     </CheckBox>
+
+                    <CheckBox VerticalContentAlignment="Center"
+                              IsChecked="{Binding Resume}" 
+                              Margin="5 0">
+                        <Label VerticalContentAlignment="Center">
+                            <TextBlock Text="{x:Static p:Resources.ResumeCheckboxMsg}"
+                                       VerticalAlignment="Center"
+                                       TextWrapping="WrapWithOverflow"
+                                       Margin="3 3 0 0"  
+                                       Foreground="{StaticResource PreferencesWindowFontColor}"
+                                       FontSize="10" />
+                            <Label.ToolTip>
+                                <ToolTip Content="{x:Static p:Resources.ResumeTooltip}" 
+                                         Style="{StaticResource GenericToolTipLight}"/>
+                            </Label.ToolTip>
+                        </Label>
+                    </CheckBox>
+                    <!-- Suggested Migration Tasks -->
+                    <Label VerticalContentAlignment="Center">
+                        <TextBlock Text="{x:Static p:Resources.SuggestedFixesMsg}"
+                                   VerticalAlignment="Center"
+                                   Margin="3 3 0 0"  
+                                   TextWrapping="WrapWithOverflow"
+                                   Foreground="{StaticResource PreferencesWindowFontColor}"
+                                   FontSize="10" />
+                        <Label.ToolTip>
+                            <ToolTip Content="{x:Static p:Resources.SuggestedFixesTooltip}" 
+                                     Style="{StaticResource GenericToolTipLight}"/>
+                        </Label.ToolTip>
+                    </Label>
                     <CheckBox VerticalContentAlignment="Center"
                               IsChecked="{Binding FixNodeSpacing}" 
                               Margin="5 0">
@@ -102,6 +162,24 @@
                             </Label.ToolTip>
                         </Label>
                     </CheckBox>
+
+                  
+                </StackPanel>
+                <StackPanel Grid.Column="1">
+                    <!-- Optional Migration Tasks -->
+                    <Label VerticalContentAlignment="Center">
+                        <TextBlock Text="{x:Static p:Resources.OptionalFixesMsg}"
+                                   VerticalAlignment="Center"
+                                   Margin="3 3 0 0"  
+                                   TextWrapping="WrapWithOverflow"
+                                   Foreground="{StaticResource PreferencesWindowFontColor}"
+                                   FontSize="10" />
+                        <Label.ToolTip>
+                            <ToolTip Content="{x:Static p:Resources.OptionalFixesTooltip}" 
+                                     Style="{StaticResource GenericToolTipLight}"/>
+                        </Label.ToolTip>
+                    </Label>
+
                     <CheckBox VerticalContentAlignment="Center"
                               IsChecked="{Binding FixInputOrder}" 
                               Margin="5 0">
@@ -118,26 +196,22 @@
                             </Label.ToolTip>
                         </Label>
                     </CheckBox>
-                </StackPanel>
-                <StackPanel Grid.Column="1">
-
                     <CheckBox VerticalContentAlignment="Center"
-                              IsChecked="{Binding Resume}" 
+                              IsChecked="{Binding FixInputLinebreaks}" 
                               Margin="5 0">
                         <Label VerticalContentAlignment="Center">
-                            <TextBlock Text="{x:Static p:Resources.ResumeCheckboxMsg}"
+                            <TextBlock Text="{x:Static p:Resources.FixInputLinebreaksCheckboxMsg}"
                                        VerticalAlignment="Center"
-                                       TextWrapping="WrapWithOverflow"
                                        Margin="3 3 0 0"  
+                                       TextWrapping="WrapWithOverflow"
                                        Foreground="{StaticResource PreferencesWindowFontColor}"
                                        FontSize="10" />
                             <Label.ToolTip>
-                                <ToolTip Content="{x:Static p:Resources.ResumeTooltip}" 
+                                <ToolTip Content="{x:Static p:Resources.FixInputLinebreaksCheckboxTooltip}" 
                                          Style="{StaticResource GenericToolTipLight}"/>
                             </Label.ToolTip>
                         </Label>
                     </CheckBox>
-
                     <!--<CheckBox VerticalContentAlignment="Center"
                               IsChecked="{Binding SingleGraph}" 
                               Margin="5 0">
@@ -183,10 +257,10 @@
                         Style="{StaticResource CtaButtonStyle}" />
             </Grid>
         </StackPanel>
-        <Separator Margin="-25 0" Grid.Row="2" VerticalAlignment="Top" Background="{StaticResource DarkGreyBrush}" />
+        <Separator Margin="-25 0" Grid.Row="3" VerticalAlignment="Top" Background="{StaticResource DarkGreyBrush}" />
 
         <!-- Graphs to be exported -->
-        <Grid Grid.Row="2" Margin="0 15 0 0">
+        <Grid Grid.Row="3" Margin="0 15 0 0">
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto" />
                 <RowDefinition Height="*" />
@@ -218,7 +292,7 @@
             </ScrollViewer>
         </Grid>
         <Button Content="{x:Static p:Resources.CancelButtonText}"
-                Grid.Row="3"
+                Grid.Row="4"
                 Margin="0 8 -3 0"
                 Command="{Binding CancelCommand}"
                 IsEnabled="{Binding CanExport}"

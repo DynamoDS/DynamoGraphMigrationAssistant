@@ -8,7 +8,7 @@ namespace DynamoGraphMigrationAssistant.Controls
         private string graphName;
 
         /// <summary>
-        ///     The name of the Graph
+        /// The name of the Graph
         /// </summary>
         public string GraphName
         {
@@ -24,7 +24,7 @@ namespace DynamoGraphMigrationAssistant.Controls
         }
 
         /// <summary>
-        ///     Shows if the graph has been successfully exported
+        /// Shows if the graph has been successfully exported
         /// </summary>
         public bool Exported
         {
