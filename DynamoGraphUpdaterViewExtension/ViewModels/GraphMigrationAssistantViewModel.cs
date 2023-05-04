@@ -21,6 +21,7 @@ using Dynamo.Wpf.Extensions;
 using Dynamo.Wpf.Utilities;
 using DynamoGraphMigrationAssistant.Controls;
 using DynamoGraphMigrationAssistant.Models;
+using ProtoCore.AST;
 using PythonNodeModels;
 
 namespace DynamoGraphMigrationAssistant.ViewModels
@@ -48,6 +49,12 @@ namespace DynamoGraphMigrationAssistant.ViewModels
         int progress = 0;
 
         public StringBuilder sb;
+
+
+        /// <summary>
+        /// Collection of potential target Dynamo versions
+        /// </summary>
+        public ObservableCollection<TargetDynamoVersion> TargetDynamoVersions { get; set; }
 
         /// <summary>
         ///     Collection of graphs loaded for exporting
@@ -703,7 +710,8 @@ namespace DynamoGraphMigrationAssistant.ViewModels
 
                     var newNote = DynamoViewModel.CurrentSpaceViewModel.Notes.First(note => note.Model.GUID.Equals(noteGuid));
 
-                    nodeViewModel.NodeModel.Select();
+                    DynamoModel.SelectModelCommand select = new DynamoModel.SelectModelCommand(nodeViewModel.NodeModel.GUID, ModifierKeys.None);
+                    DynamoViewModel.Model.ExecuteCommand(select);
 
                     MethodInfo pinToNode = typeof(NoteViewModel).GetMethod("PinToNode",
                         BindingFlags.NonPublic | BindingFlags.Instance);
@@ -724,10 +732,11 @@ namespace DynamoGraphMigrationAssistant.ViewModels
             //{
             //    if (nodeViewModel.NodeModel is PythonNode pythonNode)
             //    {
-            //        pythonNode.M
+            //        MethodInfo pinToNode = typeof(NoteViewModel).GetMethod("PinToNode",
+            //            BindingFlags.NonPublic | BindingFlags.Instance);
+            //        pinToNode.Invoke(newNote, new object[] { nodeViewModel.NodeModel });
             //    }
             //}
-
             //PythonNode.
         }
 
