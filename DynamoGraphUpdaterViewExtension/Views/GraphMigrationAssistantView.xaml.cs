@@ -26,5 +26,21 @@ namespace DynamoGraphMigrationAssistant.Views
             InitializeComponent();
             DataContext = vm;
         }
+
+        private void Selector_OnSelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if(!IsLoaded) return;
+
+            ComboBox versionCombobox = sender as ComboBox;
+
+            GraphMigrationAssistantViewModel vm = versionCombobox.DataContext as GraphMigrationAssistantViewModel;
+
+            var targetDynamoVersion = versionCombobox.SelectedItem as TargetDynamoVersion;
+
+
+            vm.FixNodeSpacing = targetDynamoVersion.NodeSpacingSuggested;
+            vm.ReplaceIfNodes = targetDynamoVersion.IfNodeSuggested;
+
+        }
     }
 }

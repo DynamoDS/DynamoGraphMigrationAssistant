@@ -111,7 +111,7 @@ namespace DynamoGraphMigrationAssistant.ViewModels
             }
             set
             {
-                if (ReplaceIfNodes != value)
+                if (replaceIfNodes != value)
                 {
                     ReplaceIfNodes = value;
                     RaisePropertyChanged(nameof(ReplaceIfNodes));
@@ -131,9 +131,9 @@ namespace DynamoGraphMigrationAssistant.ViewModels
             }
             set
             {
-                if (FixNodeSpacing != value)
+                if (fixNodeSpacing != value)
                 {
-                    FixNodeSpacing = value;
+                    fixNodeSpacing = value;
                     RaisePropertyChanged(nameof(FixNodeSpacing));
                 }
             }
@@ -317,6 +317,8 @@ namespace DynamoGraphMigrationAssistant.ViewModels
             graphQueue = new Queue<string>();
 
             sb = new StringBuilder();
+
+            LoadTargetDynamoVersions();
         }
 
 
@@ -416,13 +418,26 @@ namespace DynamoGraphMigrationAssistant.ViewModels
                 new TargetDynamoVersion("2.6", "Revit", "2021.1", false, false, true),
                 new TargetDynamoVersion("2.10", "Revit", "2022", false, false, true),
                 new TargetDynamoVersion("2.12", "Revit", "2022.1", false, true, true),
-                new TargetDynamoVersion("2.13", "Revit", "2023", false, true, true),
+                new TargetDynamoVersion("2.13", "Revit", "2023", true, true, true),
                 new TargetDynamoVersion("2.16", "Revit", "2023.1", true, true, true),
                 new TargetDynamoVersion("2.17", "Revit", " 2024", true, true, true),
                 new TargetDynamoVersion("2.10", "Civil3D", "2022", false, false, true),
                 new TargetDynamoVersion("2.13", "Civil3D", "2023", true, true, true),
                 new TargetDynamoVersion("2.17", "Civil3D", " 2024", true, true, true),
             };
+
+
+            ////pick the potential versions from what our graphs mostly consist of
+            //var whatProductIsUsedMost = graphs.GroupBy(g => g.Product).OrderByDescending(g => g.Count()).FirstOrDefault()?.Key;
+
+            //if (whatProductIsUsedMost is null)
+            //{
+            //    TargetVersions = PotentialTargetVersions;
+            //}
+            //else
+            //{
+            //    TargetVersions = new ObservableCollection<TargetDynamoVersion>(PotentialTargetVersions.Where(p => p.Host.Equals(whatProductIsUsedMost)));
+            //}
         }
 
         /// <summary>

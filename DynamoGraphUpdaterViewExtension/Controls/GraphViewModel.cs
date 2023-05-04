@@ -1,4 +1,5 @@
-﻿using Dynamo.Core;
+﻿using System.IO;
+using Dynamo.Core;
 
 namespace DynamoGraphMigrationAssistant.Controls
 {
@@ -6,6 +7,7 @@ namespace DynamoGraphMigrationAssistant.Controls
     {
         private bool exported;
         private string graphName;
+        private string product;
 
         /// <summary>
         /// The name of the Graph
@@ -40,5 +42,24 @@ namespace DynamoGraphMigrationAssistant.Controls
         }
 
         public string UniqueName { get; set; }
+
+        public string Product => CalculateDynamoProduct();
+
+        public string CalculateDynamoProduct()
+        {
+            var fileText = File.ReadAllText(UniqueName);
+
+            if (fileText.Contains("RevitNodes.dll"))
+            {
+                return "Revit";
+            }
+
+            if (fileText.Contains("Civil3DNodes.dll"))
+            {
+               return "Civil3D";
+            }
+
+            return string.Empty;
+        }
     }
 }
