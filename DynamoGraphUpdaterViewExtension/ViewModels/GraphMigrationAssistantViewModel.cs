@@ -404,6 +404,26 @@ namespace DynamoGraphMigrationAssistant.ViewModels
         #endregion
 
         #region Methods
+        /// <summary>
+        /// Load the potential Dynamo versions to migrate to. This allows us to preselect the suggestion migration tasks.
+        /// </summary>
+        private void LoadTargetDynamoVersions()
+        {
+            //Load our target versions from json TODO: make this read extra folder
+            TargetDynamoVersions = new ObservableCollection<TargetDynamoVersion>()
+            {
+                new TargetDynamoVersion("2.5", "Revit", "2021", false, false, true),
+                new TargetDynamoVersion("2.6", "Revit", "2021.1", false, false, true),
+                new TargetDynamoVersion("2.10", "Revit", "2022", false, false, true),
+                new TargetDynamoVersion("2.12", "Revit", "2022.1", false, true, true),
+                new TargetDynamoVersion("2.13", "Revit", "2023", false, true, true),
+                new TargetDynamoVersion("2.16", "Revit", "2023.1", true, true, true),
+                new TargetDynamoVersion("2.17", "Revit", " 2024", true, true, true),
+                new TargetDynamoVersion("2.10", "Civil3D", "2022", false, false, true),
+                new TargetDynamoVersion("2.13", "Civil3D", "2023", true, true, true),
+                new TargetDynamoVersion("2.17", "Civil3D", " 2024", true, true, true),
+            };
+        }
 
         /// <summary>
         /// The main method executing the migration
