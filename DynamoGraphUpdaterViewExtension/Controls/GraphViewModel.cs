@@ -6,6 +6,7 @@ namespace DynamoGraphMigrationAssistant.Controls
     public class GraphViewModel : NotificationObject
     {
         private bool exported;
+        private bool inTargetVersion;
         private string graphName;
         private string product;
 
@@ -41,10 +42,26 @@ namespace DynamoGraphMigrationAssistant.Controls
             }
         }
 
+        /// <summary>
+        /// Shows if the graph is in the target version
+        /// </summary>
+        public bool InTargetVersion
+        {
+            get => inTargetVersion;
+            set
+            {
+                if (value != inTargetVersion)
+                {
+                    inTargetVersion = value;
+                    RaisePropertyChanged(nameof(InTargetVersion));
+                }
+            }
+        }
+
         public string UniqueName { get; set; }
 
         public string Product => CalculateDynamoProduct();
-
+        public string Version => Utilities.GetDynamoVersionForGraph(UniqueName);
         public string CalculateDynamoProduct()
         {
             var fileText = File.ReadAllText(UniqueName);

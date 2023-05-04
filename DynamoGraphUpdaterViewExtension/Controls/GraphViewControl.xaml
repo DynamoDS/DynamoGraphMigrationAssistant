@@ -7,11 +7,13 @@
              mc:Ignorable="d"
              d:DesignHeight="40" d:DesignWidth="800">
     <UserControl.Resources>
+        <local:BooleanToColorConverter x:Key="BooleanToColorConverter" />
         <local:BooleanToImageSourceConverter x:Key="BooleanToImageSourceConverter" />
     </UserControl.Resources>
     <Grid Margin="0 5">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="Auto" />
+            <ColumnDefinition Width="48" />
             <ColumnDefinition Width="*" />
         </Grid.ColumnDefinitions>
 
@@ -25,6 +27,12 @@
         <!-- Graph name -->
         <TextBlock
             Grid.Column="1"
+            Text="{Binding Version}"
+            Margin="10 0" />
+
+        <!-- Graph name -->
+        <TextBlock
+            Grid.Column="2"
             Text="{Binding GraphName}"
             Margin="10 0" />
     </Grid>

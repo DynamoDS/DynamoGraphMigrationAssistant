@@ -80,11 +80,20 @@ namespace DynamoGraphMigrationAssistant.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Target Dynamo Version.
+        ///   Looks up a localized string similar to Target Dynamo Version:.
         /// </summary>
         public static string DynamoVersionsMsg {
             get {
                 return ResourceManager.GetString("DynamoVersionsMsg", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Note: Graphs in target version already, will simply be copied..
+        /// </summary>
+        public static string DynamoVersionsTooltip {
+            get {
+                return ResourceManager.GetString("DynamoVersionsTooltip", resourceCulture);
             }
         }
         
@@ -184,6 +193,15 @@ namespace DynamoGraphMigrationAssistant.Properties {
         public static string FixNodeSpacingTooltip {
             get {
                 return ResourceManager.GetString("FixNodeSpacingTooltip", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Graphs in Target Version.
+        /// </summary>
+        public static string GraphsInTargetVersionMsg {
+            get {
+                return ResourceManager.GetString("GraphsInTargetVersionMsg", resourceCulture);
             }
         }
         

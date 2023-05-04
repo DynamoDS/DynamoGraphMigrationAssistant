@@ -41,6 +41,29 @@ namespace DynamoGraphMigrationAssistant.Views
             vm.FixNodeSpacing = targetDynamoVersion.NodeSpacingSuggested;
             vm.ReplaceIfNodes = targetDynamoVersion.IfNodeSuggested;
 
+            var graphList = vm.Graphs.ToList();
+
+            graphList.AddRange(vm.GraphsInTargetVersion.ToList());
+
+            vm.Graphs.Clear();
+            vm.GraphsInTargetVersion.Clear();
+
+
+            foreach (var graphViewModel in graphList)
+            {
+                if (graphViewModel.Version.Equals(targetDynamoVersion.Version))
+                {
+                    graphViewModel.InTargetVersion = true;
+
+                    vm.GraphsInTargetVersion.Add(graphViewModel);
+                }
+                else
+                {
+                    graphViewModel.InTargetVersion = false;
+                    vm.Graphs.Add(graphViewModel);
+                }
+            }
+
         }
     }
 }

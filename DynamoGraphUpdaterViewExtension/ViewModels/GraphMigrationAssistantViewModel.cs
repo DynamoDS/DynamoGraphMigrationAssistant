@@ -60,6 +60,10 @@ namespace DynamoGraphMigrationAssistant.ViewModels
         ///     Collection of graphs loaded for exporting
         /// </summary>
         public ObservableCollection<GraphViewModel> Graphs { get; set; }
+        /// <summary>
+        ///     Collection of graphs that are already in the target version
+        /// </summary>
+        public ObservableCollection<GraphViewModel> GraphsInTargetVersion { get; set; }
 
         /// <summary>
         ///     The source path containing dynamo graphs to be exported
@@ -113,7 +117,7 @@ namespace DynamoGraphMigrationAssistant.ViewModels
             {
                 if (replaceIfNodes != value)
                 {
-                    ReplaceIfNodes = value;
+                    replaceIfNodes = value;
                     RaisePropertyChanged(nameof(ReplaceIfNodes));
                 }
             }
@@ -319,6 +323,8 @@ namespace DynamoGraphMigrationAssistant.ViewModels
             sb = new StringBuilder();
 
             LoadTargetDynamoVersions();
+
+            GraphsInTargetVersion = new ObservableCollection<GraphViewModel>();
         }
 
 
@@ -347,6 +353,8 @@ namespace DynamoGraphMigrationAssistant.ViewModels
         private void SourceFolderChanged(PathViewModel pathVM)
         {
             Graphs = new ObservableCollection<GraphViewModel>();
+            GraphsInTargetVersion = new ObservableCollection<GraphViewModel>();
+
             graphDictionary = new Dictionary<int, GraphViewModel>();
 
             var files = Utilities.GetAllFilesOfExtension(pathVM.FolderPath)?.OrderBy(x => x);
@@ -359,8 +367,19 @@ namespace DynamoGraphMigrationAssistant.ViewModels
                 var uniqueName = Path.GetFullPath(graph);
                 var graphVM = new GraphViewModel { GraphName = name, UniqueName = uniqueName };
 
-                Graphs.Add(graphVM);
-                graphDictionary[uniqueName.GetHashCode()] = graphVM;
+
+                //check if the graph is in the target version
+                if (graphVM.InTargetVersion)
+                {
+                    GraphsInTargetVersion.Add(graphVM);
+                    graphDictionary[uniqueName.GetHashCode()] = graphVM;
+                }
+                else
+                {
+                    Graphs.Add(graphVM);
+                    graphDictionary[uniqueName.GetHashCode()] = graphVM;
+                }
+              
             }
 
             NotificationMessage = String.Format(Properties.Resources.NotificationMsg, Graphs.Count.ToString());
@@ -554,7 +573,6 @@ namespace DynamoGraphMigrationAssistant.ViewModels
         private void ExportGraph()
         {
             phase = MigrationPhase.Save;
-
 
             //replace if nodes
             if (ReplaceIfNodes)
