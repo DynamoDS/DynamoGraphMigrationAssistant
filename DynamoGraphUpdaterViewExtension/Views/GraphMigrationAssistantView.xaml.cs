@@ -41,6 +41,8 @@ namespace DynamoGraphMigrationAssistant.Views
             vm.FixNodeSpacing = targetDynamoVersion.NodeSpacingSuggested;
             vm.ReplaceIfNodes = targetDynamoVersion.IfNodeSuggested;
 
+            if (vm.Graphs is null) return;
+            
             var graphList = vm.Graphs.ToList();
 
             graphList.AddRange(vm.GraphsInTargetVersion.ToList());

@@ -61,7 +61,7 @@ namespace DynamoGraphMigrationAssistant.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Cancel.
+        ///   Looks up a localized string similar to Stop.
         /// </summary>
         public static string CancelButtonText {
             get {
@@ -301,6 +301,15 @@ namespace DynamoGraphMigrationAssistant.Properties {
         public static string OptionalFixesTooltip {
             get {
                 return ResourceManager.GetString("OptionalFixesTooltip", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to This tool provides the infrastructure to migrate Dynamo graphs from pre-2.13 versions to 2.13+ versions..
+        /// </summary>
+        public static string OverviewMsg {
+            get {
+                return ResourceManager.GetString("OverviewMsg", resourceCulture);
             }
         }
         

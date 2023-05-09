@@ -199,6 +199,7 @@ namespace DynamoGraphMigrationAssistant.ViewModels
                 {
                     resume = value;
                     RaisePropertyChanged(nameof(Resume));
+                    TargetFolderChanged();
                 }
             }
         }
@@ -814,7 +815,7 @@ namespace DynamoGraphMigrationAssistant.ViewModels
 
         private string GetDynPath(string graph)
         {
-            var graphName = Path.GetFileNameWithoutExtension(graph);
+            var graphName = Path.GetFileName(graph);
             var directory = Path.GetDirectoryName(graph);
             if (directory == null) return null;
 

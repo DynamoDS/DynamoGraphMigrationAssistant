@@ -118,7 +118,7 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="CancelButtonText" xml:space="preserve">
-    <value>Cancel</value>
+    <value>Stop</value>
   </data>
   <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="checkmark" type="System.Resources.ResXFileRef, System.Windows.Forms">
@@ -198,6 +198,9 @@
   </data>
   <data name="OptionalFixesTooltip" xml:space="preserve">
     <value>These migrations tasks are optional as they are more user-specific.</value>
+  </data>
+  <data name="OverviewMsg" xml:space="preserve">
+    <value>This tool provides the infrastructure to migrate Dynamo graphs from pre-2.13 versions to 2.13+ versions.</value>
   </data>
   <data name="ProcessMsg" xml:space="preserve">
     <value>Processed {0} out of {1} graphs.</value>
