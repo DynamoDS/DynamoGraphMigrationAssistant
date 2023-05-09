@@ -34,11 +34,15 @@
 
         <!-- Folder selection controls -->
         <StackPanel Orientation="Vertical">
-            <Label Content="{x:Static p:Resources.OverviewMsg}"
+            <TextBox Text="{x:Static p:Resources.OverviewMsg}"
                 Padding="5,5,5,5"
                 FontSize="14"
                 FontFamily="{StaticResource ArtifaktElementBold}"
-                Foreground="{StaticResource PreferencesWindowFontColor}"/>
+                Foreground="{StaticResource PreferencesWindowFontColor}" 
+                TextWrapping="Wrap" 
+                IsHitTestVisible="False" 
+                Background="{x:Null}"
+                BorderBrush="{x:Null}"/>
             <Label Content="{x:Static p:Resources.SourceFolderMsg}"
                    Padding="5,5,5,5"
                    FontSize="13"
