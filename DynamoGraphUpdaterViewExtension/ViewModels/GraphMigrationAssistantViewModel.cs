@@ -322,8 +322,7 @@ namespace DynamoGraphMigrationAssistant.ViewModels
 
             LoadTargetDynamoVersions();
         }
-
-        private void
+        
 
         // Handles source path changed
         private void SourcePathPropertyChanged(object sender, PropertyChangedEventArgs propertyChangedEventArgs)
