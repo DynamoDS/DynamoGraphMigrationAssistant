@@ -35,37 +35,31 @@ namespace DynamoGraphMigrationAssistant.Views
 
             GraphMigrationAssistantViewModel vm = versionCombobox.DataContext as GraphMigrationAssistantViewModel;
 
-            var targetDynamoVersion = versionCombobox.SelectedItem as TargetDynamoVersion;
+            vm.TargetDynamoVersion = versionCombobox.SelectedItem as TargetDynamoVersion;
+            
 
-
-            vm.FixNodeSpacing = targetDynamoVersion.NodeSpacingSuggested;
-            vm.ReplaceIfNodes = targetDynamoVersion.IfNodeSuggested;
+            vm.FixNodeSpacing = vm.TargetDynamoVersion.NodeSpacingSuggested;
+            vm.ReplaceIfNodes = vm.TargetDynamoVersion.IfNodeSuggested;
 
             if (vm.Graphs is null) return;
             
             var graphList = vm.Graphs.ToList();
 
-            graphList.AddRange(vm.GraphsInTargetVersion.ToList());
-
-            vm.Graphs.Clear();
-            vm.GraphsInTargetVersion.Clear();
-
+            //vm.Graphs.Clear();
 
             foreach (var graphViewModel in graphList)
             {
-                if (graphViewModel.Version.Equals(targetDynamoVersion.Version))
+                if (graphViewModel.Version.Equals(vm.TargetDynamoVersion.Version))
                 {
                     graphViewModel.InTargetVersion = true;
-
-                    vm.GraphsInTargetVersion.Add(graphViewModel);
                 }
                 else
                 {
                     graphViewModel.InTargetVersion = false;
-                    vm.Graphs.Add(graphViewModel);
+
                 }
             }
-
+            vm.TargetVersionChanged();
         }
     }
 }

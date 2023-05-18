@@ -28,7 +28,7 @@
         <TextBlock
             Grid.Column="1"
             Text="{Binding Version}"
-            Margin="10 0" />
+            Margin="10 0" Foreground="{Binding InTargetVersion, Converter={StaticResource BooleanToColorConverter}}"/>
 
         <!-- Graph name -->
         <TextBlock

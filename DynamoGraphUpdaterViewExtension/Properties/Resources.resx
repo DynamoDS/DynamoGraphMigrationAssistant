@@ -128,13 +128,16 @@
     <value>Target Dynamo Version:</value>
   </data>
   <data name="DynamoVersionsTooltip" xml:space="preserve">
-    <value>Note: Graphs in target version already, will simply be copied.</value>
+    <value>Graphs in the source folder will be migrated to the selected target version. Graphs already in the target version will be copied with no changes.</value>
   </data>
   <data name="ExportButtonText" xml:space="preserve">
     <value>Export</value>
   </data>
   <data name="ExtensionName" xml:space="preserve">
     <value>Dynamo Graph Migration Assistant</value>
+  </data>
+  <data name="FileCopiedLogMessage" xml:space="preserve">
+    <value>{0} was in target Dynamo version and copied to output folder with no changes.</value>
   </data>
   <data name="FinishMsg" xml:space="preserve">
     <value>Successfully migrated {0} graphs</value>
@@ -146,22 +149,22 @@
     <value>Successfully exported {0} image.</value>
   </data>
   <data name="FixInputLinebreaksCheckboxMsg" xml:space="preserve">
-    <value>Swap Linebreaks to Pinned Notes</value>
+    <value>Swap Line Breaks to Pinned Notes</value>
   </data>
   <data name="FixInputLinebreaksCheckboxTooltip" xml:space="preserve">
-    <value>This will split the node name (by new line) to two chunks of text. The first chunk will be a pinned note, the second chunk will be the node name.</value>
+    <value>If a node name includes a line break, this option will separate text before the line break into a pinned note.</value>
   </data>
   <data name="FixInputOrderCheckboxMsg" xml:space="preserve">
-    <value>Fix input order</value>
+    <value>Force input order</value>
   </data>
   <data name="FixInputOrderCheckboxTooltip" xml:space="preserve">
-    <value>Force order of nodes marked as input by appending a prefix. (Nodes are sorted by Y location values)</value>
+    <value>Appends a prefix (001|, 002|…) to the names of nodes marked as input. Ordering begins with nodes closest to the top of the workspace.</value>
   </data>
   <data name="FixNodeSpacingCheckboxMsg" xml:space="preserve">
-    <value>Fix node spacing.</value>
+    <value>Cleanup node layout</value>
   </data>
   <data name="FixNodeSpacingTooltip" xml:space="preserve">
-    <value>Account for the spacing of the larger nodes in Dynamo 2.13+ UI.</value>
+    <value>Adjust node spacing to avoid overlapping nodes.</value>
   </data>
   <data name="GraphsInTargetVersionMsg" xml:space="preserve">
     <value>Graphs in Target Version</value>
@@ -176,10 +179,10 @@
     <value>{0} if nodes migrated to refactored if.</value>
   </data>
   <data name="KeepFolderStructureCheckboxMsg" xml:space="preserve">
-    <value>Keep folder structure.</value>
+    <value>Keep folder structure</value>
   </data>
   <data name="KeepFolderStructureTooltip" xml:space="preserve">
-    <value>Retains the original folder/subfolder structure for graphs location.</value>
+    <value>Retains the folder/subfolder structure from the source folder.</value>
   </data>
   <data name="MigrateGraphMsg" xml:space="preserve">
     <value>Graphs to Migrate</value>
@@ -191,16 +194,16 @@
     <value>{0} nodes and notes moved to prevent overlap.</value>
   </data>
   <data name="NotificationMsg" xml:space="preserve">
-    <value>The target folder contains {0} Dynamo graphs.</value>
+    <value>The source folder contains {0} Dynamo graphs.</value>
   </data>
   <data name="OptionalFixesMsg" xml:space="preserve">
-    <value>Optional Migration Tasks</value>
+    <value>Optional Graph Updates</value>
   </data>
   <data name="OptionalFixesTooltip" xml:space="preserve">
     <value>These migrations tasks are optional as they are more user-specific.</value>
   </data>
   <data name="OverviewMsg" xml:space="preserve">
-    <value>This tool provides the infrastructure to migrate Dynamo graphs from pre-2.13 versions to 2.13+ versions.</value>
+    <value>Use this tool to migrate Dynamo graphs from pre-2.13 versions to 2.13+ versions.</value>
   </data>
   <data name="ProcessMsg" xml:space="preserve">
     <value>Processed {0} out of {1} graphs.</value>
@@ -209,16 +212,16 @@
     <value>..\Resources\Progress circle.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="ReplaceIfNodesCheckboxMsg" xml:space="preserve">
-    <value>Migrate if nodes</value>
+    <value>Update If nodes</value>
   </data>
   <data name="ReplaceIfNodesCheckboxTooltip" xml:space="preserve">
-    <value>Migrates if nodes from previous version to the refactored version.</value>
+    <value>Replaces outdated If nodes with updated If nodes.</value>
   </data>
   <data name="ResumeCheckboxMsg" xml:space="preserve">
-    <value>Resume previous session.</value>
+    <value>Resume previous session</value>
   </data>
   <data name="ResumeTooltip" xml:space="preserve">
-    <value>Attempts to resume the progress from a previous run. The progress is stored within the 'log.txt' file in the root Target folder.</value>
+    <value>Attempts to resume progress from a previous run. Progress is stored within the log.txt file in the root target folder.</value>
   </data>
   <data name="SelectFolderMsg" xml:space="preserve">
     <value>Select folder ..</value>
@@ -233,15 +236,15 @@
     <value>Source folder</value>
   </data>
   <data name="SuggestedFixesMsg" xml:space="preserve">
-    <value>Suggested Migration Tasks</value>
+    <value>Recommended Graph Updates</value>
   </data>
   <data name="SuggestedFixesTooltip" xml:space="preserve">
-    <value>These tasks are suggested based on the Dynamo version selected.</value>
+    <value>These updates are recommended based on the target Dynamo version to improve functionality and usability of the migrated graph(s).</value>
   </data>
   <data name="TargetFolderMsg" xml:space="preserve">
     <value>Target folder</value>
   </data>
   <data name="UpdatePathTooltip" xml:space="preserve">
-    <value>Select folder.</value>
+    <value>Select folder</value>
   </data>
 </root>

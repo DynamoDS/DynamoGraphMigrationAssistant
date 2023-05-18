@@ -146,8 +146,6 @@
     </Compile>
     <Compile Include="Controls\GraphViewModel.cs" />
     <Compile Include="Controls\PathViewModel.cs" />
-    <Compile Include="Controls\UpdateableGraphsViewModel.cs" />
-    <Compile Include="Controls\UpdateableGraphViewModel.cs" />
     <Compile Include="Models\GraphMigrationAssistantModel.cs" />
     <Compile Include="ViewModels\GraphMigrationAssistantViewModel.cs" />
     <Compile Include="Views\GraphMigrationAssistantView.xaml.cs">
@@ -159,9 +157,6 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
-    </Compile>
-    <Compile Include="Controls\UpdateableGraphsControl.xaml.cs">
-      <DependentUpon>UpdateableGraphsControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="Utilities.cs" />
     <Compile Include="TargetDynamoVersion.cs" />
@@ -192,10 +187,6 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="Views\GraphMigrationAssistantView.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Controls\UpdateableGraphsControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

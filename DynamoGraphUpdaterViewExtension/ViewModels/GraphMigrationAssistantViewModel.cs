@@ -55,15 +55,12 @@ namespace DynamoGraphMigrationAssistant.ViewModels
         /// Collection of potential target Dynamo versions
         /// </summary>
         public ObservableCollection<TargetDynamoVersion> TargetDynamoVersions { get; set; }
+        public TargetDynamoVersion TargetDynamoVersion { get; set; }
 
         /// <summary>
         ///     Collection of graphs loaded for exporting
         /// </summary>
         public ObservableCollection<GraphViewModel> Graphs { get; set; }
-        /// <summary>
-        ///     Collection of graphs that are already in the target version
-        /// </summary>
-        public ObservableCollection<GraphViewModel> GraphsInTargetVersion { get; set; }
 
         /// <summary>
         ///     The source path containing dynamo graphs to be exported
@@ -88,9 +85,9 @@ namespace DynamoGraphMigrationAssistant.ViewModels
                 if (SourcePathViewModel?.FolderPath == null && !SingleGraph)
                     return false;
                 if (SourcePathViewModel?.FolderPath == null && SingleGraph)
-                    return Utilities.IsValidPath(TargetPathViewModel.FolderPath);
+                    return Utilities.IsValidPath(TargetPathViewModel.FolderPath) && TargetDynamoVersion != null;
                 if (SourcePathViewModel?.FolderPath != null)
-                    return Utilities.IsValidPath(TargetPathViewModel.FolderPath) && Utilities.IsValidPath(SourcePathViewModel.FolderPath);
+                    return Utilities.IsValidPath(TargetPathViewModel.FolderPath) && Utilities.IsValidPath(SourcePathViewModel.FolderPath) && TargetDynamoVersion != null;
                 return false;
             }
             private set
@@ -324,8 +321,6 @@ namespace DynamoGraphMigrationAssistant.ViewModels
             sb = new StringBuilder();
 
             LoadTargetDynamoVersions();
-
-            GraphsInTargetVersion = new ObservableCollection<GraphViewModel>();
         }
 
 
@@ -350,11 +345,17 @@ namespace DynamoGraphMigrationAssistant.ViewModels
             }
         }
 
+        // target version changed
+        internal void TargetVersionChanged()
+        {
+            RaisePropertyChanged(nameof(CanExport));
+        }
+
         // Update graphs if source folder is changed by the UI
         private void SourceFolderChanged(PathViewModel pathVM)
         {
             Graphs = new ObservableCollection<GraphViewModel>();
-            GraphsInTargetVersion = new ObservableCollection<GraphViewModel>();
+            //GraphsInTargetVersion = new ObservableCollection<GraphViewModel>();
 
             graphDictionary = new Dictionary<int, GraphViewModel>();
 
@@ -368,11 +369,20 @@ namespace DynamoGraphMigrationAssistant.ViewModels
                 var uniqueName = Path.GetFullPath(graph);
                 var graphVM = new GraphViewModel { GraphName = name, UniqueName = uniqueName };
 
-
+                if (TargetDynamoVersion != null)
+                {
+                    graphVM.InTargetVersion = graphVM.Version.Equals(TargetDynamoVersion.Version);
+                }
+                else
+                {
+                    graphVM.InTargetVersion = false;
+                }
+                
                 //check if the graph is in the target version
                 if (graphVM.InTargetVersion)
                 {
-                    GraphsInTargetVersion.Add(graphVM);
+                    //graphVM.Exported = true;
+                    Graphs.Add(graphVM);
                     graphDictionary[uniqueName.GetHashCode()] = graphVM;
                 }
                 else
@@ -479,9 +489,24 @@ namespace DynamoGraphMigrationAssistant.ViewModels
 
             ResetUi();
 
-            foreach (var file in Graphs.ToList().Select(x => x.UniqueName).ToList())
+            foreach (var file in Graphs.Where(g => !g.InTargetVersion).ToList().Select(x => x.UniqueName).ToList())
             {
                 graphQueue.Enqueue(file);
+            }
+
+            //copy the ones already in the path
+            foreach (var fileInTarget in Graphs.Where(g => g.InTargetVersion))
+            {
+                var graphName = GetDynPath(fileInTarget.UniqueName);
+
+                File.Copy(fileInTarget.UniqueName,graphName,true);
+                
+                fileInTarget.Exported = true;
+
+                //log the changes
+                EnterLog(string.Format(Properties.Resources.FileCopiedLogMessage, fileInTarget.GraphName));
+
+                progress++;
             }
         }
 

@@ -8,8 +8,7 @@
              xmlns:controls="clr-namespace:DynamoGraphMigrationAssistant.Controls"
              UseLayoutRounding="True"
              SnapsToDevicePixels="True"
-             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="800"
-             >
+             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="800">
     <UserControl.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
@@ -22,19 +21,19 @@
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </UserControl.Resources>
-    <Grid x:Name="MainGrid" Margin="20">
-        <Grid.RowDefinitions>
-            <RowDefinition Height="auto" />
-            <RowDefinition Height="auto" />
-            <RowDefinition Height="auto" />
-            <RowDefinition Height="*" />
-            <RowDefinition Height="*" />
-            <RowDefinition Height="auto" />
-        </Grid.RowDefinitions>
+   
+        <Grid x:Name="MainGrid" Margin="20">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto" />
+                <RowDefinition Height="auto" />
+                <RowDefinition Height="auto" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="auto" />
+            </Grid.RowDefinitions>
 
-        <!-- Folder selection controls -->
-        <StackPanel Orientation="Vertical">
-            <TextBox Text="{x:Static p:Resources.OverviewMsg}"
+            <!-- Folder selection controls -->
+            <StackPanel Orientation="Vertical">
+                <TextBox Text="{x:Static p:Resources.OverviewMsg}"
                 Padding="5,5,5,5"
                 FontSize="14"
                 FontFamily="{StaticResource ArtifaktElementBold}"
@@ -43,203 +42,199 @@
                 IsHitTestVisible="False" 
                 Background="{x:Null}"
                 BorderBrush="{x:Null}"/>
-            <Label Content="{x:Static p:Resources.SourceFolderMsg}"
+                <Label Content="{x:Static p:Resources.SourceFolderMsg}"
                    Padding="5,5,5,5"
                    FontSize="13"
                    FontFamily="{StaticResource ArtifaktElementBold}"
                    Foreground="{StaticResource PreferencesWindowFontColor}" />
-            <controls:FolderPathViewControl DataContext="{Binding SourcePathViewModel}" Margin="0 0 0 10" />
-            <Label Content="{x:Static p:Resources.TargetFolderMsg}"
+                <controls:FolderPathViewControl DataContext="{Binding SourcePathViewModel}" Margin="0 0 0 10" />
+                <Label Content="{x:Static p:Resources.TargetFolderMsg}"
                    Padding="5,5,5,5"
                    FontSize="13"
                    FontFamily="{StaticResource ArtifaktElementBold}"
                    Foreground="{StaticResource PreferencesWindowFontColor}" />
-            <controls:FolderPathViewControl DataContext="{Binding TargetPathViewModel}" Margin="0 0 0 10" />
-        </StackPanel>
+                <controls:FolderPathViewControl DataContext="{Binding TargetPathViewModel}" Margin="0 0 0 10" />
+            </StackPanel>
 
-        <!-- Target Dynamo Version -->
-        <Label Grid.Row="1" VerticalContentAlignment="Center">
-            <StackPanel Orientation="Horizontal">
-                <TextBlock Text="{x:Static p:Resources.DynamoVersionsMsg}"
+            <!-- Target Dynamo Version -->
+            <Label Grid.Row="1" VerticalContentAlignment="Center">
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Text="{x:Static p:Resources.DynamoVersionsMsg}"
                            VerticalAlignment="Center"
                            Margin="3 3 0 0"  
                            TextWrapping="WrapWithOverflow"
                            Foreground="{StaticResource PreferencesWindowFontColor}"
                            ToolTip="{x:Static p:Resources.DynamoVersionsTooltip}"
                            FontSize="12" />
-                <ComboBox Width="200" Margin="12 3 0 0" ItemsSource="{Binding TargetDynamoVersions}" DisplayMemberPath="DisplayName" Style="{StaticResource RefreshComboBox}" FontSize="12" SelectionChanged="Selector_OnSelectionChanged"/>
-            </StackPanel>
+                    <ComboBox Width="200" Margin="12 3 0 0" ItemsSource="{Binding TargetDynamoVersions}" DisplayMemberPath="DisplayName" Style="{StaticResource RefreshComboBox}" FontSize="12" SelectionChanged="Selector_OnSelectionChanged"/>
+                </StackPanel>
 
-        </Label>
+            </Label>
 
 
 
-        <!-- Export button -->
-        <StackPanel Orientation="Vertical" Grid.Row="2">
-            <Grid>
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="*"/>
-                    <RowDefinition Height="*"/>
-                </Grid.RowDefinitions>
-                <StackPanel Orientation="Vertical">
+            <!-- Export button -->
+            <StackPanel Orientation="Vertical" Grid.Row="2">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+                    <StackPanel Orientation="Vertical">
 
-                    <!-- General Settings -->
-                    <Label VerticalContentAlignment="Center">
-                        <TextBlock Text="{x:Static p:Resources.MiscSettingsMsg}"
+                        <!-- General Settings -->
+                        <Label VerticalContentAlignment="Center">
+                            <TextBlock Text="{x:Static p:Resources.MiscSettingsMsg}"
                                    VerticalAlignment="Center"
                                    Margin="3 3 0 0"  
                                    TextWrapping="WrapWithOverflow"
                                    Foreground="{StaticResource PreferencesWindowFontColor}"
                                    FontSize="12" />
-                        <Label.ToolTip>
-                            <ToolTip Content="{x:Static p:Resources.KeepFolderStructureTooltip}" 
-                                     Style="{StaticResource GenericToolTipLight}"/>
-                        </Label.ToolTip>
-                    </Label>
-                    <WrapPanel Margin="8 0 0 0">
-                        <CheckBox VerticalContentAlignment="Center"
+                        </Label>
+                        <WrapPanel Margin="8 0 0 0">
+                            <CheckBox VerticalContentAlignment="Center"
                               IsChecked="{Binding IsKeepFolderStructure}" 
                               Margin="5 0">
-                            <Label VerticalContentAlignment="Center">
-                                <TextBlock Text="{x:Static p:Resources.KeepFolderStructureCheckboxMsg}"
+                                <Label VerticalContentAlignment="Center">
+                                    <TextBlock Text="{x:Static p:Resources.KeepFolderStructureCheckboxMsg}"
                                        VerticalAlignment="Center"
                                        Margin="3 3 0 0"  
                                        TextWrapping="WrapWithOverflow"
                                        Foreground="{StaticResource PreferencesWindowFontColor}"
                                        FontSize="10" />
-                                <Label.ToolTip>
-                                    <ToolTip Content="{x:Static p:Resources.KeepFolderStructureTooltip}" 
+                                    <Label.ToolTip>
+                                        <ToolTip Content="{x:Static p:Resources.KeepFolderStructureTooltip}" 
                                          Style="{StaticResource GenericToolTipLight}"/>
-                                </Label.ToolTip>
-                            </Label>
-                        </CheckBox>
+                                    </Label.ToolTip>
+                                </Label>
+                            </CheckBox>
 
-                        <CheckBox VerticalContentAlignment="Center"
+                            <CheckBox VerticalContentAlignment="Center"
                               IsChecked="{Binding Resume}" 
                               Margin="5 0">
-                            <Label VerticalContentAlignment="Center">
-                                <TextBlock Text="{x:Static p:Resources.ResumeCheckboxMsg}"
+                                <Label VerticalContentAlignment="Center">
+                                    <TextBlock Text="{x:Static p:Resources.ResumeCheckboxMsg}"
                                        VerticalAlignment="Center"
                                        TextWrapping="WrapWithOverflow"
                                        Margin="3 3 0 0"  
                                        Foreground="{StaticResource PreferencesWindowFontColor}"
                                        FontSize="10" />
-                                <Label.ToolTip>
-                                    <ToolTip Content="{x:Static p:Resources.ResumeTooltip}" 
+                                    <Label.ToolTip>
+                                        <ToolTip Content="{x:Static p:Resources.ResumeTooltip}" 
                                          Style="{StaticResource GenericToolTipLight}"/>
-                                </Label.ToolTip>
-                            </Label>
-                        </CheckBox>
-                    </WrapPanel>
-                </StackPanel>
+                                    </Label.ToolTip>
+                                </Label>
+                            </CheckBox>
+                        </WrapPanel>
+                    </StackPanel>
 
 
-                <StackPanel  Grid.Row="1">
-                    <!-- Suggested Migration Tasks -->
-                    <Label VerticalContentAlignment="Center">
-                        <TextBlock Text="{x:Static p:Resources.SuggestedFixesMsg}"
+                    <StackPanel  Grid.Row="1">
+                        <!-- Suggested Migration Tasks -->
+                        <Label VerticalContentAlignment="Center">
+                            <TextBlock Text="{x:Static p:Resources.SuggestedFixesMsg}"
                                    VerticalAlignment="Center"
                                    Margin="3 3 0 0"  
                                    TextWrapping="WrapWithOverflow"
                                    Foreground="{StaticResource PreferencesWindowFontColor}"
                                    FontSize="12" />
-                        <Label.ToolTip>
-                            <ToolTip Content="{x:Static p:Resources.SuggestedFixesTooltip}" 
+                            <Label.ToolTip>
+                                <ToolTip Content="{x:Static p:Resources.SuggestedFixesTooltip}" 
                                      Style="{StaticResource GenericToolTipLight}"/>
-                        </Label.ToolTip>
-                    </Label>
-                    <WrapPanel Margin="8 0 0 0">
-                        <CheckBox VerticalContentAlignment="Center"
+                            </Label.ToolTip>
+                        </Label>
+                        <WrapPanel Margin="8 0 0 0">
+                            <CheckBox VerticalContentAlignment="Center"
                               IsChecked="{Binding FixNodeSpacing}" 
                               Margin="5 0">
-                            <Label VerticalContentAlignment="Center">
-                                <TextBlock Text="{x:Static p:Resources.FixNodeSpacingCheckboxMsg}"
+                                <Label VerticalContentAlignment="Center">
+                                    <TextBlock Text="{x:Static p:Resources.FixNodeSpacingCheckboxMsg}"
                                        VerticalAlignment="Center"
                                        Margin="3 3 0 0"  
                                        TextWrapping="WrapWithOverflow"
                                        Foreground="{StaticResource PreferencesWindowFontColor}"
                                        FontSize="10" />
-                                <Label.ToolTip>
-                                    <ToolTip Content="{x:Static p:Resources.FixNodeSpacingTooltip}" 
+                                    <Label.ToolTip>
+                                        <ToolTip Content="{x:Static p:Resources.FixNodeSpacingTooltip}" 
                                          Style="{StaticResource GenericToolTipLight}"/>
-                                </Label.ToolTip>
-                            </Label>
-                        </CheckBox>
-                        <CheckBox VerticalContentAlignment="Center"
+                                    </Label.ToolTip>
+                                </Label>
+                            </CheckBox>
+                            <CheckBox VerticalContentAlignment="Center"
                               IsChecked="{Binding ReplaceIfNodes}" 
                               Margin="5 0">
-                            <Label VerticalContentAlignment="Center">
-                                <TextBlock Text="{x:Static p:Resources.ReplaceIfNodesCheckboxMsg}"
+                                <Label VerticalContentAlignment="Center">
+                                    <TextBlock Text="{x:Static p:Resources.ReplaceIfNodesCheckboxMsg}"
                                        VerticalAlignment="Center"
                                        Margin="3 3 0 0"  
                                        TextWrapping="WrapWithOverflow"
                                        Foreground="{StaticResource PreferencesWindowFontColor}"
                                        FontSize="10" />
-                                <Label.ToolTip>
-                                    <ToolTip Content="{x:Static p:Resources.ReplaceIfNodesCheckboxTooltip}" 
+                                    <Label.ToolTip>
+                                        <ToolTip Content="{x:Static p:Resources.ReplaceIfNodesCheckboxTooltip}" 
                                          Style="{StaticResource GenericToolTipLight}"/>
-                                </Label.ToolTip>
-                            </Label>
-                        </CheckBox>
-                    </WrapPanel>
-                    <!-- Optional Migration Tasks -->
-                    <Label VerticalContentAlignment="Center">
-                        <TextBlock Text="{x:Static p:Resources.OptionalFixesMsg}"
+                                    </Label.ToolTip>
+                                </Label>
+                            </CheckBox>
+                        </WrapPanel>
+                        <!-- Optional Migration Tasks -->
+                        <Label VerticalContentAlignment="Center">
+                            <TextBlock Text="{x:Static p:Resources.OptionalFixesMsg}"
                                    VerticalAlignment="Center"
                                    Margin="3 3 0 0"  
                                    TextWrapping="WrapWithOverflow"
                                    Foreground="{StaticResource PreferencesWindowFontColor}"
                                    FontSize="12" />
-                        <Label.ToolTip>
-                            <ToolTip Content="{x:Static p:Resources.OptionalFixesTooltip}" 
+                            <Label.ToolTip>
+                                <ToolTip Content="{x:Static p:Resources.OptionalFixesTooltip}" 
                                      Style="{StaticResource GenericToolTipLight}"/>
-                        </Label.ToolTip>
-                    </Label>
-                    <WrapPanel Orientation="Horizontal" Margin="8 0 0 0">
-                        <CheckBox VerticalContentAlignment="Center"
+                            </Label.ToolTip>
+                        </Label>
+                        <WrapPanel Orientation="Horizontal" Margin="8 0 0 0">
+                            <CheckBox VerticalContentAlignment="Center"
                               IsChecked="{Binding FixInputOrder}" 
                               Margin="5 0">
-                            <Label VerticalContentAlignment="Center">
-                                <TextBlock Text="{x:Static p:Resources.FixInputOrderCheckboxMsg}"
+                                <Label VerticalContentAlignment="Center">
+                                    <TextBlock Text="{x:Static p:Resources.FixInputOrderCheckboxMsg}"
                                        VerticalAlignment="Center"
                                        Margin="3 3 0 0"  
                                        TextWrapping="WrapWithOverflow"
                                        Foreground="{StaticResource PreferencesWindowFontColor}"
                                        FontSize="10" />
-                                <Label.ToolTip>
-                                    <ToolTip Content="{x:Static p:Resources.FixInputOrderCheckboxTooltip}" 
+                                    <Label.ToolTip>
+                                        <ToolTip Content="{x:Static p:Resources.FixInputOrderCheckboxTooltip}" 
                                          Style="{StaticResource GenericToolTipLight}"/>
-                                </Label.ToolTip>
-                            </Label>
-                        </CheckBox>
-                        <CheckBox VerticalContentAlignment="Center"
+                                    </Label.ToolTip>
+                                </Label>
+                            </CheckBox>
+                            <CheckBox VerticalContentAlignment="Center"
                               IsChecked="{Binding FixInputLinebreaks}" 
                               Margin="5 0">
-                            <Label VerticalContentAlignment="Center">
-                                <TextBlock Text="{x:Static p:Resources.FixInputLinebreaksCheckboxMsg}"
+                                <Label VerticalContentAlignment="Center">
+                                    <TextBlock Text="{x:Static p:Resources.FixInputLinebreaksCheckboxMsg}"
                                        VerticalAlignment="Center"
                                        Margin="3 3 0 0"  
                                        TextWrapping="WrapWithOverflow"
                                        Foreground="{StaticResource PreferencesWindowFontColor}"
                                        FontSize="10" />
-                                <Label.ToolTip>
-                                    <ToolTip Content="{x:Static p:Resources.FixInputLinebreaksCheckboxTooltip}" 
+                                    <Label.ToolTip>
+                                        <ToolTip Content="{x:Static p:Resources.FixInputLinebreaksCheckboxTooltip}" 
                                          Style="{StaticResource GenericToolTipLight}"/>
-                                </Label.ToolTip>
-                            </Label>
-                        </CheckBox>
-                    </WrapPanel>
+                                    </Label.ToolTip>
+                                </Label>
+                            </CheckBox>
+                        </WrapPanel>
 
 
-                </StackPanel>
-            </Grid>
+                    </StackPanel>
+                </Grid>
 
-            <Grid HorizontalAlignment="Stretch" Grid.Row="1" Margin="0 10 0 20" >
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="*"></ColumnDefinition>
-                    <ColumnDefinition Width="auto"></ColumnDefinition>
-                </Grid.ColumnDefinitions>
-                <TextBlock x:Name="MessageTextBlock"
+                <Grid HorizontalAlignment="Stretch" Grid.Row="1" Margin="0 10 0 20" >
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"></ColumnDefinition>
+                        <ColumnDefinition Width="auto"></ColumnDefinition>
+                    </Grid.ColumnDefinitions>
+                    <TextBlock x:Name="MessageTextBlock"
                            Text="{Binding NotificationMessage}"
                            Padding="5 5 0 0"
                            VerticalAlignment="Center" 
@@ -248,7 +243,7 @@
                            TextWrapping="WrapWithOverflow"
                            TextTrimming="CharacterEllipsis"
                            Foreground="{StaticResource PreferencesWindowFontColor}"/>
-                <Button Content="{x:Static p:Resources.ExportButtonText}"
+                    <Button Content="{x:Static p:Resources.ExportButtonText}"
                         Margin="0 0 -3 0"
                         Command="{Binding ExportGraphsCommand}"
                         IsEnabled="{Binding CanExport}"
@@ -258,78 +253,46 @@
                         Foreground="White"
                         Background="#0696D7"
                         Style="{StaticResource CtaButtonStyle}" />
-            </Grid>
-        </StackPanel>
-        <Separator Margin="-25 0" Grid.Row="3" VerticalAlignment="Top" Background="{StaticResource DarkGreyBrush}" />
+                </Grid>
+            </StackPanel>
+            <Separator Margin="-25 0" Grid.Row="3" VerticalAlignment="Top" Background="{StaticResource DarkGreyBrush}" />
 
-        <!-- Graphs to be exported -->
-        <Grid Grid.Row="3" Margin="0 15 0 0">
-            <Grid.RowDefinitions>
-                <RowDefinition Height="Auto" />
-                <RowDefinition Height="*" />
-            </Grid.RowDefinitions>
-            <Label Content="{x:Static p:Resources.MigrateGraphMsg}"
+            <!-- Graphs to be exported -->
+            <Grid Grid.Row="3" Margin="0 15 0 0">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
+                <Label Content="{x:Static p:Resources.MigrateGraphMsg}"
                    Padding="5"
                    FontSize="13"
                    FontFamily="{StaticResource ArtifaktElementBold}"
                    Foreground="{StaticResource PreferencesWindowFontColor}" />
 
-            <ScrollViewer VerticalScrollBarVisibility="Auto"
+                <ScrollViewer VerticalScrollBarVisibility="Auto"
                           Grid.Row="1"
                           VerticalAlignment="Top"
                           Margin="1 5 -4 5"
                           HorizontalScrollBarVisibility="Auto">
-                <ItemsControl x:Name="GraphsItemsControl"
+                    <ItemsControl x:Name="GraphsItemsControl"
                               Margin="5"
                               ItemsSource="{Binding Graphs, UpdateSourceTrigger=PropertyChanged}">
-                    <ItemsControl.ItemsPanel>
-                        <ItemsPanelTemplate>
-                            <StackPanel Orientation="Vertical" />
-                        </ItemsPanelTemplate>
-                    </ItemsControl.ItemsPanel>
-                    <ItemsControl.ItemTemplate>
-                        <DataTemplate>
-                            <controls:GraphViewControl />
-                        </DataTemplate>
-                    </ItemsControl.ItemTemplate>
-                </ItemsControl>
-            </ScrollViewer>
-        </Grid>
-        <!-- Graphs in target version -->
-        <Grid Grid.Row="4" Margin="0 15 0 0">
-            <Grid.RowDefinitions>
-                <RowDefinition Height="Auto" />
-                <RowDefinition Height="*" />
-            </Grid.RowDefinitions>
-            <Label Content="{x:Static p:Resources.GraphsInTargetVersionMsg}"
-                   Padding="5"
-                   FontSize="13"
-                   FontFamily="{StaticResource ArtifaktElementBold}"
-                   Foreground="{StaticResource PreferencesWindowFontColor}" />
+                        <ItemsControl.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <StackPanel Orientation="Vertical" />
+                            </ItemsPanelTemplate>
+                        </ItemsControl.ItemsPanel>
+                        <ItemsControl.ItemTemplate>
+                            <DataTemplate>
+                                <controls:GraphViewControl />
+                            </DataTemplate>
+                        </ItemsControl.ItemTemplate>
+                    </ItemsControl>
+                </ScrollViewer>
+            </Grid>
 
-            <ScrollViewer VerticalScrollBarVisibility="Auto"
-                          Grid.Row="1"
-                          VerticalAlignment="Top"
-                          Margin="1 5 -4 5"
-                          HorizontalScrollBarVisibility="Auto">
-                <ItemsControl x:Name="GraphsInVersionItemsControl"
-                              Margin="5"
-                              ItemsSource="{Binding GraphsInTargetVersion, UpdateSourceTrigger=PropertyChanged}">
-                    <ItemsControl.ItemsPanel>
-                        <ItemsPanelTemplate>
-                            <StackPanel Orientation="Vertical" />
-                        </ItemsPanelTemplate>
-                    </ItemsControl.ItemsPanel>
-                    <ItemsControl.ItemTemplate>
-                        <DataTemplate>
-                            <controls:GraphViewControl />
-                        </DataTemplate>
-                    </ItemsControl.ItemTemplate>
-                </ItemsControl>
-            </ScrollViewer>
-        </Grid>
-        <Button Content="{x:Static p:Resources.CancelButtonText}"
-                Grid.Row="5"
+            <Button Content="{x:Static p:Resources.CancelButtonText}"
+                Grid.Row="4"
                 Margin="0 8 -3 0"
                 Command="{Binding CancelCommand}"
                 IsEnabled="{Binding CanExport}"
@@ -339,5 +302,11 @@
                 BorderBrush="#BFBFBF"
                 Foreground="#3C3C3C"
                 Style="{StaticResource CtaButtonStyle}" />
-    </Grid>
+        </Grid>
+    
+     
+
+   
+
+
 </UserControl>

@@ -89,7 +89,7 @@ namespace DynamoGraphMigrationAssistant.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Note: Graphs in target version already, will simply be copied..
+        ///   Looks up a localized string similar to Graphs in the source folder will be migrated to the selected target version. Graphs already in the target version will be copied with no changes..
         /// </summary>
         public static string DynamoVersionsTooltip {
             get {
@@ -112,6 +112,15 @@ namespace DynamoGraphMigrationAssistant.Properties {
         public static string ExtensionName {
             get {
                 return ResourceManager.GetString("ExtensionName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to {0} was in target Dynamo version and copied to output folder with no changes..
+        /// </summary>
+        public static string FileCopiedLogMessage {
+            get {
+                return ResourceManager.GetString("FileCopiedLogMessage", resourceCulture);
             }
         }
         
@@ -143,7 +152,7 @@ namespace DynamoGraphMigrationAssistant.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Swap Linebreaks to Pinned Notes.
+        ///   Looks up a localized string similar to Swap Line Breaks to Pinned Notes.
         /// </summary>
         public static string FixInputLinebreaksCheckboxMsg {
             get {
@@ -152,7 +161,7 @@ namespace DynamoGraphMigrationAssistant.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to This will split the node name (by new line) to two chunks of text. The first chunk will be a pinned note, the second chunk will be the node name..
+        ///   Looks up a localized string similar to If a node name includes a line break, this option will separate text before the line break into a pinned note..
         /// </summary>
         public static string FixInputLinebreaksCheckboxTooltip {
             get {
@@ -161,7 +170,7 @@ namespace DynamoGraphMigrationAssistant.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Fix input order.
+        ///   Looks up a localized string similar to Force input order.
         /// </summary>
         public static string FixInputOrderCheckboxMsg {
             get {
@@ -170,7 +179,7 @@ namespace DynamoGraphMigrationAssistant.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Force order of nodes marked as input by appending a prefix. (Nodes are sorted by Y location values).
+        ///   Looks up a localized string similar to Appends a prefix (001|, 002|…) to the names of nodes marked as input. Ordering begins with nodes closest to the top of the workspace..
         /// </summary>
         public static string FixInputOrderCheckboxTooltip {
             get {
@@ -179,7 +188,7 @@ namespace DynamoGraphMigrationAssistant.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Fix node spacing..
+        ///   Looks up a localized string similar to Cleanup node layout.
         /// </summary>
         public static string FixNodeSpacingCheckboxMsg {
             get {
@@ -188,7 +197,7 @@ namespace DynamoGraphMigrationAssistant.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Account for the spacing of the larger nodes in Dynamo 2.13+ UI..
+        ///   Looks up a localized string similar to Adjust node spacing to avoid overlapping nodes..
         /// </summary>
         public static string FixNodeSpacingTooltip {
             get {
@@ -233,7 +242,7 @@ namespace DynamoGraphMigrationAssistant.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Keep folder structure..
+        ///   Looks up a localized string similar to Keep folder structure.
         /// </summary>
         public static string KeepFolderStructureCheckboxMsg {
             get {
@@ -242,7 +251,7 @@ namespace DynamoGraphMigrationAssistant.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Retains the original folder/subfolder structure for graphs location..
+        ///   Looks up a localized string similar to Retains the folder/subfolder structure from the source folder..
         /// </summary>
         public static string KeepFolderStructureTooltip {
             get {
@@ -278,7 +287,7 @@ namespace DynamoGraphMigrationAssistant.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The target folder contains {0} Dynamo graphs..
+        ///   Looks up a localized string similar to The source folder contains {0} Dynamo graphs..
         /// </summary>
         public static string NotificationMsg {
             get {
@@ -287,7 +296,7 @@ namespace DynamoGraphMigrationAssistant.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Optional Migration Tasks.
+        ///   Looks up a localized string similar to Optional Graph Updates.
         /// </summary>
         public static string OptionalFixesMsg {
             get {
@@ -305,7 +314,7 @@ namespace DynamoGraphMigrationAssistant.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to This tool provides the infrastructure to migrate Dynamo graphs from pre-2.13 versions to 2.13+ versions..
+        ///   Looks up a localized string similar to Use this tool to migrate Dynamo graphs from pre-2.13 versions to 2.13+ versions..
         /// </summary>
         public static string OverviewMsg {
             get {
@@ -333,7 +342,7 @@ namespace DynamoGraphMigrationAssistant.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Migrate if nodes.
+        ///   Looks up a localized string similar to Update If nodes.
         /// </summary>
         public static string ReplaceIfNodesCheckboxMsg {
             get {
@@ -342,7 +351,7 @@ namespace DynamoGraphMigrationAssistant.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Migrates if nodes from previous version to the refactored version..
+        ///   Looks up a localized string similar to Replaces outdated If nodes with updated If nodes..
         /// </summary>
         public static string ReplaceIfNodesCheckboxTooltip {
             get {
@@ -351,7 +360,7 @@ namespace DynamoGraphMigrationAssistant.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Resume previous session..
+        ///   Looks up a localized string similar to Resume previous session.
         /// </summary>
         public static string ResumeCheckboxMsg {
             get {
@@ -360,7 +369,7 @@ namespace DynamoGraphMigrationAssistant.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Attempts to resume the progress from a previous run. The progress is stored within the &apos;log.txt&apos; file in the root Target folder..
+        ///   Looks up a localized string similar to Attempts to resume progress from a previous run. Progress is stored within the log.txt file in the root target folder..
         /// </summary>
         public static string ResumeTooltip {
             get {
@@ -405,7 +414,7 @@ namespace DynamoGraphMigrationAssistant.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Suggested Migration Tasks.
+        ///   Looks up a localized string similar to Recommended Graph Updates.
         /// </summary>
         public static string SuggestedFixesMsg {
             get {
@@ -414,7 +423,7 @@ namespace DynamoGraphMigrationAssistant.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to These tasks are suggested based on the Dynamo version selected..
+        ///   Looks up a localized string similar to These updates are recommended based on the target Dynamo version to improve functionality and usability of the migrated graph(s)..
         /// </summary>
         public static string SuggestedFixesTooltip {
             get {
@@ -432,7 +441,7 @@ namespace DynamoGraphMigrationAssistant.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Select folder..
+        ///   Looks up a localized string similar to Select folder.
         /// </summary>
         public static string UpdatePathTooltip {
             get {
