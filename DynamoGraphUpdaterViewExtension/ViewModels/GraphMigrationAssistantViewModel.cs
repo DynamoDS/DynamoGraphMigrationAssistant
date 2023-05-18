@@ -323,7 +323,7 @@ namespace DynamoGraphMigrationAssistant.ViewModels
             LoadTargetDynamoVersions();
         }
 
-
+        private void
 
         // Handles source path changed
         private void SourcePathPropertyChanged(object sender, PropertyChangedEventArgs propertyChangedEventArgs)
@@ -355,7 +355,6 @@ namespace DynamoGraphMigrationAssistant.ViewModels
         private void SourceFolderChanged(PathViewModel pathVM)
         {
             Graphs = new ObservableCollection<GraphViewModel>();
-            //GraphsInTargetVersion = new ObservableCollection<GraphViewModel>();
 
             graphDictionary = new Dictionary<int, GraphViewModel>();
 
