@@ -1,6 +1,6 @@
-# DynamoGraphUpdater
+# Dynamo Graph Migration Assistant
 
-DynamoGraphUpdater (DGU) is a View Extension for Dynamo which allows you to prepare your previous generation ui graphs for Dynamo versions 2.13.x and higher.
+DynamoGraphMigrationAssistant (DGMA) is a View Extension for Dynamo which allows you to prepare your previous generation ui graphs for Dynamo versions 2.13.x and higher.
 
 <img src="https://raw.githubusercontent.com/DynamoDS/DynamoGraphUpdater/master/doc/sample.gif"/>
 
