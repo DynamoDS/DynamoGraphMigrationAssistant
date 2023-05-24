@@ -130,6 +130,9 @@
       <HintPath>packages\DynamoVisualProgramming.Core.2.17.2.4595\lib\net48\VMDataBridge.dll</HintPath>
     </Reference>
     <Reference Include="WindowsBase" />
+    <Reference Include="WorkspaceDependencyViewExtension">
+      <HintPath>C:\Users\johnpierson\Desktop\Autodesk\DynamoCoreRuntime2.17.0\WorkspaceDependencyViewExtension.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Update="Controls\FolderPathViewControl.xaml.cs">

@@ -1,12 +1,15 @@
 ﻿using Dynamo.Wpf.Extensions;
 using System;
-using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
+using CoreNodeModels.Input;
+using Dynamo.Extensions;
+using Dynamo.WorkspaceDependency;
 using DynamoGraphMigrationAssistant.ViewModels;
 using DynamoGraphMigrationAssistant.Views;
-using Newtonsoft.Json;
+using Directory = System.IO.Directory;
 
 namespace DynamoGraphMigrationAssistant
 {
@@ -20,6 +23,9 @@ namespace DynamoGraphMigrationAssistant
         /// The GUID of the extension
         /// </summary>
         public override string UniqueId => "57B476EF-844D-4719-A6A6-B649CB998868";
+
+        //public override string Name => "Python Migration";
+        //public override string UniqueId => "1f8146d0-58b1-4b3c-82b7-34a3fab5ac5d";
 
         public MenuItem DynamoMigrationAssistantMenuItem;
         private ViewLoadedParams _viewLoadedParamsReference;
@@ -35,6 +41,14 @@ namespace DynamoGraphMigrationAssistant
         {
             InitializeViewExtension();
         }
+        public override void Startup(ViewStartupParams viewStartupParams)
+        {
+        }
+
+        private void ExtensionLoaderOnExtensionLoading(IExtension obj)
+        {
+            var thing = obj.Name;
+        }
 
         public override void Dispose()
         {
@@ -47,6 +61,7 @@ namespace DynamoGraphMigrationAssistant
         public override void Loaded(ViewLoadedParams viewLoadedParams)
         {
             if (viewLoadedParams == null) throw new ArgumentNullException(nameof(viewLoadedParams));
+
 
             _viewLoadedParamsReference = viewLoadedParams;
 
@@ -61,7 +76,7 @@ namespace DynamoGraphMigrationAssistant
             //InitializeViewExtension();
         }
 
-   
+
 
         public void Shutdown()
         {

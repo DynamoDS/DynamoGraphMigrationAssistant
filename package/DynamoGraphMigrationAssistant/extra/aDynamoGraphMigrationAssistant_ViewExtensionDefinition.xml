@@ -1,0 +1,4 @@
+﻿<ViewExtensionDefinition>
+		<AssemblyPath>..\bin\DynamoGraphMigrationAssistantViewExtension.dll</AssemblyPath>
+	<TypeName>DynamoGraphMigrationAssistant.DynamoGraphMigrationAssistantViewExtension</TypeName>
+</ViewExtensionDefinition>

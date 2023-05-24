@@ -441,6 +441,24 @@ namespace DynamoGraphMigrationAssistant.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Add source folder to trusted locations.
+        /// </summary>
+        public static string TrustFileLocationCheckboxMsg {
+            get {
+                return ResourceManager.GetString("TrustFileLocationCheckboxMsg", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to This location is currently not in the trusted locations. In order to run the tool, you need to add it in preferences or check this box..
+        /// </summary>
+        public static string TrustFileLocationCheckboxTooltip {
+            get {
+                return ResourceManager.GetString("TrustFileLocationCheckboxTooltip", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Select folder.
         /// </summary>
         public static string UpdatePathTooltip {

@@ -19,6 +19,7 @@
                     Source="{x:Static ui:SharedDictionaryManager.DynamoColorsAndBrushesDictionaryUri}" />
                 <ui:SharedResourceDictionary Source="{x:Static ui:SharedDictionaryManager.DynamoModernDictionaryUri}" />
             </ResourceDictionary.MergedDictionaries>
+            <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
         </ResourceDictionary>
     </UserControl.Resources>
    
@@ -34,20 +35,37 @@
             <!-- Folder selection controls -->
             <StackPanel Orientation="Vertical">
                 <TextBox Text="{x:Static p:Resources.OverviewMsg}"
-                Padding="5,5,5,5"
-                FontSize="14"
-                FontFamily="{StaticResource ArtifaktElementBold}"
-                Foreground="{StaticResource PreferencesWindowFontColor}" 
-                TextWrapping="Wrap" 
-                IsHitTestVisible="False" 
-                Background="{x:Null}"
-                BorderBrush="{x:Null}"/>
+                         Padding="5,5,5,5"
+                         FontSize="14"
+                         FontFamily="{StaticResource ArtifaktElementBold}"
+                         Foreground="{StaticResource PreferencesWindowFontColor}" 
+                         TextWrapping="Wrap" 
+                         IsHitTestVisible="False" 
+                         Background="{x:Null}"
+                         BorderBrush="{x:Null}"
+                         IsTabStop="False"/>
                 <Label Content="{x:Static p:Resources.SourceFolderMsg}"
                    Padding="5,5,5,5"
                    FontSize="13"
                    FontFamily="{StaticResource ArtifaktElementBold}"
                    Foreground="{StaticResource PreferencesWindowFontColor}" />
-                <controls:FolderPathViewControl DataContext="{Binding SourcePathViewModel}" Margin="0 0 0 10" />
+                <CheckBox VerticalContentAlignment="Center"
+                          IsChecked="{Binding IsTrustedFolder}" 
+                          Margin="5 0" Visibility="{Binding TrustCheckboxVisible, Converter={StaticResource BooleanToVisibilityConverter}}">
+                    <Label VerticalContentAlignment="Center">
+                    <TextBlock Text="{x:Static p:Resources.TrustFileLocationCheckboxMsg}"
+                                   VerticalAlignment="Center"
+                                   Margin="3 3 0 0"  
+                                   TextWrapping="WrapWithOverflow"
+                                   Foreground="{StaticResource PreferencesWindowFontColor}"
+                                   FontSize="10" />
+                        <Label.ToolTip>
+                        <ToolTip Content="{x:Static p:Resources.TrustFileLocationCheckboxTooltip}" 
+                                     Style="{StaticResource GenericToolTipLight}"/>
+                        </Label.ToolTip>
+                    </Label>
+                </CheckBox>
+            <controls:FolderPathViewControl DataContext="{Binding SourcePathViewModel}" Margin="0 0 0 10" />
                 <Label Content="{x:Static p:Resources.TargetFolderMsg}"
                    Padding="5,5,5,5"
                    FontSize="13"
