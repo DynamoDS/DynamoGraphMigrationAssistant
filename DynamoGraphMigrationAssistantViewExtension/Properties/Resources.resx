@@ -244,6 +244,12 @@
   <data name="TargetFolderMsg" xml:space="preserve">
     <value>Target folder</value>
   </data>
+  <data name="TrustFileLocationCheckboxMsg" xml:space="preserve">
+    <value>Add source folder to trusted locations</value>
+  </data>
+  <data name="TrustFileLocationCheckboxTooltip" xml:space="preserve">
+    <value>This location is currently not in the trusted locations. In order to run the tool, you need to add it in preferences or check this box.</value>
+  </data>
   <data name="UpdatePathTooltip" xml:space="preserve">
     <value>Select folder</value>
   </data>

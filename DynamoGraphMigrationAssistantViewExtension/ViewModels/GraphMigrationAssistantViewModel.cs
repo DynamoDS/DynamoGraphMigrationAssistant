@@ -9,6 +9,7 @@ using System.Security.Permissions;
 using System.Text;
 using System.Windows;
 using System.Windows.Threading;
+using Dynamo.Configuration;
 using Dynamo.Core;
 using Dynamo.Graph.Nodes;
 using Dynamo.Graph.Workspaces;
@@ -21,8 +22,8 @@ using Dynamo.Wpf.Extensions;
 using Dynamo.Wpf.Utilities;
 using DynamoGraphMigrationAssistant.Controls;
 using DynamoGraphMigrationAssistant.Models;
-using ProtoCore.AST;
-using PythonNodeModels;
+using Directory = System.IO.Directory;
+using String = System.String;
 
 namespace DynamoGraphMigrationAssistant.ViewModels
 {
@@ -85,9 +86,9 @@ namespace DynamoGraphMigrationAssistant.ViewModels
                 if (SourcePathViewModel?.FolderPath == null && !SingleGraph)
                     return false;
                 if (SourcePathViewModel?.FolderPath == null && SingleGraph)
-                    return Utilities.IsValidPath(TargetPathViewModel.FolderPath) && TargetDynamoVersion != null;
+                    return Utilities.IsValidPath(TargetPathViewModel.FolderPath) && TargetDynamoVersion != null && IsTrustedFolder;
                 if (SourcePathViewModel?.FolderPath != null)
-                    return Utilities.IsValidPath(TargetPathViewModel.FolderPath) && Utilities.IsValidPath(SourcePathViewModel.FolderPath) && TargetDynamoVersion != null;
+                    return Utilities.IsValidPath(TargetPathViewModel.FolderPath) && Utilities.IsValidPath(SourcePathViewModel.FolderPath) && TargetDynamoVersion != null && IsTrustedFolder;
                 return false;
             }
             private set
@@ -225,7 +226,7 @@ namespace DynamoGraphMigrationAssistant.ViewModels
 
         private bool isKeepFolderStructure = true;
         /// <summary>
-        ///     Contains user preference to retain folder structure for images
+        /// Contains user preference to retain folder structure for images
         /// </summary>
         public bool IsKeepFolderStructure
         {
@@ -242,6 +243,37 @@ namespace DynamoGraphMigrationAssistant.ViewModels
                 }
             }
         }
+
+        /// <summary>
+        /// marks the source folder as trusted
+        /// </summary>
+        private bool _isTrustedFolder = false;
+        public bool IsTrustedFolder
+        {
+            get => _isTrustedFolder;
+            set
+            {
+                if (_isTrustedFolder == value) return;
+                _isTrustedFolder = value;
+                RaisePropertyChanged(nameof(IsTrustedFolder));
+                RaisePropertyChanged(nameof(CanExport));
+            }
+        }
+        /// <summary>
+        /// show the trust checkbox to the user if needed
+        /// </summary>
+        private bool _trustCheckboxVisible = false;
+        public bool TrustCheckboxVisible
+        {
+            get => _trustCheckboxVisible;
+            set
+            {
+                if (_trustCheckboxVisible == value) return;
+                _trustCheckboxVisible = value;
+                RaisePropertyChanged(nameof(TrustCheckboxVisible));
+            }
+        }
+
 
         private string notificationMessage;
         private Dispatcher dispatcher;
@@ -293,6 +325,8 @@ namespace DynamoGraphMigrationAssistant.ViewModels
             viewLoadedParamsInstance.CurrentWorkspaceChanged += OnCurrentWorkspaceChanged;
             viewLoadedParamsInstance.CurrentWorkspaceCleared += OnCurrentWorkspaceCleared;
 
+            TrustCheckboxVisible = false;
+
             if (viewLoadedParamsInstance.CurrentWorkspaceModel is HomeWorkspaceModel)
             {
                 CurrentWorkspace = viewLoadedParamsInstance.CurrentWorkspaceModel as HomeWorkspaceModel;
@@ -322,7 +356,8 @@ namespace DynamoGraphMigrationAssistant.ViewModels
 
             LoadTargetDynamoVersions();
         }
-        
+
+
 
         // Handles source path changed
         private void SourcePathPropertyChanged(object sender, PropertyChangedEventArgs propertyChangedEventArgs)
@@ -333,6 +368,17 @@ namespace DynamoGraphMigrationAssistant.ViewModels
             {
                 if (pathVM.Type == PathType.Source)
                 {
+                    //handle if the source path is not trusted
+                    if (!DynamoViewModel.PreferenceSettings.IsTrustedLocation(pathVM.FolderPath))
+                    {
+                        TrustCheckboxVisible = true;
+                        IsTrustedFolder = false;
+                    }
+                    else
+                    {
+                        IsTrustedFolder = true;
+                    }
+
                     SourceFolderChanged(pathVM);
                 }
                 else
@@ -486,6 +532,14 @@ namespace DynamoGraphMigrationAssistant.ViewModels
             }
 
             ResetUi();
+
+            //add the folder to trust if the user checked it
+            if (IsTrustedFolder)
+            {
+                MethodInfo addToTrustedLocations = typeof(PreferenceSettings).GetMethod("AddTrustedLocation",
+                    BindingFlags.NonPublic | BindingFlags.Instance);
+                addToTrustedLocations.Invoke(DynamoViewModel.PreferenceSettings, new object[] { SourcePathViewModel.FolderPath });
+            }
 
             foreach (var file in Graphs.Where(g => !g.InTargetVersion).ToList().Select(x => x.UniqueName).ToList())
             {

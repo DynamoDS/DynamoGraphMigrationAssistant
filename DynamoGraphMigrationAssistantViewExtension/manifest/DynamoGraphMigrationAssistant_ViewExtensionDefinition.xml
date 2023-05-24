@@ -1,5 +1,4 @@
 ﻿<ViewExtensionDefinition>
-	<!--<AssemblyPath>[YOUR_EXTENSION_SOLUTION_LOCATION]\ExportSampleImagesViewExtension\bin\Debug\ExportSampleImagesViewExtension.dll</AssemblyPath>-->
-	<AssemblyPath>D:\repos_john\DynamoGraphUpdater\DynamoGraphUpdaterViewExtension\bin\Debug\DynamoGraphMigrationAssistantViewExtension.dll</AssemblyPath>
+	<AssemblyPath>D:\repos_john\DynamoGraphUpdater\DynamoGraphMigrationAssistantViewExtension\bin\Debug\DynamoGraphMigrationAssistantViewExtension.dll</AssemblyPath>
 	<TypeName>DynamoGraphMigrationAssistant.DynamoGraphMigrationAssistantViewExtension</TypeName>
 </ViewExtensionDefinition>
