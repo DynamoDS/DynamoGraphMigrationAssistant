@@ -49,7 +49,11 @@ namespace DynamoGraphMigrationAssistant.Views
 
             foreach (var graphViewModel in graphList)
             {
-                if (graphViewModel.Version.Equals(vm.TargetDynamoVersion.Version))
+                Version original = Version.Parse(graphViewModel.Version);
+
+                Version target = Version.Parse(vm.TargetDynamoVersion.Version);
+
+                if (original >= target)
                 {
                     graphViewModel.InTargetVersion = true;
                 }

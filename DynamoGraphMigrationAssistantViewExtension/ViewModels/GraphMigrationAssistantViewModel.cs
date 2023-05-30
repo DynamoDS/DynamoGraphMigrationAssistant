@@ -931,7 +931,9 @@ namespace DynamoGraphMigrationAssistant.ViewModels
         {
             try
             {
-                DynamoViewModel.OpenCommand.Execute(path);
+                //var command = new DynamoModel.OpenFileCommand(path, true);
+                Tuple<string, bool> openParameters = new Tuple<string, bool>(path, true);
+                DynamoViewModel.OpenCommand.Execute(openParameters);
             }
             catch (Exception)
             {
