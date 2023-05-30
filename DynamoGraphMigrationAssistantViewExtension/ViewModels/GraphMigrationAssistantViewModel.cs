@@ -889,9 +889,9 @@ namespace DynamoGraphMigrationAssistant.ViewModels
 
 #if DEBUG
             //TODO: see if we can change the graph back to what the run mode was before.
-            DynamoViewModel.CurrentSpaceViewModel.RunSettingsViewModel.Model.RunEnabled = false;
-            DynamoViewModel.CurrentSpaceViewModel.RunSettingsViewModel.Model.RunType = RunType.Automatic;
-            DynamoViewModel.CurrentSpaceViewModel.RunSettingsViewModel.CancelRunCommand.Execute(null);
+            //DynamoViewModel.CurrentSpaceViewModel.RunSettingsViewModel.Model.RunEnabled = false;
+            //DynamoViewModel.CurrentSpaceViewModel.RunSettingsViewModel.Model.RunType = RunType.Automatic;
+            //DynamoViewModel.CurrentSpaceViewModel.RunSettingsViewModel.CancelRunCommand.Execute(null);
 #endif
 
             DynamoViewModel.SaveAsCommand.Execute(graphName);
