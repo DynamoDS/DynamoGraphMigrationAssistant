@@ -6,6 +6,7 @@ using System.Windows;
 using System.Windows.Controls;
 using CoreNodeModels.Input;
 using Dynamo.Extensions;
+using Dynamo.Graph.Workspaces;
 using Dynamo.WorkspaceDependency;
 using DynamoGraphMigrationAssistant.ViewModels;
 using DynamoGraphMigrationAssistant.Views;
@@ -76,8 +77,6 @@ namespace DynamoGraphMigrationAssistant
             //InitializeViewExtension();
         }
 
-
-
         public void Shutdown()
         {
             Dispose();
@@ -103,6 +102,14 @@ namespace DynamoGraphMigrationAssistant
         private void AddToSidebar()
         {
             InitializeViewExtension();
+
+            //if the user is launching the extension from the starting view, simply launch a new blank workspace.
+            //(The starting view has a graph view model at all times, so it is difficult to know)
+            //TODO: see if there is a better event for this.
+            if (!ViewModel.DynamoViewModel.CurrentSpaceViewModel.Nodes.Any())
+            {
+                ViewModel.DynamoViewModel.NewHomeWorkspaceCommand.Execute(null);
+            }
 
             _viewLoadedParamsReference?.AddToExtensionsSideBar(this, View);
         }
