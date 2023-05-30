@@ -8,9 +8,12 @@ using System.Reflection;
 using System.Security.Permissions;
 using System.Text;
 using System.Windows;
+using System.Windows.Shapes;
 using System.Windows.Threading;
 using Dynamo.Configuration;
+using Dynamo.Controls;
 using Dynamo.Core;
+using Dynamo.Graph;
 using Dynamo.Graph.Nodes;
 using Dynamo.Graph.Workspaces;
 using Dynamo.Models;
@@ -22,7 +25,9 @@ using Dynamo.Wpf.Extensions;
 using Dynamo.Wpf.Utilities;
 using DynamoGraphMigrationAssistant.Controls;
 using DynamoGraphMigrationAssistant.Models;
+using ProtoCore.AST;
 using Directory = System.IO.Directory;
+using Path = System.IO.Path;
 using String = System.String;
 
 namespace DynamoGraphMigrationAssistant.ViewModels
@@ -469,12 +474,12 @@ namespace DynamoGraphMigrationAssistant.ViewModels
             CurrentWorkspace = workspace as HomeWorkspaceModel;
             if (CurrentWorkspace == null) return;
 
-            CurrentWorkspace.EvaluationCompleted += CurrentWorkspaceOnEvaluationCompleted;
+            //CurrentWorkspace.EvaluationCompleted += CurrentWorkspaceOnEvaluationCompleted;
         }
 
         private void CurrentWorkspaceOnEvaluationCompleted(object sender, EvaluationCompletedEventArgs e)
         {
-            CurrentWorkspace.EvaluationCompleted -= CurrentWorkspaceOnEvaluationCompleted;
+            //CurrentWorkspace.EvaluationCompleted -= CurrentWorkspaceOnEvaluationCompleted;
         }
 
         #endregion
@@ -768,9 +773,6 @@ namespace DynamoGraphMigrationAssistant.ViewModels
 
             foreach (var nodeViewModel in DynamoViewModel.CurrentSpaceViewModel.Nodes)
             {
-                //zoom to node
-                DynamoViewModel.CurrentSpaceViewModel.FocusNodeCommand.Execute(nodeViewModel.NodeModel.GUID);
-
                 var originalX = nodeViewModel.X;
                 var originalY = nodeViewModel.Y;
 
@@ -784,9 +786,6 @@ namespace DynamoGraphMigrationAssistant.ViewModels
 
             foreach (var noteViewModel in DynamoViewModel.CurrentSpaceViewModel.Notes)
             {
-                //zoom to node
-                DynamoViewModel.CurrentSpaceViewModel.FocusNodeCommand.Execute(noteViewModel.Model.GUID);
-
                 var originalX = noteViewModel.Left;
                 var originalY = noteViewModel.Top;
 
@@ -797,6 +796,17 @@ namespace DynamoGraphMigrationAssistant.ViewModels
 
                 nodesMovedCount++;
             }
+
+            try
+            {
+                DynamoViewModel.FitViewCommand.Execute(null);
+            }
+            catch (Exception e)
+            {
+                string message = e.Message;
+            }
+           
+
 
             //log the changes
             EnterLog(string.Format(Properties.Resources.NodesMovedLogMessage, nodesMovedCount));
@@ -877,6 +887,13 @@ namespace DynamoGraphMigrationAssistant.ViewModels
 
             var graphName = GetDynPath(CurrentWorkspace.FileName);
 
+#if DEBUG
+            //TODO: see if we can change the graph back to what the run mode was before.
+            DynamoViewModel.CurrentSpaceViewModel.RunSettingsViewModel.Model.RunEnabled = false;
+            DynamoViewModel.CurrentSpaceViewModel.RunSettingsViewModel.Model.RunType = RunType.Automatic;
+            DynamoViewModel.CurrentSpaceViewModel.RunSettingsViewModel.CancelRunCommand.Execute(null);
+#endif
+
             DynamoViewModel.SaveAsCommand.Execute(graphName);
         }
 
@@ -940,6 +957,7 @@ namespace DynamoGraphMigrationAssistant.ViewModels
             }
         }
 
+      
         private void Cancel(object obj)
         {
             graphQueue.Clear();
@@ -1018,6 +1036,39 @@ namespace DynamoGraphMigrationAssistant.ViewModels
             return itemsToRemove.Count;
         }
 
+        private Tuple<Point2D, double, double> CalculateZoomLevel(WorkspaceViewModel workspaceViewModel)
+        {
+            // no selection, fitview all nodes and notes
+            var nodes = workspaceViewModel.Nodes.Select(x => x.NodeModel);
+            var notes = workspaceViewModel.Notes.Select(x => x.Model);
+            var models = nodes.Concat<ModelBase>(notes);
+
+            if (!models.Any()) return new Tuple<Point2D, double, double>(new Point2D(),0,0);
+
+            // initialize to the first model (either note or node) on the list 
+
+            var firstModel = models.First();
+            var minX = firstModel.X;
+            var maxX = firstModel.X;
+            var minY = firstModel.Y;
+            var maxY = firstModel.Y;
+
+            foreach (var model in models)
+            {
+                //calculates the min and max positions of both x and y coords of all nodes and notes
+                minX = Math.Min(model.X, minX);
+                maxX = Math.Max(model.X + model.Width, maxX);
+                minY = Math.Min(model.Y, minY);
+                maxY = Math.Max(model.Y + model.Height, maxY);
+            }
+
+            var offset = new Point2D(minX, minY);
+            double focusWidth = maxX - minX;
+            double focusHeight = maxY - minY;
+
+           
+            return new Tuple<Point2D, double, double>(offset, focusWidth, focusHeight);
+        }
         #endregion
     }
 }

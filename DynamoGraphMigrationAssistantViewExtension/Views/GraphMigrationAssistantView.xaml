@@ -84,7 +84,7 @@
                            Foreground="{StaticResource PreferencesWindowFontColor}"
                            ToolTip="{x:Static p:Resources.DynamoVersionsTooltip}"
                            FontSize="12" />
-                    <ComboBox Width="200" Margin="12 3 0 0" ItemsSource="{Binding TargetDynamoVersions}" DisplayMemberPath="DisplayName" Style="{StaticResource RefreshComboBox}" FontSize="12" SelectionChanged="Selector_OnSelectionChanged"/>
+                    <ComboBox Width="200" Margin="12 3 0 0" ItemsSource="{Binding TargetDynamoVersions}" DisplayMemberPath="DisplayName" Style="{StaticResource RefreshComboBox}" FontSize="12" SelectionChanged="Selector_OnSelectionChanged" Name="TargetVersionComboBox" SelectedIndex="5"/>
                 </StackPanel>
 
             </Label>

@@ -25,7 +25,17 @@ namespace DynamoGraphMigrationAssistant.Views
         {
             InitializeComponent();
             DataContext = vm;
+
+            this.Loaded += OnLoaded;
         }
+
+        private void OnLoaded(object sender, RoutedEventArgs e)
+        {
+            GraphMigrationAssistantViewModel vm = this.TargetVersionComboBox.DataContext as GraphMigrationAssistantViewModel;
+
+            vm.TargetDynamoVersion = this.TargetVersionComboBox.SelectedItem as TargetDynamoVersion;
+        }
+
 
         private void Selector_OnSelectionChanged(object sender, SelectionChangedEventArgs e)
         {

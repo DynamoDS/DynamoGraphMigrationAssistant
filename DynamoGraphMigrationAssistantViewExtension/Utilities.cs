@@ -1,4 +1,5 @@
 ﻿using System;
+using System.CodeDom;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -37,12 +38,20 @@ namespace DynamoGraphMigrationAssistant
         /// <returns></returns>
         public static string GetDynamoVersionForGraph(string graphPath)
         {
-            var jsonText = File.ReadAllText(graphPath);
-            JObject o = JObject.Parse(jsonText);
-            string versionString = (string)o.SelectToken("View.Dynamo.Version");
-            Version version = Version.Parse(versionString);
+            try
+            {
+                var jsonText = File.ReadAllText(graphPath);
+                JObject o = JObject.Parse(jsonText);
+                string versionString = (string)o.SelectToken("View.Dynamo.Version");
+                Version version = Version.Parse(versionString);
 
-            return $"{version.Major}.{version.Minor}";
+                return $"{version.Major}.{version.Minor}";
+            }
+            catch (Exception e)
+            {
+                return "2.0";
+            }
+           
         }
     }
 }

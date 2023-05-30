@@ -25,16 +25,10 @@ namespace DynamoGraphMigrationAssistant
         /// </summary>
         public override string UniqueId => "57B476EF-844D-4719-A6A6-B649CB998868";
 
-        //public override string Name => "Python Migration";
-        //public override string UniqueId => "1f8146d0-58b1-4b3c-82b7-34a3fab5ac5d";
-
         public MenuItem DynamoMigrationAssistantMenuItem;
         private ViewLoadedParams _viewLoadedParamsReference;
 
-        //internal DynamoMigrationAssistantView View;
-        //internal DynamoGraphMigrationAssistantModel Model;
-        //internal DynamoGraphMigrationAssistantViewModel ViewModel;
-
+      
         internal GraphMigrationAssistantView View;
         internal GraphMigrationAssistantViewModel ViewModel;
 
