@@ -1,16 +1,10 @@
 ﻿using Dynamo.Wpf.Extensions;
 using System;
-using System.IO;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
-using CoreNodeModels.Input;
-using Dynamo.Extensions;
-using Dynamo.Graph.Workspaces;
-using Dynamo.WorkspaceDependency;
 using DynamoGraphMigrationAssistant.ViewModels;
 using DynamoGraphMigrationAssistant.Views;
-using Directory = System.IO.Directory;
 
 namespace DynamoGraphMigrationAssistant
 {
@@ -35,14 +29,6 @@ namespace DynamoGraphMigrationAssistant
         public DynamoGraphMigrationAssistantViewExtension()
         {
             InitializeViewExtension();
-        }
-        public override void Startup(ViewStartupParams viewStartupParams)
-        {
-        }
-
-        private void ExtensionLoaderOnExtensionLoading(IExtension obj)
-        {
-            var thing = obj.Name;
         }
 
         public override void Dispose()

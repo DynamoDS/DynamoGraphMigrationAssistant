@@ -18,10 +18,10 @@
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="CommonServiceLocator" Version="1.0" />
-    <PackageReference Include="DynamoVisualProgramming.Core" Version="2.17.2.4595" />
-    <PackageReference Include="DynamoVisualProgramming.DynamoServices" Version="2.17.2.4595" />
-    <PackageReference Include="DynamoVisualProgramming.WpfUILibrary" Version="2.17.2.4595" />
-    <PackageReference Include="DynamoVisualProgramming.ZeroTouchLibrary" Version="2.17.2.4595" />
+    <PackageReference Include="DynamoVisualProgramming.Core" Version="2.18.1.5096" />
+    <PackageReference Include="DynamoVisualProgramming.DynamoServices" Version="2.18.1.5096" />
+    <PackageReference Include="DynamoVisualProgramming.WpfUILibrary" Version="2.18.1.5096" />
+    <PackageReference Include="DynamoVisualProgramming.ZeroTouchLibrary" Version="2.18.1.5096" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
     <PackageReference Include="NUnit" Version="2.6.3" />
     <PackageReference Include="Prism" Version="4.1.0.0" />

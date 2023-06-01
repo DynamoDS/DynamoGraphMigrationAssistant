@@ -34,12 +34,12 @@ namespace DynamoGraphMigrationAssistant
         /// <summary>
         /// Extension GUID
         /// </summary>
-        public string UniqueId { get { return EXTENSION_GUID; } }
+        public string UniqueId => EXTENSION_GUID;
 
         /// <summary>
         /// Extension Name
         /// </summary>
-        public string Name { get { return EXTENSION_NAME; } }
+        public string Name => EXTENSION_NAME;
     }
 
     public class WorkspaceReferencesOverride : IViewExtension
@@ -63,18 +63,18 @@ namespace DynamoGraphMigrationAssistant
 
         public void Shutdown()
         {
-            throw new NotImplementedException();
+           //
         }
         private const string EXTENSION_NAME = "Workspace References Override";
         private const string EXTENSION_GUID = "A6706BF5-11C2-458F-B7C8-B745A77EF7FD";
         /// <summary>
         /// Extension GUID
         /// </summary>
-        public string UniqueId { get { return EXTENSION_GUID; } }
+        public string UniqueId => EXTENSION_GUID;
 
         /// <summary>
         /// Extension Name
         /// </summary>
-        public string Name { get { return EXTENSION_NAME; } }
+        public string Name => EXTENSION_NAME;
     }
 }

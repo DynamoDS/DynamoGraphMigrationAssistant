@@ -8,10 +8,8 @@ using System.Reflection;
 using System.Security.Permissions;
 using System.Text;
 using System.Windows;
-using System.Windows.Shapes;
 using System.Windows.Threading;
 using Dynamo.Configuration;
-using Dynamo.Controls;
 using Dynamo.Core;
 using Dynamo.Graph;
 using Dynamo.Graph.Nodes;
@@ -25,7 +23,6 @@ using Dynamo.Wpf.Extensions;
 using Dynamo.Wpf.Utilities;
 using DynamoGraphMigrationAssistant.Controls;
 using DynamoGraphMigrationAssistant.Models;
-using ProtoCore.AST;
 using Directory = System.IO.Directory;
 using Path = System.IO.Path;
 using String = System.String;
@@ -64,23 +61,23 @@ namespace DynamoGraphMigrationAssistant.ViewModels
         public TargetDynamoVersion TargetDynamoVersion { get; set; }
 
         /// <summary>
-        ///     Collection of graphs loaded for exporting
+        /// Collection of graphs loaded for exporting
         /// </summary>
         public ObservableCollection<GraphViewModel> Graphs { get; set; }
 
         /// <summary>
-        ///     The source path containing dynamo graphs to be exported
+        /// The source path containing dynamo graphs to be exported
         /// </summary>
         public PathViewModel SourcePathViewModel { get; set; }
 
         /// <summary>
-        ///     The target path where the images will be stored
+        /// The target path where the images will be stored
         /// </summary>
         public PathViewModel TargetPathViewModel { get; set; }
 
         private bool canExport;
         /// <summary>
-        ///     Checks if both folder paths have been set
+        /// Checks if both folder paths have been set
         /// </summary>
         public bool CanExport
         {
@@ -106,144 +103,111 @@ namespace DynamoGraphMigrationAssistant.ViewModels
             }
         }
 
-        private bool replaceIfNodes = true;
+        private bool _replaceIfNodes = true;
         /// <summary>
         /// Replace if nodes to refactored if
         /// </summary>
         public bool ReplaceIfNodes
         {
-            get
-            {
-                return replaceIfNodes;
-            }
+            get => _replaceIfNodes;
             set
             {
-                if (replaceIfNodes != value)
-                {
-                    replaceIfNodes = value;
-                    RaisePropertyChanged(nameof(ReplaceIfNodes));
-                }
+                if (_replaceIfNodes == value) return;
+                _replaceIfNodes = value;
+                RaisePropertyChanged(nameof(ReplaceIfNodes));
             }
         }
 
-        private bool fixNodeSpacing = true;
+        private bool _fixNodeSpacing = true;
         /// <summary>
         /// With Dynamo 2.13 came larger nodes. this spaces them out to fix that.
         /// </summary>
         public bool FixNodeSpacing
         {
-            get
-            {
-                return fixNodeSpacing;
-            }
+            get => _fixNodeSpacing;
             set
             {
-                if (fixNodeSpacing != value)
-                {
-                    fixNodeSpacing = value;
-                    RaisePropertyChanged(nameof(FixNodeSpacing));
-                }
+                if (_fixNodeSpacing == value) return;
+                _fixNodeSpacing = value;
+                RaisePropertyChanged(nameof(FixNodeSpacing));
             }
         }
-        private bool fixInputOrder = false;
+        private bool _fixInputOrder = false;
         /// <summary>
         /// Dynamo Player can now support input order alphabetically. Historically users created their inputs in order to fix this.
         /// </summary>
         public bool FixInputOrder
         {
-            get
-            {
-                return fixInputOrder;
-            }
+            get => _fixInputOrder;
             set
             {
-                if (fixInputOrder != value)
-                {
-                    fixInputOrder = value;
-                    RaisePropertyChanged(nameof(FixInputOrder));
-                }
+                if (_fixInputOrder == value) return;
+                _fixInputOrder = value;
+                RaisePropertyChanged(nameof(FixInputOrder));
             }
         }
 
-        private bool fixInputLinebreaks = false;
+        private bool _fixInputLinebreaks = false;
         /// <summary>
         /// Previously users entered line breaks into inputs for directions. This offers a fix with new pinned notes.
         /// </summary>
         public bool FixInputLinebreaks
         {
-            get
-            {
-                return fixInputLinebreaks;
-            }
+            get => _fixInputLinebreaks;
             set
             {
-                if (fixInputLinebreaks != value)
-                {
-                    fixInputLinebreaks = value;
-                    RaisePropertyChanged(nameof(FixInputLinebreaks));
-                }
+                if (_fixInputLinebreaks == value) return;
+                _fixInputLinebreaks = value;
+                RaisePropertyChanged(nameof(FixInputLinebreaks));
             }
         }
 
-        private bool resume = false;
+        private bool _resume = false;
         /// <summary>
         ///     When this flag is set to true, will attempt to resume progress
         ///     based on the log file in the current destination folder
         /// </summary>
         public bool Resume
         {
-            get
-            {
-                return resume;
-            }
+            get => _resume;
             set
             {
-                if (resume != value)
-                {
-                    resume = value;
-                    RaisePropertyChanged(nameof(Resume));
-                    TargetFolderChanged();
-                }
+                if (_resume == value) return;
+                _resume = value;
+                RaisePropertyChanged(nameof(Resume));
+                TargetFolderChanged();
             }
         }
 
-        private bool singleGraph = false;
+        private bool _singleGraph = false;
         /// <summary>
         ///     This override allows users to export a single graph
         ///     The current graph will be exported to the Target folder
         /// </summary>
         public bool SingleGraph
         {
-            get
-            {
-                return singleGraph;
-            }
+            get => _singleGraph;
             set
             {
-                if (singleGraph != value)
-                {
-                    singleGraph = value;
-                    RaisePropertyChanged(nameof(SingleGraph));
-                    RaisePropertyChanged(nameof(CanExport));
-                }
+                if (_singleGraph == value) return;
+                _singleGraph = value;
+                RaisePropertyChanged(nameof(SingleGraph));
+                RaisePropertyChanged(nameof(CanExport));
             }
         }
 
-        private bool isKeepFolderStructure = true;
+        private bool _isKeepFolderStructure = true;
         /// <summary>
         /// Contains user preference to retain folder structure for images
         /// </summary>
         public bool IsKeepFolderStructure
         {
-            get
-            {
-                return isKeepFolderStructure;
-            }
+            get => _isKeepFolderStructure;
             set
             {
-                if (isKeepFolderStructure != value)
+                if (_isKeepFolderStructure != value)
                 {
-                    isKeepFolderStructure = value;
+                    _isKeepFolderStructure = value;
                     RaisePropertyChanged(nameof(IsKeepFolderStructure));
                 }
             }
@@ -280,27 +244,24 @@ namespace DynamoGraphMigrationAssistant.ViewModels
         }
 
 
-        private string notificationMessage;
-        private Dispatcher dispatcher;
-        private Queue<string> graphQueue;
-        private bool export = true;
+        private string _notificationMessage;
+        private Dispatcher _dispatcher;
+        private Queue<string> _graphQueue;
+        //private bool _export = true;
 
         /// <summary>
         ///     Contains notification text displayed on the UI
         /// </summary>
         public string NotificationMessage
         {
-            get
-            {
-                return notificationMessage;
-            }
+            get => _notificationMessage;
 
             set
             {
-                if (notificationMessage != value)
+                if (_notificationMessage != value)
                 {
-                    notificationMessage = value;
-                    RaisePropertyChanged(nameof(notificationMessage));
+                    _notificationMessage = value;
+                    RaisePropertyChanged(nameof(_notificationMessage));
                 }
             }
         }
@@ -336,7 +297,7 @@ namespace DynamoGraphMigrationAssistant.ViewModels
             {
                 CurrentWorkspace = viewLoadedParamsInstance.CurrentWorkspaceModel as HomeWorkspaceModel;
                 DynamoViewModel = viewLoadedParamsInstance.DynamoWindow.DataContext as DynamoViewModel;
-                dispatcher = viewLoadedParamsInstance.DynamoWindow.Dispatcher;
+                _dispatcher = viewLoadedParamsInstance.DynamoWindow.Dispatcher;
                 scheduler = DynamoViewModel.Model.Scheduler;
             }
 
@@ -347,7 +308,7 @@ namespace DynamoGraphMigrationAssistant.ViewModels
             SourcePathViewModel = new PathViewModel
             { Type = PathType.Source, Owner = viewLoadedParamsInstance.DynamoWindow };
 
-            dispatcher.Hooks.DispatcherInactive += OnDispatcherFinished;
+            _dispatcher.Hooks.DispatcherInactive += OnDispatcherFinished;
 
             TargetPathViewModel.PropertyChanged += SourcePathPropertyChanged;
             SourcePathViewModel.PropertyChanged += SourcePathPropertyChanged;
@@ -355,7 +316,7 @@ namespace DynamoGraphMigrationAssistant.ViewModels
             ExportGraphsCommand = new DelegateCommand(ExportGraphs);
             CancelCommand = new DelegateCommand(Cancel);
 
-            graphQueue = new Queue<string>();
+            _graphQueue = new Queue<string>();
 
             sb = new StringBuilder();
 
@@ -451,7 +412,7 @@ namespace DynamoGraphMigrationAssistant.ViewModels
             var log = GetLogFileInformation();
 
             // Do not enqueue the file if it is already in the log file
-            if (resume && log != null)
+            if (_resume && log != null)
             {
                 Graphs.RemoveAll(x => log.Contains(x.UniqueName));
                 graphDictionary = Graphs.ToDictionary(x => x.UniqueName.GetHashCode(), x => x);
@@ -543,12 +504,14 @@ namespace DynamoGraphMigrationAssistant.ViewModels
             {
                 MethodInfo addToTrustedLocations = typeof(PreferenceSettings).GetMethod("AddTrustedLocation",
                     BindingFlags.NonPublic | BindingFlags.Instance);
-                addToTrustedLocations.Invoke(DynamoViewModel.PreferenceSettings, new object[] { SourcePathViewModel.FolderPath });
+                if (addToTrustedLocations != null)
+                    addToTrustedLocations.Invoke(DynamoViewModel.PreferenceSettings,
+                        new object[] { SourcePathViewModel.FolderPath });
             }
 
             foreach (var file in Graphs.Where(g => !g.InTargetVersion).ToList().Select(x => x.UniqueName).ToList())
             {
-                graphQueue.Enqueue(file);
+                _graphQueue.Enqueue(file);
             }
 
             //copy the ones already in the path
@@ -586,7 +549,7 @@ namespace DynamoGraphMigrationAssistant.ViewModels
 
         private void OnDispatcherFinished(object sender, EventArgs e)
         {
-            if (locked || graphQueue.Count > 0)
+            if (locked || _graphQueue.Count > 0)
             {
                 if (scheduler.HasPendingTasks) return;
 
@@ -594,7 +557,7 @@ namespace DynamoGraphMigrationAssistant.ViewModels
                 {
                     case (MigrationPhase.Open):
                         locked = true;
-                        OpenGraph(graphQueue.Dequeue());
+                        OpenGraph(_graphQueue.Dequeue());
                         break;
                     case (MigrationPhase.PerformMigration):
                         ExportGraph();
@@ -607,7 +570,7 @@ namespace DynamoGraphMigrationAssistant.ViewModels
                 }
             }
 
-            if (graphQueue.Count == 0 && !finished && !locked)
+            if (_graphQueue.Count == 0 && !finished && !locked)
             {
                 finished = true;
                 InformFinish((progress).ToString());
@@ -918,7 +881,7 @@ namespace DynamoGraphMigrationAssistant.ViewModels
                 TargetPathViewModel.FolderPath + graphFolder.Substring(SourcePathViewModel.FolderPath.Length) :
                 TargetPathViewModel.FolderPath;
 
-            if (isKeepFolderStructure)
+            if (_isKeepFolderStructure)
             {
                 Directory.CreateDirectory(newFolder);
             }
@@ -960,7 +923,7 @@ namespace DynamoGraphMigrationAssistant.ViewModels
       
         private void Cancel(object obj)
         {
-            graphQueue.Clear();
+            _graphQueue.Clear();
             Reset();
         }
 
@@ -981,11 +944,11 @@ namespace DynamoGraphMigrationAssistant.ViewModels
         {
             TargetPathViewModel.PropertyChanged -= SourcePathPropertyChanged;
             SourcePathViewModel.PropertyChanged -= SourcePathPropertyChanged;
-            dispatcher.Hooks.DispatcherInactive -= OnDispatcherFinished;
+            _dispatcher.Hooks.DispatcherInactive -= OnDispatcherFinished;
 
             CurrentWorkspace = null;
             DynamoViewModel = null;
-            dispatcher = null;
+            _dispatcher = null;
             scheduler = null;
         }
 

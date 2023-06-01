@@ -17,27 +17,6 @@
                 <ui:SharedResourceDictionary Source="{x:Static ui:SharedDictionaryManager.DynamoColorsAndBrushesDictionaryUri}" />
                 <ui:SharedResourceDictionary Source="{x:Static ui:SharedDictionaryManager.DynamoModernDictionaryUri}" />
             </ResourceDictionary.MergedDictionaries>
-
-            <Style x:Key="GraphUpdaterFolderStyle" TargetType="Button">
-                <Setter Property="Cursor" Value="Hand"/>
-                <Setter Property="Template">
-                    <Setter.Value>
-                        <ControlTemplate TargetType="Button">
-                            <Grid>
-                                <Image Name="folderIcon"  Width="24" Height="24" Source="pack://application:,,,/DynamoCoreWpf;component/UI/Images/edit_folder_16px_hover.png"/>
-                            </Grid>
-                            <ControlTemplate.Triggers>
-                                <Trigger Property="IsMouseOver" Value="True">
-                                    <Setter TargetName="folderIcon" Property="Source" Value="pack://application:,,,/DynamoCoreWpf;component/UI/Images/edit_folder_16px_hover.png" />
-                                </Trigger>
-                                <Trigger Property="IsEnabled" Value="False">
-                                    <Setter Property="Opacity" Value=".5" />
-                                </Trigger>
-                            </ControlTemplate.Triggers>
-                        </ControlTemplate>
-                    </Setter.Value>
-                </Setter>
-            </Style>
         </ResourceDictionary>
 
     </UserControl.Resources>
@@ -53,7 +32,8 @@
                 x:Name="UpdatePathButton"
                 Command="{Binding Path=UpdatePathCommand}"
                 ToolTipService.ShowOnDisabled="True"
-                Style="{StaticResource GraphUpdaterFolderStyle}">
+                Background="{StaticResource PreferencesWindowBackgroundColor}"
+                Style="{StaticResource EditFolderButtonStyle}">
             <Button.ToolTip>
                 <ToolTip Content="{x:Static p:Resources.UpdatePathTooltip}" />
             </Button.ToolTip>
@@ -70,10 +50,14 @@
                    Padding="8 6 4 4"
                    ToolTip="{Binding FolderPath}"
                    Cursor="Hand"
-                   MouseLeftButtonUp="PathTextBlock_OnMouseLeftButtonUp"
                    FontFamily="{StaticResource ArtifaktElementBold}"
                    FontSize="10px"
-                   Foreground="#3C3C3C" IsHitTestVisible="False" IsTabStop="False"/>
+                   Foreground="#3C3C3C"
+                   IsTabStop="False">
+            <TextBox.InputBindings>
+                <MouseBinding Command="{Binding Path=UpdatePathCommand}" MouseAction="LeftClick" />
+            </TextBox.InputBindings>
+        </TextBox>
         <TextBox x:Name="PlaceholderTextBlock"
                    Visibility="{Binding FolderPath, Converter={StaticResource NonEmptyStringToCollapsedConverter}}"
                    Text="{x:Static p:Resources.SelectFolderMsg}"
@@ -88,6 +72,6 @@
                    FontSize="10px"
                    Foreground="#3C3C3C" IsHitTestVisible="False" IsTabStop="False"/>
 
-       
+
     </Grid>
 </UserControl>
