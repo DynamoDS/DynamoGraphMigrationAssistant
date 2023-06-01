@@ -253,4 +253,7 @@
   <data name="UpdatePathTooltip" xml:space="preserve">
     <value>Select folder</value>
   </data>
+  <data name="ViewOutputButtonText" xml:space="preserve">
+    <value>View Output</value>
+  </data>
 </root>

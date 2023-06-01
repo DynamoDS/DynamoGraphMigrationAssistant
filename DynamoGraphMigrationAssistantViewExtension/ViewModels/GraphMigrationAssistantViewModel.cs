@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Reflection;
@@ -132,6 +133,7 @@ namespace DynamoGraphMigrationAssistant.ViewModels
                 RaisePropertyChanged(nameof(FixNodeSpacing));
             }
         }
+
         private bool _fixInputOrder = false;
         /// <summary>
         /// Dynamo Player can now support input order alphabetically. Historically users created their inputs in order to fix this.
@@ -181,8 +183,8 @@ namespace DynamoGraphMigrationAssistant.ViewModels
 
         private bool _singleGraph = false;
         /// <summary>
-        ///     This override allows users to export a single graph
-        ///     The current graph will be exported to the Target folder
+        /// This override allows users to export a single graph
+        /// The current graph will be exported to the Target folder
         /// </summary>
         public bool SingleGraph
         {
@@ -244,6 +246,35 @@ namespace DynamoGraphMigrationAssistant.ViewModels
         }
 
 
+        private bool _stopButtonVisible = false;
+        /// <summary>
+        /// show and hide the stop button to the user
+        /// </summary>
+        public bool StopButtonVisible
+        {
+            get => _stopButtonVisible;
+            set
+            {
+                if (_stopButtonVisible == value) return;
+                _stopButtonVisible = value;
+                RaisePropertyChanged(nameof(StopButtonVisible));
+            }
+        }
+        private bool _viewOutputButtonVisible = false;
+        /// <summary>
+        /// show and hide the view output button to the user
+        /// </summary>
+        public bool ViewOutputButtonVisible
+        {
+            get => _viewOutputButtonVisible;
+            set
+            {
+                if (_viewOutputButtonVisible == value) return;
+                _viewOutputButtonVisible = value;
+                RaisePropertyChanged(nameof(ViewOutputButtonVisible));
+            }
+        }
+
         private string _notificationMessage;
         private Dispatcher _dispatcher;
         private Queue<string> _graphQueue;
@@ -268,6 +299,7 @@ namespace DynamoGraphMigrationAssistant.ViewModels
 
         public DelegateCommand ExportGraphsCommand { get; set; }
         public DelegateCommand CancelCommand { get; set; }
+        public DelegateCommand ViewOutputCommand { get; set; }
 
         #endregion
 
@@ -315,6 +347,7 @@ namespace DynamoGraphMigrationAssistant.ViewModels
 
             ExportGraphsCommand = new DelegateCommand(ExportGraphs);
             CancelCommand = new DelegateCommand(Cancel);
+            ViewOutputCommand = new DelegateCommand(ViewOutput);
 
             _graphQueue = new Queue<string>();
 
@@ -434,14 +467,8 @@ namespace DynamoGraphMigrationAssistant.ViewModels
         {
             CurrentWorkspace = workspace as HomeWorkspaceModel;
             if (CurrentWorkspace == null) return;
-
-            //CurrentWorkspace.EvaluationCompleted += CurrentWorkspaceOnEvaluationCompleted;
         }
 
-        private void CurrentWorkspaceOnEvaluationCompleted(object sender, EvaluationCompletedEventArgs e)
-        {
-            //CurrentWorkspace.EvaluationCompleted -= CurrentWorkspaceOnEvaluationCompleted;
-        }
 
         #endregion
 
@@ -498,6 +525,10 @@ namespace DynamoGraphMigrationAssistant.ViewModels
             }
 
             ResetUi();
+
+            //show the stop button
+            StopButtonVisible = true;
+            ViewOutputButtonVisible = false;
 
             //add the folder to trust if the user checked it
             if (IsTrustedFolder)
@@ -897,6 +928,10 @@ namespace DynamoGraphMigrationAssistant.ViewModels
             EnterLog(successMessage);
 
             MessageBoxService.Show(owner, successMessage, Properties.Resources.FinishMsgTitle, MessageBoxButton.OK, MessageBoxImage.Information);
+
+            //show the view output button
+            StopButtonVisible = false;
+            ViewOutputButtonVisible = true;
         }
 
 
@@ -925,6 +960,10 @@ namespace DynamoGraphMigrationAssistant.ViewModels
         {
             _graphQueue.Clear();
             Reset();
+        }
+        private void ViewOutput(object obj)
+        {
+            Process.Start(TargetPathViewModel.FolderPath);
         }
 
         private void Reset()

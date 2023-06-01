@@ -76,7 +76,7 @@
 
             <!-- Target Dynamo Version -->
             <Label Grid.Row="1" VerticalContentAlignment="Center">
-                <StackPanel Orientation="Horizontal">
+                <StackPanel Orientation="Vertical">
                     <TextBlock Text="{x:Static p:Resources.DynamoVersionsMsg}"
                            VerticalAlignment="Center"
                            Margin="3 3 0 0"  
@@ -84,7 +84,7 @@
                            Foreground="{StaticResource PreferencesWindowFontColor}"
                            ToolTip="{x:Static p:Resources.DynamoVersionsTooltip}"
                            FontSize="12" />
-                    <ComboBox Width="200" Margin="12 3 0 0" ItemsSource="{Binding TargetDynamoVersions}" DisplayMemberPath="DisplayName" Style="{StaticResource RefreshComboBox}" FontSize="12" SelectionChanged="Selector_OnSelectionChanged" Name="TargetVersionComboBox" SelectedIndex="5"/>
+                    <ComboBox Width="80" Margin="8 3 0 0" ItemsSource="{Binding TargetDynamoVersions}" DisplayMemberPath="DisplayName" Style="{StaticResource RefreshComboBox}" FontSize="12" SelectionChanged="Selector_OnSelectionChanged" Name="TargetVersionComboBox" SelectedIndex="5"/>
                 </StackPanel>
 
             </Label>
@@ -288,10 +288,11 @@
                    Foreground="{StaticResource PreferencesWindowFontColor}" />
 
                 <ScrollViewer VerticalScrollBarVisibility="Auto"
+                              CanContentScroll="True"
                           Grid.Row="1"
                           VerticalAlignment="Top"
                           Margin="1 5 -4 5"
-                          HorizontalScrollBarVisibility="Auto">
+                          HorizontalScrollBarVisibility="Disabled">
                     <ItemsControl x:Name="GraphsItemsControl"
                               Margin="5"
                               ItemsSource="{Binding Graphs, UpdateSourceTrigger=PropertyChanged}">
@@ -309,18 +310,32 @@
                 </ScrollViewer>
             </Grid>
 
-            <Button Content="{x:Static p:Resources.CancelButtonText}"
+        <Button Content="{x:Static p:Resources.CancelButtonText}"
                 Grid.Row="4"
                 Margin="0 8 -3 0"
                 Command="{Binding CancelCommand}"
                 IsEnabled="{Binding CanExport}"
+                Visibility="{Binding StopButtonVisible, Converter={StaticResource BooleanToVisibilityConverter}}"
                 DockPanel.Dock="Right"
                 HorizontalAlignment="Right"
                 Background="White"
                 BorderBrush="#BFBFBF"
                 Foreground="#3C3C3C"
                 Style="{StaticResource CtaButtonStyle}" />
-        </Grid>
+        <Button Content="{x:Static p:Resources.ViewOutputButtonText}"
+                    Grid.Row="4"
+                    Margin="0 8 -3 0"
+                    Command="{Binding ViewOutputCommand}"
+                    IsEnabled="{Binding CanExport}"
+                    Visibility="{Binding ViewOutputButtonVisible, Converter={StaticResource BooleanToVisibilityConverter}}"
+                    DockPanel.Dock="Right"
+                    HorizontalAlignment="Right"
+                    Background="White"
+                    BorderBrush="#BFBFBF"
+                    Foreground="#3C3C3C"
+                    Style="{StaticResource CtaButtonStyle}" />
+
+    </Grid>
     
      
 

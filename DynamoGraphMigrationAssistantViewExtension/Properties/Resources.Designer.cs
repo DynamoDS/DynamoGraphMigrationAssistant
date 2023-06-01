@@ -466,5 +466,14 @@ namespace DynamoGraphMigrationAssistant.Properties {
                 return ResourceManager.GetString("UpdatePathTooltip", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to View Output.
+        /// </summary>
+        public static string ViewOutputButtonText {
+            get {
+                return ResourceManager.GetString("ViewOutputButtonText", resourceCulture);
+            }
+        }
     }
 }
