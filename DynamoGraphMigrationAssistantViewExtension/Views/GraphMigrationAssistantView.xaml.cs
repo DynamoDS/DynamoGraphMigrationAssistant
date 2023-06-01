@@ -34,6 +34,10 @@ namespace DynamoGraphMigrationAssistant.Views
             GraphMigrationAssistantViewModel vm = this.TargetVersionComboBox.DataContext as GraphMigrationAssistantViewModel;
 
             vm.TargetDynamoVersion = this.TargetVersionComboBox.SelectedItem as TargetDynamoVersion;
+
+            if (vm.Graphs is null) return;
+
+            vm.CheckVersions();
         }
 
 
@@ -53,27 +57,7 @@ namespace DynamoGraphMigrationAssistant.Views
 
             if (vm.Graphs is null) return;
             
-            var graphList = vm.Graphs.ToList();
-
-            //vm.Graphs.Clear();
-
-            foreach (var graphViewModel in graphList)
-            {
-                Version original = Version.Parse(graphViewModel.Version);
-
-                Version target = Version.Parse(vm.TargetDynamoVersion.Version);
-
-                if (original >= target)
-                {
-                    graphViewModel.InTargetVersion = true;
-                }
-                else
-                {
-                    graphViewModel.InTargetVersion = false;
-
-                }
-            }
-            vm.TargetVersionChanged();
+            vm.CheckVersions();
         }
     }
 }

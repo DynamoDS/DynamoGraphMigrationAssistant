@@ -438,6 +438,8 @@ namespace DynamoGraphMigrationAssistant.ViewModels
 
             NotificationMessage = String.Format(Properties.Resources.NotificationMsg, Graphs.Count.ToString());
             RaisePropertyChanged(nameof(Graphs));
+
+            CheckVersions();
         }
 
         private void TargetFolderChanged()
@@ -455,6 +457,30 @@ namespace DynamoGraphMigrationAssistant.ViewModels
 
             NotificationMessage = String.Format(Properties.Resources.NotificationMsg, Graphs.Count.ToString());
             RaisePropertyChanged(nameof(Graphs));
+        }
+
+        internal void CheckVersions()
+        {
+            var graphList = Graphs.ToList();
+
+
+            foreach (var graphViewModel in graphList)
+            {
+                Version original = Version.Parse(graphViewModel.Version);
+
+                Version target = Version.Parse(TargetDynamoVersion.Version);
+
+                if (original >= target)
+                {
+                    graphViewModel.InTargetVersion = true;
+                }
+                else
+                {
+                    graphViewModel.InTargetVersion = false;
+
+                }
+            }
+            TargetVersionChanged();
         }
 
         private void OnCurrentWorkspaceCleared(IWorkspaceModel workspace)
