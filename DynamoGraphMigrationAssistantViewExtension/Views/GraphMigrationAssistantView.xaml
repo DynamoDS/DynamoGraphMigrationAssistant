@@ -47,8 +47,8 @@
                              IsTabStop="False"/>
                 <Button Name="PauseSplashScreenIcon"
                             Command="{Binding ViewHelpDocumentationCommand}"
-                           Width="16"
-                           Height="16"
+                           Width="18"
+                           Height="18"
                            Margin="10,0,0,0"
                            HorizontalAlignment="Left"
                            VerticalAlignment="Center" Background="{x:Null}" BorderBrush="{x:Null}">
