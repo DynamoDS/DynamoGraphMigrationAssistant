@@ -269,6 +269,15 @@ namespace DynamoGraphMigrationAssistant.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to View help documentation.
+        /// </summary>
+        public static string MigrationAssistantHelpTooltip {
+            get {
+                return ResourceManager.GetString("MigrationAssistantHelpTooltip", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to General Settings.
         /// </summary>
         public static string MiscSettingsMsg {

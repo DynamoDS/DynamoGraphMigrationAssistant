@@ -1,0 +1,206 @@
+<!-- These headers are required to force the browser embedded in the DocumentationBrowser extension to render in modern IE11 mode. -->
+
+<head>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width initial-scale=1">
+    <meta charset="UTF-8" />
+</head>
+
+<style>
+    body {
+        color: white;
+        font-size: 14px;
+        font-family: "Artifakt Element";
+        src: url("fonts/ArtifaktElement-Regular.woff") format("woff");
+        padding: 1%;
+    }
+
+    a {
+        color: lightgray;
+        cursor: pointer;
+        background-color: transparent;
+    }
+
+    table {
+        border-collapse: collapse;
+        border: 1px solid white;
+    }
+
+    th,
+    td {
+        border: 1px solid white;
+        padding-right: 10px;
+        padding-left: 10px;
+        padding-bottom: 10px;
+        padding-top: 10px;
+    }
+
+    samp {
+        margin-top: 10px;
+        display: block;
+        color: lightgrey;
+    }
+
+    code .k {
+        color: #dcdcaa;
+        font-weight: bold;
+    }
+
+    code .s {
+        color: #ce9178;
+    }
+
+    code .v {
+        color: #b5cea8;
+    }
+
+    code .o {
+        color: #c586c0;
+        font-weight: bold;
+    }
+
+    code .i {
+        color: #569cd6;
+        font-weight: bold;
+    }
+
+    code .b {
+        color: #9cdcfe;
+        font-weight: bold;
+    }
+
+    code .e {
+        color: #43c9b0;
+    }
+
+    code > .nl .nl {
+        padding-left: 10px;
+    }
+
+    code .nl {
+        display: block;
+    }
+
+    thead {
+        text-align: center;
+    }
+
+    .hidden-lg {
+        display: none;
+    }
+
+    .button {
+        background-color: transparent;
+        border-color: #3c3c3c;
+        color: #bbbbbb;
+    }
+
+        .button:hover {
+            border-color: #656565;
+            background-color: #373737;
+            opacity: 1.0;
+        }
+
+    .questionmark:after {
+        content: '?';
+        display: inline-block;
+        font-family: sans-serif;
+        font-weight: bold;
+        text-align: center;
+        font-size: 0.8em;
+        line-height: 0.8em;
+        border-radius: 50%;
+        margin-left: 6px;
+        padding: 0.13em 0.2em 0.09em 0.2em;
+        color: inherit;
+        border: 1px solid;
+        text-decoration: none;
+    }
+
+    @media screen and (max-width: 600px) {
+        table {
+            width: 100%;
+        }
+
+        table,
+        th,
+        td {
+            border: none;
+        }
+
+        tr {
+            border: 1px solid white;
+            display: block;
+        }
+
+        td,
+        th {
+            display: block;
+        }
+
+        .hidden-lg {
+            display: block;
+            font-weight: bold;
+            text-align: center;
+            border-bottom: 1px solid white;
+        }
+
+        .hidden-sm {
+            display: none;
+        }
+
+        .spaced-sm {
+            margin-top: 20px;
+        }
+
+        tbody tr:first-of-type {
+            border-bottom: none;
+        }
+    }
+</style>
+
+<!-- Use inline styles to keep Dynamo Dictionary styling in the dictionary -->
+<!-- and custom styling in Dynamo sidepanel. -->
+
+<body style="background-color: #353535; font-family: 'Artifakt Element', 'Open Sans';">
+    <h1>Dynamo Graph Migration Assistant</h1>
+    <p>
+        The Dynamo Graph Migration Assistant automates several tasks that are needed to update a graph to a newer Dynamo version. You can migrate a single graph or several graphs at once to one of the target Dynamo versions offered. Several settings are available to customize the graph update.
+    </p>
+    <p>
+        Note that you cannot use this tool to migrate graphs to an older version. Any graphs already in the target version will be copied to the target folder with no changes.
+    </p>
+    <h2>Migrating graphs</h2>
+    <ol type="1">
+        <li>To prepare for migrating your graphs, place all the graphs you want to migrate into a folder. This folder can have subfolders.</li>
+        <li>In the Dynamo Graph Migration Assistant, select a source folder. This is the folder from step 1. The number of Dynamo graphs to be migrated appears next to the Export button. The names of the graphs are shown under the Graphs to Migrate header.</li>
+        <li>Select a target folder. When you begin the migration process, migrated versions of your graphs will be created in the target folder. The original graphs will remain in the source folder.</li>
+        <li>Select a target Dynamo version. This needs to be newer than the version of the graphs in the source folder.</li>
+        <li>Select options under General Settings. More information about each setting is available in the Settings section below.</li>
+        <li>Select options under Recommended Graph Updates.</li>
+        <li>Select options under Optional Graph Updates. </li>
+        <li>Click Export to begin the migration process. You can keep track of progress in the Graphs to Migrate section. Checkmarks appear next to the name of each migrated graph.</li>
+        <li>You will receive a confirmation message once the migration is complete. Migrated graphs will be available in the target folder.</li>
+    </ol>
+    <h2>Settings</h2>
+    <p>You can customize the migration process using the settings provided.</p>
+    <h3>General Settings</h3>
+    <p><b>Keep folder structure:</b> Choose if you want to duplicate the source folder’s structure in the target folder. If you do not check the Keep Folder Structure box, migrated graphs will be placed in the root target folder without subfolders.</p>
+    <p><b>Resume previous session:</b> If you previously interrupted a migration process, you can resume it by checking the box. Progress is based on a log.txt file created in the target folder, so be sure to choose the same target folder that you used for the migration process you want to resume.</p>
+    <h3>Recommended Graph Updates</h3>
+    <p>
+        These settings improve the migrated graphs’ usability and functionality and are recommended based on your selected target version.
+        <br />
+        <br />
+        <b>Cleanup node layout:</b> This setting moves nodes in the workspace to prevent them from overlapping.<br />
+        <b>Update If nodes:</b> This setting replaces outdated If nodes with updated versions.<br />
+    </p>
+    <h3>Optional Graph Updates</h3>
+    <p>
+        These settings may be useful based on your graph practices.
+        <br />
+        <br />
+        <b>Force input order:</b> Creates an input order (for example, to use in Dynamo Player) by appending a prefix to the name of each node marked as “Is Input.” The prefix is 001|, 002|, etc. Numbering will begin with the node closest to the top of the workspace.<br />
+        <b>Swap line breaks to pinned notes:</b> If a node name includes a line break, this option will take the text before the line break and turn it into a pinned note. The text after the line break will remain as the node’s name.<br />
+    </p>
+</body>

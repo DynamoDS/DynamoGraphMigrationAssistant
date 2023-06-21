@@ -187,6 +187,9 @@
   <data name="MigrateGraphMsg" xml:space="preserve">
     <value>Graphs to Migrate</value>
   </data>
+  <data name="MigrationAssistantHelpTooltip" xml:space="preserve">
+    <value>View help documentation</value>
+  </data>
   <data name="MiscSettingsMsg" xml:space="preserve">
     <value>General Settings</value>
   </data>

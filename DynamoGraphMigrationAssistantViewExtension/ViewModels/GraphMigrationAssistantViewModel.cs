@@ -300,6 +300,7 @@ namespace DynamoGraphMigrationAssistant.ViewModels
         public DelegateCommand ExportGraphsCommand { get; set; }
         public DelegateCommand CancelCommand { get; set; }
         public DelegateCommand ViewOutputCommand { get; set; }
+        public DelegateCommand ViewHelpDocumentationCommand { get; set; }
 
         #endregion
 
@@ -348,7 +349,7 @@ namespace DynamoGraphMigrationAssistant.ViewModels
             ExportGraphsCommand = new DelegateCommand(ExportGraphs);
             CancelCommand = new DelegateCommand(Cancel);
             ViewOutputCommand = new DelegateCommand(ViewOutput);
-
+            ViewHelpDocumentationCommand = new DelegateCommand(ViewHelpDocumentation);
             _graphQueue = new Queue<string>();
 
             sb = new StringBuilder();
@@ -990,6 +991,12 @@ namespace DynamoGraphMigrationAssistant.ViewModels
         private void ViewOutput(object obj)
         {
             Process.Start(TargetPathViewModel.FolderPath);
+        }
+
+        private void ViewHelpDocumentation(object obj)
+        {
+            var uri = new Uri("DynamoGraphMigrationAssistantViewExtension;MigrationAssistantHelpDoc.html", UriKind.Relative);
+            viewLoadedParamsInstance.ViewModelCommandExecutive.OpenDocumentationLinkCommand(uri);
         }
 
         private void Reset()

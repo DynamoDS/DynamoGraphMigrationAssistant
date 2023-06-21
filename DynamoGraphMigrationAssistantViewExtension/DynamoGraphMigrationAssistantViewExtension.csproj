@@ -6,8 +6,8 @@
     <AssemblyTitle>DynamoMigrationAssistantViewExtension</AssemblyTitle>
     <Product>DynamoMigrationAssistantViewExtension</Product>
     <Copyright>Copyright ©  2023</Copyright>
-    <AssemblyVersion>0.0.7</AssemblyVersion>
-    <FileVersion>0.0.7</FileVersion>
+    <AssemblyVersion>0.0.8</AssemblyVersion>
+    <FileVersion>0.0.8</FileVersion>
     <OutputPath>bin\$(Configuration)\</OutputPath>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
@@ -16,6 +16,9 @@
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
   </PropertyGroup>
+  <ItemGroup>
+    <None Remove="Docs\MigrationAssistantHelpDoc.html" />
+  </ItemGroup>
   <ItemGroup>
     <PackageReference Include="CommonServiceLocator" Version="1.0" />
     <PackageReference Include="DynamoVisualProgramming.Core" Version="2.18.1.5096" />
@@ -94,9 +97,6 @@
     <Reference Include="ProtoGeometry, Version=2.17.1.3967, Culture=neutral, processorArchitecture=AMD64">
       <HintPath>packages\DynamoVisualProgramming.ZeroTouchLibrary.2.17.2.4595\lib\net48\ProtoGeometry.dll</HintPath>
     </Reference>
-    <Reference Include="PythonNodeModels">
-      <HintPath>C:\Users\johnpierson\Desktop\Autodesk\DynamoCoreRuntime2.17.0\nodes\PythonNodeModels.dll</HintPath>
-    </Reference>
     <Reference Include="System.Buffers, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>packages\System.Buffers.4.5.1\lib\net461\System.Buffers.dll</HintPath>
     </Reference>
@@ -143,6 +143,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="manifest\DynamoGraphMigrationAssistant_ViewExtensionDefinition.xml" />
+    <EmbeddedResource Include="Docs\MigrationAssistantHelpDoc.html" />
     <None Include="Resources\Progress circle.png" />
     <None Include="Resources\checkmark.png" />
   </ItemGroup>
