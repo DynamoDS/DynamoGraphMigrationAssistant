@@ -10,6 +10,7 @@ using System.Security.Permissions;
 using System.Text;
 using System.Windows;
 using System.Windows.Threading;
+using Autodesk.DesignScript.Geometry;
 using Dynamo.Configuration;
 using Dynamo.Core;
 using Dynamo.Graph;
@@ -368,18 +369,35 @@ namespace DynamoGraphMigrationAssistant.ViewModels
             {
                 if (pathVM.Type == PathType.Source)
                 {
-                    //handle if the source path is not trusted
-                    if (!DynamoViewModel.PreferenceSettings.IsTrustedLocation(pathVM.FolderPath))
+                    Version currentDynamoVersion = new Version(DynamoViewModel.Model.Version);
+                    Version dynamoVersionWithFileTrust = new Version(2, 16, 0);
+
+                    if (currentDynamoVersion > dynamoVersionWithFileTrust)
                     {
-                        TrustCheckboxVisible = true;
-                        IsTrustedFolder = false;
+                        //use reflection to maintain compatibility between Dynamo 2.13 and up
+                        MethodInfo addToTrustedLocations = typeof(PreferenceSettings).GetMethod("IsTrustedLocation",
+                            BindingFlags.Public | BindingFlags.Instance);
+                        var isTrusted = (bool)addToTrustedLocations.Invoke(DynamoViewModel.PreferenceSettings,
+                                new object[] { pathVM.FolderPath });
+
+                        
+                        if (!isTrusted)
+                        {
+                            TrustCheckboxVisible = true;
+                            IsTrustedFolder = false;
+                        }
+                        else
+                        {
+                            IsTrustedFolder = true;
+                        }
+
+                        SourceFolderChanged(pathVM);
                     }
                     else
                     {
+                        TrustCheckboxVisible = false;
                         IsTrustedFolder = true;
                     }
-
-                    SourceFolderChanged(pathVM);
                 }
                 else
                 {
@@ -421,7 +439,7 @@ namespace DynamoGraphMigrationAssistant.ViewModels
                 {
                     graphVM.InTargetVersion = false;
                 }
-                
+
                 //check if the graph is in the target version
                 if (graphVM.InTargetVersion)
                 {
@@ -434,7 +452,7 @@ namespace DynamoGraphMigrationAssistant.ViewModels
                     Graphs.Add(graphVM);
                     graphDictionary[uniqueName.GetHashCode()] = graphVM;
                 }
-              
+
             }
 
             NotificationMessage = String.Format(Properties.Resources.NotificationMsg, Graphs.Count.ToString());
@@ -577,8 +595,8 @@ namespace DynamoGraphMigrationAssistant.ViewModels
             {
                 var graphName = GetDynPath(fileInTarget.UniqueName);
 
-                File.Copy(fileInTarget.UniqueName,graphName,true);
-                
+                File.Copy(fileInTarget.UniqueName, graphName, true);
+
                 fileInTarget.Exported = true;
 
                 //log the changes
@@ -719,7 +737,7 @@ namespace DynamoGraphMigrationAssistant.ViewModels
                 var outports = nodeViewModel.NodeModel.OutPorts.ToList();
 
                 //zoom to node
-                DynamoViewModel.CurrentSpaceViewModel.FocusNodeCommand.Execute(nodeViewModel.NodeModel.GUID);
+                //DynamoViewModel.CurrentSpaceViewModel.FocusNodeCommand.Execute(nodeViewModel.NodeModel.GUID);
 
                 DynamoModel.CreateNodeCommand createRefactoredIf =
                     new DynamoModel.CreateNodeCommand(Guid.NewGuid().ToString(), nodeName, nodeViewModel.X, nodeViewModel.Y, false, false);
@@ -826,7 +844,7 @@ namespace DynamoGraphMigrationAssistant.ViewModels
             {
                 string message = e.Message;
             }
-           
+
 
 
             //log the changes
@@ -856,13 +874,13 @@ namespace DynamoGraphMigrationAssistant.ViewModels
             {
                 if (nodeViewModel.IsSetAsInput && nodeViewModel.NodeModel.Name.Contains(Environment.NewLine))
                 {
-                   var bustedUpName =  nodeViewModel.NodeModel.Name.Split(
-                        new string[] { Environment.NewLine },
-                        StringSplitOptions.None);
-                    if(bustedUpName.Length < 2) { continue;}
+                    var bustedUpName = nodeViewModel.NodeModel.Name.Split(
+                         new string[] { Environment.NewLine },
+                         StringSplitOptions.None);
+                    if (bustedUpName.Length < 2) { continue; }
 
-                   string textForNote = bustedUpName[0];
-                   string newNodeName = bustedUpName[1];
+                    string textForNote = bustedUpName[0];
+                    string newNodeName = bustedUpName[1];
 
                     //create our note
                     var noteGuid = Guid.NewGuid();
@@ -954,7 +972,7 @@ namespace DynamoGraphMigrationAssistant.ViewModels
 
             EnterLog(successMessage);
 
-            MessageBoxService.Show(owner, successMessage, Properties.Resources.FinishMsgTitle, MessageBoxButton.OK, MessageBoxImage.Information);
+            //MessageBoxService.Show(owner, successMessage, Properties.Resources.FinishMsgTitle, MessageBoxButton.OK, MessageBoxImage.Information);
 
             //show the view output button
             StopButtonVisible = false;
@@ -982,7 +1000,7 @@ namespace DynamoGraphMigrationAssistant.ViewModels
             }
         }
 
-      
+
         private void Cancel(object obj)
         {
             _graphQueue.Clear();
@@ -1078,7 +1096,7 @@ namespace DynamoGraphMigrationAssistant.ViewModels
             var notes = workspaceViewModel.Notes.Select(x => x.Model);
             var models = nodes.Concat<ModelBase>(notes);
 
-            if (!models.Any()) return new Tuple<Point2D, double, double>(new Point2D(),0,0);
+            if (!models.Any()) return new Tuple<Point2D, double, double>(new Point2D(), 0, 0);
 
             // initialize to the first model (either note or node) on the list 
 
@@ -1101,7 +1119,7 @@ namespace DynamoGraphMigrationAssistant.ViewModels
             double focusWidth = maxX - minX;
             double focusHeight = maxY - minY;
 
-           
+
             return new Tuple<Point2D, double, double>(offset, focusWidth, focusHeight);
         }
         #endregion

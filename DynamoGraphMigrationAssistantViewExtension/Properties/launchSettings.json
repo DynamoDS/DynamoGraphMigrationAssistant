@@ -1,0 +1,15 @@
+{
+  "profiles": {
+    "DynamoGraphMigrationAssistantViewExtension": {
+      "commandName": "Project"
+    },
+    "Debug2.13": {
+      "commandName": "Executable",
+      "executablePath": "C:\\Users\\johnpierson\\Desktop\\Autodesk\\DynamoCoreRuntime2.13.1\\DynamoSandbox.exe"
+    },
+    "Debug2.17": {
+      "commandName": "Executable",
+      "executablePath": "C:\\Users\\johnpierson\\Desktop\\Autodesk\\DynamoCoreRuntime2.17.0\\DynamoSandbox.exe"
+    }
+  }
+}
