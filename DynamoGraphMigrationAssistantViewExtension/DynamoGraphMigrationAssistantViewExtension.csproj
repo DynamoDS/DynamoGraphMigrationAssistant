@@ -18,6 +18,11 @@
   </PropertyGroup>
   <ItemGroup>
     <None Remove="Docs\MigrationAssistantHelpDoc.html" />
+    <None Remove="Resources\edit_folder_16px_default.png" />
+    <None Remove="Resources\edit_folder_16px_hover.png" />
+    <None Remove="Resources\question-default-16px.png" />
+    <None Remove="Resources\question-hover-16px.png" />
+    <None Remove="Resources\Styles.xaml" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="CommonServiceLocator" Version="1.0" />
@@ -99,6 +104,10 @@
   <ItemGroup>
     <Content Include="manifest\DynamoGraphMigrationAssistant_ViewExtensionDefinition.xml" />
     <EmbeddedResource Include="Docs\MigrationAssistantHelpDoc.html" />
+    <Resource Include="Resources\edit_folder_16px_default.png" />
+    <Resource Include="Resources\edit_folder_16px_hover.png" />
+    <Resource Include="Resources\question-default-16px.png" />
+    <Resource Include="Resources\question-hover-16px.png" />
     <None Include="Resources\Progress circle.png" />
     <None Include="Resources\checkmark.png" />
   </ItemGroup>
@@ -117,6 +126,10 @@
     <Page Include="Controls\GraphViewControl.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Resources\Styles.xaml">
+      <Generator></Generator>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Page>
     <Page Include="Views\GraphMigrationAssistantView.xaml">
       <SubType>Designer</SubType>

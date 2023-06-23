@@ -12,6 +12,7 @@
     <UserControl.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="pack://application:,,,/DynamoGraphMigrationAssistantViewExtension;component/Resources/Styles.xaml"/>
                 <ui:SharedResourceDictionary Source="{x:Static ui:SharedDictionaryManager.DynamoModernDictionaryUri}" />
                 <ui:SharedResourceDictionary
                     Source="{x:Static ui:SharedDictionaryManager.DynamoConvertersDictionaryUri}" />
@@ -45,14 +46,14 @@
                              Background="{x:Null}"
                              BorderBrush="{x:Null}"
                              IsTabStop="False"/>
-                <Button Name="PauseSplashScreenIcon"
+                <Button
                         Command="{Binding ViewHelpDocumentationCommand}"
                            Width="18"
                            Height="18"
                            Margin="10,0,0,0"
                            HorizontalAlignment="Left"
                            VerticalAlignment="Center" Background="{x:Null}" BorderBrush="{x:Null}">
-                    <Image Style="{StaticResource QuestionIcon}">
+                    <Image Style="{StaticResource ClickableQuestionIcon}">
                         <Image.ToolTip>
                             <ToolTip Content="{x:Static p:Resources.MigrationAssistantHelpTooltip}" Style="{StaticResource GenericToolTipLight}"/>
                         </Image.ToolTip>

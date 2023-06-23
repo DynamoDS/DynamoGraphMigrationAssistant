@@ -1,0 +1,40 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+
+
+
+    <!-- Common Question Clickable Icon -->
+    <Style x:Key="ClickableQuestionIcon" TargetType="{x:Type Image}">
+        <Style.Triggers>
+            <Trigger Property="IsMouseOver" Value="False">
+                <Setter Property="Source" Value="pack://application:,,,/DynamoGraphMigrationAssistantViewExtension;component/Resources/question-default-16px.png" />
+            </Trigger>
+            <Trigger Property="IsMouseOver" Value="True">
+                <Setter Property="Source" Value="pack://application:,,,/DynamoGraphMigrationAssistantViewExtension;component/Resources/question-hover-16px.png" />
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+
+    <Style x:Key="EditFolderButton" TargetType="Button">
+        <Setter Property="Cursor" Value="Hand"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="Button">
+                    <Grid>
+                        <Image Name="folderIcon"  Width="16" Height="16" Source="pack://application:,,,/DynamoGraphMigrationAssistantViewExtension;component/Resources/edit_folder_16px_default.png"/>
+                    </Grid>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter TargetName="folderIcon" Property="Source" Value="pack://application:,,,/DynamoGraphMigrationAssistantViewExtension;component/Resources/edit_folder_16px_hover.png" />
+                        </Trigger>
+                        <Trigger Property="IsEnabled" Value="False">
+                            <Setter Property="Opacity" Value=".5" />
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+</ResourceDictionary>

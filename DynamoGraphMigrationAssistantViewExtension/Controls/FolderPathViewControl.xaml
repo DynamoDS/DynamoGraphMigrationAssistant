@@ -12,6 +12,7 @@
     <UserControl.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="pack://application:,,,/DynamoGraphMigrationAssistantViewExtension;component/Resources/Styles.xaml"/>
                 <ui:SharedResourceDictionary Source="{x:Static ui:SharedDictionaryManager.DynamoModernDictionaryUri}" />
                 <ui:SharedResourceDictionary Source="{x:Static ui:SharedDictionaryManager.DynamoConvertersDictionaryUri}" />
                 <ui:SharedResourceDictionary Source="{x:Static ui:SharedDictionaryManager.DynamoColorsAndBrushesDictionaryUri}" />
@@ -33,7 +34,7 @@
                 Command="{Binding Path=UpdatePathCommand}"
                 ToolTipService.ShowOnDisabled="True"
                 Background="{StaticResource PreferencesWindowBackgroundColor}"
-                Style="{StaticResource EditFolderButtonStyle}">
+                Style="{StaticResource EditFolderButton}">
             <Button.ToolTip>
                 <ToolTip Content="{x:Static p:Resources.UpdatePathTooltip}" />
             </Button.ToolTip>
