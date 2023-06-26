@@ -19,7 +19,7 @@ namespace DynamoGraphMigrationAssistant
             return Directory.Exists(path);
         }
         /// <summary>
-        ///     Returns a list of files of given path and extension
+        /// Returns a list of files of given path and extension
         /// </summary>
         /// <param name="path"></param>
         /// <param name="extension"></param>

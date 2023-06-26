@@ -10,7 +10,6 @@ using System.Security.Permissions;
 using System.Text;
 using System.Windows;
 using System.Windows.Threading;
-using Autodesk.DesignScript.Geometry;
 using Dynamo.Configuration;
 using Dynamo.Core;
 using Dynamo.Graph;
@@ -22,7 +21,6 @@ using Dynamo.UI.Commands;
 using Dynamo.Utilities;
 using Dynamo.ViewModels;
 using Dynamo.Wpf.Extensions;
-using Dynamo.Wpf.Utilities;
 using DynamoGraphMigrationAssistant.Controls;
 using DynamoGraphMigrationAssistant.Models;
 using Directory = System.IO.Directory;
@@ -380,7 +378,6 @@ namespace DynamoGraphMigrationAssistant.ViewModels
                         var isTrusted = (bool)addToTrustedLocations.Invoke(DynamoViewModel.PreferenceSettings,
                                 new object[] { pathVM.FolderPath });
 
-                        
                         if (!isTrusted)
                         {
                             TrustCheckboxVisible = true;

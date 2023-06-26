@@ -41,10 +41,7 @@ namespace DynamoGraphMigrationAssistant
         }
         public override void Loaded(ViewLoadedParams viewLoadedParams)
         {
-            if (viewLoadedParams == null) throw new ArgumentNullException(nameof(viewLoadedParams));
-
-
-            _viewLoadedParamsReference = viewLoadedParams;
+            _viewLoadedParamsReference = viewLoadedParams ?? throw new ArgumentNullException(nameof(viewLoadedParams));
 
             // Add a button to Dynamo View menu to manually show the window
             DynamoMigrationAssistantMenuItem = new MenuItem { Header = Properties.Resources.HeaderText, IsCheckable = true};
