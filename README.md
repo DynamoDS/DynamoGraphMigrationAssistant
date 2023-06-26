@@ -5,6 +5,11 @@ DynamoGraphMigrationAssistant (DGMA) is a View Extension for Dynamo that allows 
 <img src="https://raw.githubusercontent.com/DynamoDS/DynamoGraphMigrationAssistant/master/doc/sample.gif"/>
 
 #### Workflow
+1. Open Graph Migration Assistant from the extensions menu
+2. Pick the source directory of graphs to migrate.
+3. Pick a destination directory.
+4. Pick the target Dynamo version. This preselects the suggested migration steps.
+5. Run the tool.
 
 https://user-images.githubusercontent.com/15744724/242657381-6ac21c72-24d9-4fd2-b72d-5de5f4729853.mp4
 
