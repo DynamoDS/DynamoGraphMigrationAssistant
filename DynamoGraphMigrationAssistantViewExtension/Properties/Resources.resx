@@ -190,6 +190,9 @@
   <data name="MigrationAssistantHelpTooltip" xml:space="preserve">
     <value>View help documentation</value>
   </data>
+  <data name="MigrationAssistantSettingsTooltip" xml:space="preserve">
+    <value>Modify graph update settings.</value>
+  </data>
   <data name="MiscSettingsMsg" xml:space="preserve">
     <value>General Settings</value>
   </data>
@@ -200,7 +203,7 @@
     <value>The source folder contains {0} Dynamo graphs.</value>
   </data>
   <data name="OptionalFixesMsg" xml:space="preserve">
-    <value>Optional Graph Updates</value>
+    <value>Optional</value>
   </data>
   <data name="OptionalFixesTooltip" xml:space="preserve">
     <value>These migrations tasks are optional as they are more user-specific.</value>
@@ -239,7 +242,7 @@
     <value>Source folder</value>
   </data>
   <data name="SuggestedFixesMsg" xml:space="preserve">
-    <value>Recommended Graph Updates</value>
+    <value>Recommended</value>
   </data>
   <data name="SuggestedFixesTooltip" xml:space="preserve">
     <value>These updates are recommended based on the target Dynamo version to improve functionality and usability of the migrated graph(s).</value>
@@ -255,6 +258,9 @@
   </data>
   <data name="UpdatePathTooltip" xml:space="preserve">
     <value>Select folder</value>
+  </data>
+  <data name="UpdatesMsg" xml:space="preserve">
+    <value>Graph Updates</value>
   </data>
   <data name="ViewOutputButtonText" xml:space="preserve">
     <value>View Output</value>

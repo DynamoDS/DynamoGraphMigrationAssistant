@@ -22,6 +22,8 @@
     <None Remove="Resources\edit_folder_16px_hover.png" />
     <None Remove="Resources\question-default-16px.png" />
     <None Remove="Resources\question-hover-16px.png" />
+    <None Remove="Resources\settings-default-32px.png" />
+    <None Remove="Resources\settings-hover-32px.png" />
     <None Remove="Resources\Styles.xaml" />
   </ItemGroup>
   <ItemGroup>
@@ -108,6 +110,8 @@
     <Resource Include="Resources\edit_folder_16px_hover.png" />
     <Resource Include="Resources\question-default-16px.png" />
     <Resource Include="Resources\question-hover-16px.png" />
+    <Resource Include="Resources\settings-default-32px.png" />
+    <Resource Include="Resources\settings-hover-32px.png" />
     <None Include="Resources\Progress circle.png" />
     <None Include="Resources\checkmark.png" />
   </ItemGroup>

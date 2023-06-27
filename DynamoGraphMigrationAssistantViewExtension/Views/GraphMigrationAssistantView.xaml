@@ -100,7 +100,7 @@
                            TextWrapping="WrapWithOverflow"
                            Foreground="{StaticResource PreferencesWindowFontColor}"
                            ToolTip="{x:Static p:Resources.DynamoVersionsTooltip}"
-                           FontSize="12" />
+                           FontSize="14" />
                 <ComboBox Width="80" Margin="8 3 0 0" ItemsSource="{Binding TargetDynamoVersions}" DisplayMemberPath="DisplayName" Style="{StaticResource RefreshComboBox}" FontSize="12" SelectionChanged="Selector_OnSelectionChanged" Name="TargetVersionComboBox" SelectedIndex="5"/>
             </StackPanel>
 
@@ -119,14 +119,14 @@
 
                     <!-- General Settings -->
                     <Label VerticalContentAlignment="Center">
-                        <TextBlock Text="{x:Static p:Resources.MiscSettingsMsg}"
+                        <TextBlock Grid.Column="1" Text="{x:Static p:Resources.MiscSettingsMsg}"
                                    VerticalAlignment="Center"
                                    Margin="3 3 0 0"  
                                    TextWrapping="WrapWithOverflow"
                                    Foreground="{StaticResource PreferencesWindowFontColor}"
-                                   FontSize="12" />
+                                   FontSize="14" />
                     </Label>
-                    <WrapPanel Margin="8 0 0 0">
+                    <WrapPanel Margin="24 0 0 0">
                         <CheckBox VerticalContentAlignment="Center"
                               IsChecked="{Binding IsKeepFolderStructure}" 
                               Margin="5 0">
@@ -164,28 +164,49 @@
                 </StackPanel>
 
 
-                <StackPanel  Grid.Row="1">
+                <StackPanel Grid.Row="1">
+
+                    <Label>
+                        <Grid Margin="3 3 0 0">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="24"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            <Image Grid.Column="0" HorizontalAlignment="Left" Style="{StaticResource ClickableSettingsIcon}" Width="16">
+                            <Image.ToolTip>
+                                <ToolTip Content="{x:Static p:Resources.MigrationAssistantSettingsTooltip}" Style="{StaticResource GenericToolTipLight}"/>
+                            </Image.ToolTip>
+                            </Image>
+                            <TextBlock Grid.Column="1" Text="{x:Static p:Resources.UpdatesMsg}"
+                                       VerticalAlignment="Center" 
+                                       TextWrapping="WrapWithOverflow"
+                                       Foreground="{StaticResource PreferencesWindowFontColor}"
+                                       FontSize="14" />
+                        </Grid>
+                    </Label>
+
                     <!-- Suggested Migration Tasks -->
                     <Label VerticalContentAlignment="Center">
-                        <TextBlock Text="{x:Static p:Resources.SuggestedFixesMsg}"
+                        <TextBlock Grid.Column="0" Text="{x:Static p:Resources.SuggestedFixesMsg}"
                                    VerticalAlignment="Center"
-                                   Margin="3 3 0 0"  
+                                   Margin="6 3 0 0"  
                                    TextWrapping="WrapWithOverflow"
                                    Foreground="{StaticResource PreferencesWindowFontColor}"
                                    FontSize="12" />
+
                         <Label.ToolTip>
                             <ToolTip Content="{x:Static p:Resources.SuggestedFixesTooltip}" 
                                      Style="{StaticResource GenericToolTipLight}"/>
                         </Label.ToolTip>
                     </Label>
-                    <WrapPanel Margin="8 0 0 0">
+                    <WrapPanel Margin="24 0 0 0">
                         <CheckBox VerticalContentAlignment="Center"
                               IsChecked="{Binding FixNodeSpacing}" 
                               Margin="5 0">
                             <Label VerticalContentAlignment="Center">
                                 <TextBlock Text="{x:Static p:Resources.FixNodeSpacingCheckboxMsg}"
                                        VerticalAlignment="Center"
-                                       Margin="3 3 0 0"  
+                                       Margin="6 3 0 0"  
                                        TextWrapping="WrapWithOverflow"
                                        Foreground="{StaticResource PreferencesWindowFontColor}"
                                        FontSize="10" />
@@ -216,7 +237,7 @@
                     <Label VerticalContentAlignment="Center">
                         <TextBlock Text="{x:Static p:Resources.OptionalFixesMsg}"
                                    VerticalAlignment="Center"
-                                   Margin="3 3 0 0"  
+                                   Margin="6 3 0 0"  
                                    TextWrapping="WrapWithOverflow"
                                    Foreground="{StaticResource PreferencesWindowFontColor}"
                                    FontSize="12" />
@@ -225,7 +246,7 @@
                                      Style="{StaticResource GenericToolTipLight}"/>
                         </Label.ToolTip>
                     </Label>
-                    <WrapPanel Orientation="Horizontal" Margin="8 0 0 0">
+                    <WrapPanel Orientation="Horizontal" Margin="24 0 0 0">
                         <CheckBox VerticalContentAlignment="Center"
                               IsChecked="{Binding FixInputOrder}" 
                               Margin="5 0">
@@ -259,7 +280,6 @@
                             </Label>
                         </CheckBox>
                     </WrapPanel>
-
 
                 </StackPanel>
             </Grid>

@@ -15,7 +15,17 @@
             </Trigger>
         </Style.Triggers>
     </Style>
-
+  <!-- Common Settings Clickable Icon -->
+    <Style x:Key="ClickableSettingsIcon" TargetType="{x:Type Image}">
+        <Style.Triggers>
+            <Trigger Property="IsMouseOver" Value="False">
+                <Setter Property="Source" Value="pack://application:,,,/DynamoGraphMigrationAssistantViewExtension;component/Resources/settings-default-32px.png" />
+            </Trigger>
+            <Trigger Property="IsMouseOver" Value="True">
+                <Setter Property="Source" Value="pack://application:,,,/DynamoGraphMigrationAssistantViewExtension;component/Resources/settings-hover-32px.png" />
+            </Trigger>
+        </Style.Triggers>
+    </Style>
     <Style x:Key="EditFolderButton" TargetType="Button">
         <Setter Property="Cursor" Value="Hand"/>
         <Setter Property="Template">

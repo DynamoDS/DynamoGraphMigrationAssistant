@@ -75,7 +75,7 @@ namespace DynamoGraphMigrationAssistant.ViewModels
         /// </summary>
         public PathViewModel TargetPathViewModel { get; set; }
 
-        private bool canExport;
+        private bool _canExport;
         /// <summary>
         /// Checks if both folder paths have been set
         /// </summary>
@@ -95,11 +95,9 @@ namespace DynamoGraphMigrationAssistant.ViewModels
             }
             private set
             {
-                if (canExport != value)
-                {
-                    canExport = value;
-                    RaisePropertyChanged(nameof(CanExport));
-                }
+                if (_canExport == value) return;
+                _canExport = value;
+                RaisePropertyChanged(nameof(CanExport));
             }
         }
 
@@ -277,10 +275,9 @@ namespace DynamoGraphMigrationAssistant.ViewModels
         private string _notificationMessage;
         private Dispatcher _dispatcher;
         private Queue<string> _graphQueue;
-        //private bool _export = true;
 
         /// <summary>
-        ///     Contains notification text displayed on the UI
+        /// Contains notification text displayed on the UI
         /// </summary>
         public string NotificationMessage
         {
@@ -306,7 +303,7 @@ namespace DynamoGraphMigrationAssistant.ViewModels
         #region Loading
 
         /// <summary>
-        ///     Constructor
+        /// Constructor
         /// </summary>
         /// <param name="p"></param>
         public GraphMigrationAssistantViewModel(ViewLoadedParams p)
@@ -333,8 +330,6 @@ namespace DynamoGraphMigrationAssistant.ViewModels
                 scheduler = DynamoViewModel.Model.Scheduler;
             }
 
-            //if(DisablePrompts) DynamoViewModel.Model.DisablePrompts = true;
-
             TargetPathViewModel = new PathViewModel
             { Type = PathType.Target, Owner = viewLoadedParamsInstance.DynamoWindow };
             SourcePathViewModel = new PathViewModel
@@ -358,7 +353,7 @@ namespace DynamoGraphMigrationAssistant.ViewModels
 
 
 
-        // Handles source path changed
+        // Handles the source path being changed
         private void SourcePathPropertyChanged(object sender, PropertyChangedEventArgs propertyChangedEventArgs)
         {
             var pathVM = sender as PathViewModel;
@@ -412,13 +407,13 @@ namespace DynamoGraphMigrationAssistant.ViewModels
         }
 
         // Update graphs if source folder is changed by the UI
-        private void SourceFolderChanged(PathViewModel pathVM)
+        private void SourceFolderChanged(PathViewModel pathVm)
         {
             Graphs = new ObservableCollection<GraphViewModel>();
 
             graphDictionary = new Dictionary<int, GraphViewModel>();
 
-            var files = Utilities.GetAllFilesOfExtension(pathVM.FolderPath)?.OrderBy(x => x);
+            var files = Utilities.GetAllFilesOfExtension(pathVm.FolderPath)?.OrderBy(x => x);
             if (files == null)
                 return;
 

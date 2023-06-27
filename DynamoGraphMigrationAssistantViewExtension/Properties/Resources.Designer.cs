@@ -278,6 +278,15 @@ namespace DynamoGraphMigrationAssistant.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Modify graph update settings..
+        /// </summary>
+        public static string MigrationAssistantSettingsTooltip {
+            get {
+                return ResourceManager.GetString("MigrationAssistantSettingsTooltip", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to General Settings.
         /// </summary>
         public static string MiscSettingsMsg {
@@ -305,7 +314,7 @@ namespace DynamoGraphMigrationAssistant.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Optional Graph Updates.
+        ///   Looks up a localized string similar to Optional.
         /// </summary>
         public static string OptionalFixesMsg {
             get {
@@ -423,7 +432,7 @@ namespace DynamoGraphMigrationAssistant.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Recommended Graph Updates.
+        ///   Looks up a localized string similar to Recommended.
         /// </summary>
         public static string SuggestedFixesMsg {
             get {
@@ -473,6 +482,15 @@ namespace DynamoGraphMigrationAssistant.Properties {
         public static string UpdatePathTooltip {
             get {
                 return ResourceManager.GetString("UpdatePathTooltip", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Graph Updates.
+        /// </summary>
+        public static string UpdatesMsg {
+            get {
+                return ResourceManager.GetString("UpdatesMsg", resourceCulture);
             }
         }
         
