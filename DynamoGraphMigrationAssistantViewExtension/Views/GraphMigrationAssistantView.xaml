@@ -172,8 +172,10 @@
                                 <ColumnDefinition Width="24"/>
                                 <ColumnDefinition Width="*"/>
                             </Grid.ColumnDefinitions>
-                            <Image Grid.Column="0" HorizontalAlignment="Left" Style="{StaticResource ClickableSettingsIcon}" Width="16">
-                            <Image.ToolTip>
+                            <Image Grid.Column="0" HorizontalAlignment="Left" Style="{StaticResource ClickableSettingsIcon}" Width="16"
+                                   MouseLeftButtonDown="EditGraphSettingsCommand">
+                            
+                                <Image.ToolTip>
                                 <ToolTip Content="{x:Static p:Resources.MigrationAssistantSettingsTooltip}" Style="{StaticResource GenericToolTipLight}"/>
                             </Image.ToolTip>
                             </Image>

@@ -11,6 +11,7 @@ using System.Text;
 using System.Windows;
 using System.Windows.Threading;
 using Dynamo.Configuration;
+using Dynamo.Controls;
 using Dynamo.Core;
 using Dynamo.Graph;
 using Dynamo.Graph.Nodes;
@@ -21,6 +22,7 @@ using Dynamo.UI.Commands;
 using Dynamo.Utilities;
 using Dynamo.ViewModels;
 using Dynamo.Wpf.Extensions;
+using Dynamo.Wpf.Views;
 using DynamoGraphMigrationAssistant.Controls;
 using DynamoGraphMigrationAssistant.Models;
 using Directory = System.IO.Directory;
@@ -297,6 +299,7 @@ namespace DynamoGraphMigrationAssistant.ViewModels
         public DelegateCommand CancelCommand { get; set; }
         public DelegateCommand ViewOutputCommand { get; set; }
         public DelegateCommand ViewHelpDocumentationCommand { get; set; }
+        public DelegateCommand EditGraphSettingsCommand { get; set; }
 
         #endregion
 
@@ -344,6 +347,7 @@ namespace DynamoGraphMigrationAssistant.ViewModels
             CancelCommand = new DelegateCommand(Cancel);
             ViewOutputCommand = new DelegateCommand(ViewOutput);
             ViewHelpDocumentationCommand = new DelegateCommand(ViewHelpDocumentation);
+            EditGraphSettingsCommand = new DelegateCommand(EditSettings);
             _graphQueue = new Queue<string>();
 
             sb = new StringBuilder();
@@ -1007,6 +1011,14 @@ namespace DynamoGraphMigrationAssistant.ViewModels
         {
             var uri = new Uri("DynamoGraphMigrationAssistantViewExtension;MigrationAssistantHelpDoc.html", UriKind.Relative);
             viewLoadedParamsInstance.ViewModelCommandExecutive.OpenDocumentationLinkCommand(uri);
+        }
+
+        private void EditSettings(object obj)
+        {
+            var dynamoView = viewLoadedParamsInstance.DynamoWindow as DynamoView;
+            PreferencesView preferencesView = new PreferencesView(dynamoView);
+         
+            preferencesView.ShowDialog();
         }
 
         private void Reset()

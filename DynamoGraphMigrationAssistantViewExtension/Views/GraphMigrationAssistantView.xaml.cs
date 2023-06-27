@@ -59,5 +59,13 @@ namespace DynamoGraphMigrationAssistant.Views
             
             vm.CheckVersions();
         }
+
+        private void EditGraphSettingsCommand(object sender, MouseButtonEventArgs e)
+        {
+            if (!IsLoaded) return;
+            GraphMigrationAssistantViewModel vm = this.DataContext as GraphMigrationAssistantViewModel;
+
+            vm.EditGraphSettingsCommand.Execute(this);
+        }
     }
 }
