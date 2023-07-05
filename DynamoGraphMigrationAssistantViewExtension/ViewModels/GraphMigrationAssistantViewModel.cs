@@ -393,6 +393,7 @@ namespace DynamoGraphMigrationAssistant.ViewModels
                     {
                         TrustCheckboxVisible = false;
                         IsTrustedFolder = true;
+                        SourceFolderChanged(pathVM);
                     }
                 }
                 else
@@ -968,7 +969,8 @@ namespace DynamoGraphMigrationAssistant.ViewModels
 
             EnterLog(successMessage);
 
-            //MessageBoxService.Show(owner, successMessage, Properties.Resources.FinishMsgTitle, MessageBoxButton.OK, MessageBoxImage.Information);
+            MessageBox.Show(owner, successMessage, Properties.Resources.FinishMsgTitle, MessageBoxButton.OK,
+                MessageBoxImage.Information);
 
             //show the view output button
             StopButtonVisible = false;

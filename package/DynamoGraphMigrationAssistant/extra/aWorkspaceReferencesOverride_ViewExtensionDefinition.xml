@@ -1,4 +1,0 @@
-﻿<ViewExtensionDefinition>
-	<AssemblyPath>..\bin\DynamoGraphMigrationAssistantViewExtension.dll</AssemblyPath>
-	<TypeName>DynamoGraphMigrationAssistant.WorkspaceReferencesOverride</TypeName>
-</ViewExtensionDefinition>

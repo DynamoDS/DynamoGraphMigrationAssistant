@@ -1,8 +1,11 @@
 ﻿using Dynamo.Wpf.Extensions;
 using System;
 using System.Linq;
+using System.Reflection;
 using System.Windows;
 using System.Windows.Controls;
+using Dynamo.Configuration;
+using Dynamo.Controls;
 using DynamoGraphMigrationAssistant.ViewModels;
 using DynamoGraphMigrationAssistant.Views;
 
@@ -88,7 +91,26 @@ namespace DynamoGraphMigrationAssistant
                 ViewModel.DynamoViewModel.NewHomeWorkspaceCommand.Execute(null);
             }
 
+
+            //add to sidebar and undock it immediately
             _viewLoadedParamsReference?.AddToExtensionsSideBar(this, View);
+
+            var dynamoView = _viewLoadedParamsReference.DynamoWindow as DynamoView;
+
+            try
+            {
+                MethodInfo undockExtension = typeof(DynamoView).GetMethod("UndockExtension",
+                    BindingFlags.NonPublic | BindingFlags.Instance);
+
+                if (undockExtension != null)
+                    undockExtension.Invoke(dynamoView,
+                        new object[] { this.Name });
+            }
+            catch (Exception)
+            {
+               //the View Extension was already undocked.
+            }
+          
         }
         public override void Closed()
         {
