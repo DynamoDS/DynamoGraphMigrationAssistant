@@ -70,8 +70,24 @@ namespace DynamoGraphMigrationAssistant.ViewModels
             }
         }
 
+        private MigrationSettings _migrationSettings;
+        /// <summary>
+        /// Our current Settings
+        /// </summary>
+        public MigrationSettings MigrationSettings
+        {
+            get => _migrationSettings;
+            set
+            {
+                if (value == _migrationSettings) return;
+                _migrationSettings = value;
+                RaisePropertyChanged(nameof(MigrationSettings));
+            }
+        }
+
         public MigrationSettingsViewModel(MigrationSettings settings)
         {
+            MigrationSettings = settings;
             ScaleFactorX = settings.ScaleFactorX;
             ScaleFactorY = settings.ScaleFactorY;
             InputOrderAsNumbers = settings.InputOrderAsNumbers;

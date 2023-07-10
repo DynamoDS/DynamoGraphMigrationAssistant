@@ -178,6 +178,12 @@
   <data name="IfNodeReplacementLogMessage" xml:space="preserve">
     <value>{0} if nodes migrated to refactored if.</value>
   </data>
+  <data name="InputOrderPrefixAsNumbersLabel" xml:space="preserve">
+    <value>Use numbers for prefix?</value>
+  </data>
+  <data name="InputOrderStartNumberLabel" xml:space="preserve">
+    <value>Start Number</value>
+  </data>
   <data name="KeepFolderStructureCheckboxMsg" xml:space="preserve">
     <value>Keep folder structure</value>
   </data>
@@ -192,6 +198,15 @@
   </data>
   <data name="MigrationAssistantSettingsTooltip" xml:space="preserve">
     <value>Modify graph update settings.</value>
+  </data>
+  <data name="MigrationSettingsGraphSpacingTab" xml:space="preserve">
+    <value>Graph Spacing</value>
+  </data>
+  <data name="MigrationSettingsInputOrderTab" xml:space="preserve">
+    <value>Input Order</value>
+  </data>
+  <data name="MigrationSettingsTitle" xml:space="preserve">
+    <value>Adjust Migration Settings</value>
   </data>
   <data name="MiscSettingsMsg" xml:space="preserve">
     <value>General Settings</value>
@@ -228,6 +243,12 @@
   </data>
   <data name="ResumeTooltip" xml:space="preserve">
     <value>Attempts to resume progress from a previous run. Progress is stored within the log.txt file in the root target folder.</value>
+  </data>
+  <data name="ScaleFactorXLabel" xml:space="preserve">
+    <value>X Spacing</value>
+  </data>
+  <data name="ScaleFactorYLabel" xml:space="preserve">
+    <value>Y Spacing</value>
   </data>
   <data name="SelectFolderMsg" xml:space="preserve">
     <value>Select folder ..</value>

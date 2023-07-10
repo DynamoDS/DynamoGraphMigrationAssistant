@@ -242,6 +242,24 @@ namespace DynamoGraphMigrationAssistant.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Use numbers for prefix?.
+        /// </summary>
+        public static string InputOrderPrefixAsNumbersLabel {
+            get {
+                return ResourceManager.GetString("InputOrderPrefixAsNumbersLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Start Number.
+        /// </summary>
+        public static string InputOrderStartNumberLabel {
+            get {
+                return ResourceManager.GetString("InputOrderStartNumberLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Keep folder structure.
         /// </summary>
         public static string KeepFolderStructureCheckboxMsg {
@@ -283,6 +301,33 @@ namespace DynamoGraphMigrationAssistant.Properties {
         public static string MigrationAssistantSettingsTooltip {
             get {
                 return ResourceManager.GetString("MigrationAssistantSettingsTooltip", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Graph Spacing.
+        /// </summary>
+        public static string MigrationSettingsGraphSpacingTab {
+            get {
+                return ResourceManager.GetString("MigrationSettingsGraphSpacingTab", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Input Order.
+        /// </summary>
+        public static string MigrationSettingsInputOrderTab {
+            get {
+                return ResourceManager.GetString("MigrationSettingsInputOrderTab", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Adjust Migration Settings.
+        /// </summary>
+        public static string MigrationSettingsTitle {
+            get {
+                return ResourceManager.GetString("MigrationSettingsTitle", resourceCulture);
             }
         }
         
@@ -392,6 +437,24 @@ namespace DynamoGraphMigrationAssistant.Properties {
         public static string ResumeTooltip {
             get {
                 return ResourceManager.GetString("ResumeTooltip", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to X Spacing.
+        /// </summary>
+        public static string ScaleFactorXLabel {
+            get {
+                return ResourceManager.GetString("ScaleFactorXLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Y Spacing.
+        /// </summary>
+        public static string ScaleFactorYLabel {
+            get {
+                return ResourceManager.GetString("ScaleFactorYLabel", resourceCulture);
             }
         }
         

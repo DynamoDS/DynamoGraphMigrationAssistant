@@ -19,25 +19,32 @@ namespace DynamoGraphMigrationAssistant
         [XmlElement("InputOrderStartNumber")]
         public int InputOrderStartNumber { get; set; } = 0;
 
-        public static void SerializeModels(string filename, MigrationSettings settings)
+        private static readonly string _extensionDirectory = Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location)?.Replace("bin", "extra");
+        private static readonly string _settingsFile = Path.Combine(_extensionDirectory, "MigrationSettings.xml");
+
+        public static void SerializeModels(MigrationSettings settings)
         {
-            var xmls = new XmlSerializer(settings.GetType());
-            var writer = new StreamWriter(filename);
-            xmls.Serialize(writer, settings);
-            writer.Close();
+            try
+            {
+                var xmls = new XmlSerializer(settings.GetType());
+                var writer = new StreamWriter(_settingsFile);
+                xmls.Serialize(writer, settings);
+                writer.Close();
+            }
+            catch (Exception)
+            {
+              //writing settings failed, continue to use default
+            }
+         
         }
         public static MigrationSettings DeserializeModels()
         {
             try
             {
-                //load our settings
-                var extensionDirectory = Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location)?.Replace("bin", "extra");
-                var settingsFile = Path.Combine(extensionDirectory, "MigrationSettings.xml");
-
                 //if the settings file exists, use it, if not load with default
-                if (File.Exists(settingsFile))
+                if (File.Exists(_settingsFile))
                 {
-                    var fs = new FileStream(settingsFile, FileMode.Open);
+                    var fs = new FileStream(_settingsFile, FileMode.Open);
                     var xmls = new XmlSerializer(typeof(MigrationSettings));
                     return (MigrationSettings)xmls.Deserialize(fs);
                 }

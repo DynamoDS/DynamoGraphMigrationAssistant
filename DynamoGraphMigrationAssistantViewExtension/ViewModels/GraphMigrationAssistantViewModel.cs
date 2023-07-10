@@ -25,6 +25,7 @@ using Dynamo.Wpf.Extensions;
 using Dynamo.Wpf.Views;
 using DynamoGraphMigrationAssistant.Controls;
 using DynamoGraphMigrationAssistant.Models;
+using DynamoGraphMigrationAssistant.Views;
 using Directory = System.IO.Directory;
 using Path = System.IO.Path;
 using String = System.String;
@@ -1026,10 +1027,13 @@ namespace DynamoGraphMigrationAssistant.ViewModels
 
         private void EditSettings(object obj)
         {
-            var dynamoView = viewLoadedParamsInstance.DynamoWindow as DynamoView;
-            PreferencesView preferencesView = new PreferencesView(dynamoView);
+            //var dynamoView = viewLoadedParamsInstance.DynamoWindow as DynamoView;
+            //PreferencesView preferencesView = new PreferencesView(dynamoView);
          
-            preferencesView.ShowDialog();
+            //preferencesView.ShowDialog();
+            MigrationSettingsView view = new MigrationSettingsView(MigrationSettingsViewModel);
+
+            view.ShowDialog();
         }
 
         private void Reset()
