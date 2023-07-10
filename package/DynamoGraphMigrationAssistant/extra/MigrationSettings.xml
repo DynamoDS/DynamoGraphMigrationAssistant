@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinterSettings xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <ScaleFactorX>1.5</ScaleFactorX>
+  <ScaleFactorY>2.25</ScaleFactorY>
+  <InputOrderAsNumbers>true</InputOrderAsNumbers>
+  <InputOrderStartNumber>0</InputOrderStartNumber>
+</LinterSettings>

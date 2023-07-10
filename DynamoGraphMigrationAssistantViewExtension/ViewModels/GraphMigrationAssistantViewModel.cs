@@ -77,6 +77,11 @@ namespace DynamoGraphMigrationAssistant.ViewModels
         /// </summary>
         public PathViewModel TargetPathViewModel { get; set; }
 
+        /// <summary>
+        /// The migration settings view model
+        /// </summary>
+        public MigrationSettingsViewModel MigrationSettingsViewModel { get; set; }
+
         private bool _canExport;
         /// <summary>
         /// Checks if both folder paths have been set
@@ -314,6 +319,10 @@ namespace DynamoGraphMigrationAssistant.ViewModels
             if (p == null) return;
 
             viewLoadedParamsInstance = p;
+
+            //load our settings
+
+
 
             p.CurrentWorkspaceChanged += OnCurrentWorkspaceChanged;
             p.CurrentWorkspaceCleared += OnCurrentWorkspaceCleared;
@@ -851,7 +860,7 @@ namespace DynamoGraphMigrationAssistant.ViewModels
         //optional fixes
         private void FormatInputOrderForGraph()
         {
-            int startNumber = 1;//TODO: move to setttings
+            int startNumber = 1;//TODO: move to settings
             var padding = DynamoViewModel.CurrentSpaceViewModel.Nodes.Count.ToString().Length + 1;
 
             foreach (var nodeViewModel in DynamoViewModel.CurrentSpaceViewModel.Nodes.OrderBy(n => n.Y))

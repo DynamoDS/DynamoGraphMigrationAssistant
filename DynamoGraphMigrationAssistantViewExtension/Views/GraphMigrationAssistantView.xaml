@@ -169,21 +169,22 @@
                     <Label>
                         <Grid Margin="3 3 0 0">
                             <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="24"/>
                                 <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="24"/>
                             </Grid.ColumnDefinitions>
-                            <Image Grid.Column="0" HorizontalAlignment="Left" Style="{StaticResource ClickableSettingsIcon}" Width="16"
+                            <Image Grid.Column="1" HorizontalAlignment="Left" Style="{StaticResource ClickableSettingsIcon}" Width="16"
                                    MouseLeftButtonDown="EditGraphSettingsCommand">
                             
                                 <Image.ToolTip>
                                 <ToolTip Content="{x:Static p:Resources.MigrationAssistantSettingsTooltip}" Style="{StaticResource GenericToolTipLight}"/>
                             </Image.ToolTip>
                             </Image>
-                            <TextBlock Grid.Column="1" Text="{x:Static p:Resources.UpdatesMsg}"
+                            <TextBlock Grid.Column="0" Text="{x:Static p:Resources.UpdatesMsg}"
                                        VerticalAlignment="Center" 
                                        TextWrapping="WrapWithOverflow"
                                        Foreground="{StaticResource PreferencesWindowFontColor}"
-                                       FontSize="14" />
+                                       FontSize="14"
+                                       Padding="0 0 12 0"/>
                         </Grid>
                     </Label>
 
