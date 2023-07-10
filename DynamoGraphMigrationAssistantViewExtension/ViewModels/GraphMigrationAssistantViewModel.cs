@@ -77,6 +77,7 @@ namespace DynamoGraphMigrationAssistant.ViewModels
         /// </summary>
         public PathViewModel TargetPathViewModel { get; set; }
 
+        public MigrationSettings MigrationSettings { get; set; }
         /// <summary>
         /// The migration settings view model
         /// </summary>
@@ -321,7 +322,9 @@ namespace DynamoGraphMigrationAssistant.ViewModels
             viewLoadedParamsInstance = p;
 
             //load our settings
-
+            MigrationSettings = MigrationSettings.DeserializeModels();
+            //TODO:Test
+            MigrationSettingsViewModel = new MigrationSettingsViewModel(MigrationSettings);
 
 
             p.CurrentWorkspaceChanged += OnCurrentWorkspaceChanged;
@@ -809,9 +812,6 @@ namespace DynamoGraphMigrationAssistant.ViewModels
             EnterLog(string.Format(Properties.Resources.IfNodeReplacementLogMessage, ifNodeReplacementCount));
         }
 
-        //TODO: tie this to settings
-        private double xScaleFactor = 1.5;
-        private double yScaleFactor = 2.25;
         private void FixNodeSpacingForGraph()
         {
             int nodesMovedCount = 0;
@@ -821,8 +821,8 @@ namespace DynamoGraphMigrationAssistant.ViewModels
                 var originalX = nodeViewModel.X;
                 var originalY = nodeViewModel.Y;
 
-                nodeViewModel.X = originalX * xScaleFactor;
-                nodeViewModel.Y = originalY * yScaleFactor;
+                nodeViewModel.X = originalX * MigrationSettings.ScaleFactorX;
+                nodeViewModel.Y = originalY * MigrationSettings.ScaleFactorY;
 
                 nodeViewModel.NodeModel.ReportPosition();
 
@@ -834,8 +834,8 @@ namespace DynamoGraphMigrationAssistant.ViewModels
                 var originalX = noteViewModel.Left;
                 var originalY = noteViewModel.Top;
 
-                noteViewModel.Left = originalX * xScaleFactor;
-                noteViewModel.Top = originalY * yScaleFactor;
+                noteViewModel.Left = originalX * MigrationSettings.ScaleFactorX;
+                noteViewModel.Top = originalY * MigrationSettings.ScaleFactorY;
 
                 noteViewModel.Model.ReportPosition();
 

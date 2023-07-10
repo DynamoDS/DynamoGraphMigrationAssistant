@@ -26,7 +26,7 @@ namespace DynamoGraphMigrationAssistant
             xmls.Serialize(writer, settings);
             writer.Close();
         }
-        public static MigrationSettings DeserializeModels(string filename)
+        public static MigrationSettings DeserializeModels()
         {
             try
             {
@@ -37,7 +37,7 @@ namespace DynamoGraphMigrationAssistant
                 //if the settings file exists, use it, if not load with default
                 if (File.Exists(settingsFile))
                 {
-                    var fs = new FileStream(filename, FileMode.Open);
+                    var fs = new FileStream(settingsFile, FileMode.Open);
                     var xmls = new XmlSerializer(typeof(MigrationSettings));
                     return (MigrationSettings)xmls.Deserialize(fs);
                 }
