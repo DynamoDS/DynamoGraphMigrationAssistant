@@ -49,12 +49,27 @@ namespace DynamoGraphMigrationAssistant.ViewModels
         private Dictionary<int, GraphViewModel> graphDictionary = new Dictionary<int, GraphViewModel>();
         private MigrationPhase phase = MigrationPhase.Open;
         private bool locked = false;
+        private bool isAvailable = true;
         private bool finished = true;
         private DynamoScheduler scheduler;
         int progress = 0;
 
         public StringBuilder sb;
 
+
+        /// <summary>
+        /// Is UI Available
+        /// </summary>
+        public bool Available
+        {
+            get => isAvailable;
+            set
+            {
+                if (isAvailable == value) return;
+                isAvailable = value;
+                RaisePropertyChanged(nameof(Available));
+            }
+        }
 
         /// <summary>
         /// Collection of potential target Dynamo versions
@@ -296,7 +311,7 @@ namespace DynamoGraphMigrationAssistant.ViewModels
                 if (_notificationMessage != value)
                 {
                     _notificationMessage = value;
-                    RaisePropertyChanged(nameof(_notificationMessage));
+                    RaisePropertyChanged(nameof(NotificationMessage));
                 }
             }
         }
@@ -582,6 +597,7 @@ namespace DynamoGraphMigrationAssistant.ViewModels
             //show the stop button
             StopButtonVisible = true;
             ViewOutputButtonVisible = false;
+            Available = false;
 
             //add the folder to trust if the user checked it
             if (IsTrustedFolder)
@@ -859,19 +875,34 @@ namespace DynamoGraphMigrationAssistant.ViewModels
         //optional fixes
         private void FormatInputOrderForGraph()
         {
-            int startNumber = 1;//TODO: move to settings
+            var startCharacter = MigrationSettings.InputOrderStartLetter;
+            int startCharacterAsNumber = Utilities.ColumnIndexByName(startCharacter);
+            int startNumber = MigrationSettings.InputOrderStartNumber;
+
             var padding = DynamoViewModel.CurrentSpaceViewModel.Nodes.Count.ToString().Length + 1;
 
             foreach (var nodeViewModel in DynamoViewModel.CurrentSpaceViewModel.Nodes.OrderBy(n => n.Y))
             {
                 if (nodeViewModel.IsSetAsInput)
                 {
+                    object next = null;
                     string currentName = nodeViewModel.Name;
-                    var next = startNumber++.ToString().PadLeft(padding, '0');
+                    if (!MigrationSettings.InputOrderAsNumbers)
+                    {
+                        next = Utilities.ColumnNameByIndex(startCharacterAsNumber++);
+                    }
+                    else
+                    {
+                        next = startNumber++.ToString().PadLeft(padding, '0');
+                    }
+
                     nodeViewModel.NodeModel.Name = $"{next}| {currentName}";
                 }
             }
         }
+
+       
+
         private void MigrateInputLinebreaksToPinnedNotes()
         {
 
@@ -983,6 +1014,8 @@ namespace DynamoGraphMigrationAssistant.ViewModels
             //show the view output button
             StopButtonVisible = false;
             ViewOutputButtonVisible = true;
+
+            Available = true;
         }
 
 
