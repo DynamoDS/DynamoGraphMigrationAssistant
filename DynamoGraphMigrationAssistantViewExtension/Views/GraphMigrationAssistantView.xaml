@@ -21,6 +21,19 @@
                 <ui:SharedResourceDictionary Source="{x:Static ui:SharedDictionaryManager.DynamoModernDictionaryUri}" />
             </ResourceDictionary.MergedDictionaries>
             <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
+            <Storyboard x:Key="WiggleStoryboard" FillBehavior="Stop">
+                <DoubleAnimation Storyboard.TargetName="transform"
+                                 Storyboard.TargetProperty="Angle"
+                                 From="5"
+                                 Duration="0:0:1"
+                                 RepeatBehavior="0:0:10">
+                    <DoubleAnimation.EasingFunction>
+                        <ElasticEase EasingMode="EaseOut"
+                                     Oscillations="5"
+                                     Springiness="1" />
+                    </DoubleAnimation.EasingFunction>
+                </DoubleAnimation>
+            </Storyboard>
         </ResourceDictionary>
     </UserControl.Resources>
 
@@ -32,7 +45,7 @@
             <RowDefinition Height="*" />
             <RowDefinition Height="auto" />
         </Grid.RowDefinitions>
-        
+
         <!-- Folder selection controls -->
         <StackPanel Orientation="Vertical" IsEnabled="{Binding Available, Mode=OneWay,UpdateSourceTrigger=PropertyChanged}">
             <WrapPanel>
@@ -66,22 +79,35 @@
                    FontSize="13"
                    FontFamily="{StaticResource ArtifaktElementBold}"
                    Foreground="{StaticResource PreferencesWindowFontColor}" />
-            <CheckBox VerticalContentAlignment="Center"
+            <Border Name="TrustBorder" Visibility="{Binding TrustCheckboxVisible, Converter={StaticResource BooleanToVisibilityConverter}}">
+                <Border.RenderTransform>
+                    <RotateTransform x:Name="transform" />
+                </Border.RenderTransform>
+                <CheckBox Name="TrustCheckbox"
+                          VerticalContentAlignment="Center"
                           IsChecked="{Binding IsTrustedFolder}" 
-                          Margin="5 0" Visibility="{Binding TrustCheckboxVisible, Converter={StaticResource BooleanToVisibilityConverter}}">
-                <Label VerticalContentAlignment="Center">
-                    <TextBlock Text="{x:Static p:Resources.TrustFileLocationCheckboxMsg}"
+                          Margin="5 0" >
+                    <Label VerticalContentAlignment="Center">
+                        <TextBlock Text="{x:Static p:Resources.TrustFileLocationCheckboxMsg}"
                                    VerticalAlignment="Center"
                                    Margin="3 0 0 0"  
                                    TextWrapping="WrapWithOverflow"
                                    Foreground="{StaticResource PreferencesWindowFontColor}"
                                    FontSize="12" />
-                    <Label.ToolTip>
-                        <ToolTip Content="{x:Static p:Resources.TrustFileLocationCheckboxTooltip}" 
+                        <Label.ToolTip>
+                            <ToolTip Content="{x:Static p:Resources.TrustFileLocationCheckboxTooltip}" 
                                      Style="{StaticResource GenericToolTipLight}"/>
-                    </Label.ToolTip>
-                </Label>
-            </CheckBox>
+                        </Label.ToolTip>
+                    </Label>
+                </CheckBox>
+                <Border.Triggers>
+                    <EventTrigger RoutedEvent="Border.Loaded">
+                        <BeginStoryboard Storyboard="{StaticResource WiggleStoryboard}"/>
+                    </EventTrigger>
+                </Border.Triggers>
+            </Border>
+          
+
             <controls:FolderPathViewControl DataContext="{Binding SourcePathViewModel}" Margin="0 0 0 10"/>
             <Label Content="{x:Static p:Resources.TargetFolderMsg}"
                    Padding="5,5,5,5"
@@ -181,10 +207,10 @@
                             <Image Grid.Column="1" HorizontalAlignment="Left" Style="{StaticResource ClickableSettingsIcon}" Width="16"
                                    MouseLeftButtonDown="EditGraphSettingsCommand"
                                    IsEnabled="{Binding Available, Mode=OneWay,UpdateSourceTrigger=PropertyChanged}">
-                            
+
                                 <Image.ToolTip>
-                                <ToolTip Content="{x:Static p:Resources.MigrationAssistantSettingsTooltip}" Style="{StaticResource GenericToolTipLight}"/>
-                            </Image.ToolTip>
+                                    <ToolTip Content="{x:Static p:Resources.MigrationAssistantSettingsTooltip}" Style="{StaticResource GenericToolTipLight}"/>
+                                </Image.ToolTip>
                             </Image>
                             <TextBlock Grid.Column="0" Text="{x:Static p:Resources.UpdatesMsg}"
                                        VerticalAlignment="Center" 
@@ -297,7 +323,7 @@
                 </StackPanel>
 
             </Grid>
-            
+
 
             <Grid HorizontalAlignment="Stretch" Grid.Row="1" Margin="0 10 0 20" >
                 <Grid.ColumnDefinitions>
@@ -313,7 +339,8 @@
                            TextWrapping="WrapWithOverflow"
                            TextTrimming="CharacterEllipsis"
                            Foreground="{StaticResource PreferencesWindowFontColor}"/>
-                <Button Content="{x:Static p:Resources.ExportButtonText}"
+                <Button Name="ExportButton"
+                    Content="{x:Static p:Resources.ExportButtonText}"
                         Margin="0 0 -3 0"
                         Command="{Binding ExportGraphsCommand}"
                         IsEnabled="{Binding CanExport}"
@@ -322,7 +349,9 @@
                         BorderBrush="#0696D7"
                         Foreground="White"
                         Background="#0696D7"
-                        Style="{StaticResource CtaButtonStyle}" />
+                        Style="{StaticResource CtaButtonStyle}" MouseEnter="ExportButton_OnMouseEnter">
+
+                </Button>
             </Grid>
         </StackPanel>
         <Separator Margin="-25 0" Grid.Row="3" VerticalAlignment="Top" Background="{StaticResource DarkGreyBrush}" />
@@ -383,9 +412,8 @@
                     Visibility="{Binding ViewOutputButtonVisible, Converter={StaticResource BooleanToVisibilityConverter}}"
                     DockPanel.Dock="Right"
                     HorizontalAlignment="Right"
-                    Background="White"
-                    BorderBrush="#BFBFBF"
-                    Foreground="#3C3C3C"
+                    Background="#0696D7"
+                    Foreground="White"
                     Style="{StaticResource CtaButtonStyle}" />
 
     </Grid>
