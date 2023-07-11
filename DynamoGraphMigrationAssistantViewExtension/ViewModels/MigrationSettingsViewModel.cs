@@ -69,6 +69,20 @@ namespace DynamoGraphMigrationAssistant.ViewModels
                 RaisePropertyChanged(nameof(InputOrderStartNumber));
             }
         }
+        private string _inputOrderStartLetter;
+        /// <summary>
+        /// What letter to start at?
+        /// </summary>
+        public string InputOrderStartLetter
+        {
+            get => _inputOrderStartLetter;
+            set
+            {
+                if (value == _inputOrderStartLetter) return;
+                _inputOrderStartLetter = value;
+                RaisePropertyChanged(nameof(InputOrderStartLetter));
+            }
+        }
 
         private MigrationSettings _migrationSettings;
         /// <summary>
@@ -92,6 +106,7 @@ namespace DynamoGraphMigrationAssistant.ViewModels
             ScaleFactorY = settings.ScaleFactorY;
             InputOrderAsNumbers = settings.InputOrderAsNumbers;
             InputOrderStartNumber = settings.InputOrderStartNumber;
+            InputOrderStartLetter = settings.InputOrderStartLetter;
         }
     }
 }

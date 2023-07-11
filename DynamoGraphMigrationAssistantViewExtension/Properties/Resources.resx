@@ -181,6 +181,9 @@
   <data name="InputOrderPrefixAsNumbersLabel" xml:space="preserve">
     <value>Use numbers for prefix?</value>
   </data>
+  <data name="InputOrderStartLetterLabel" xml:space="preserve">
+    <value>Start Letter</value>
+  </data>
   <data name="InputOrderStartNumberLabel" xml:space="preserve">
     <value>Start Number</value>
   </data>

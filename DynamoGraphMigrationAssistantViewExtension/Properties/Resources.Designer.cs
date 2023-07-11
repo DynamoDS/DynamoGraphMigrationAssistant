@@ -251,6 +251,15 @@ namespace DynamoGraphMigrationAssistant.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Start Letter.
+        /// </summary>
+        public static string InputOrderStartLetterLabel {
+            get {
+                return ResourceManager.GetString("InputOrderStartLetterLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Start Number.
         /// </summary>
         public static string InputOrderStartNumberLabel {

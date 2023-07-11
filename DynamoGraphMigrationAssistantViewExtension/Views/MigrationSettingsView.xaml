@@ -167,7 +167,8 @@
                                             Content="{x:Static p:Resources.InputOrderStartNumberLabel}" 
                                             Margin="-3,0,10,0"
                                             FontWeight="Bold"
-                                            Foreground="{StaticResource PreferencesWindowFontColor}"/>
+                                            Foreground="{StaticResource PreferencesWindowFontColor}"  Visibility="{Binding InputOrderAsNumbers, Converter={StaticResource BooleanToVisibilityConverter}}">
+                                        </Label>
                                         <TextBox Name="StartNumberBox"
                                                  HorizontalAlignment="Left"
                                                  Margin="2,0,0,0"
@@ -180,10 +181,48 @@
                                                  BorderThickness="0,0,0,2"
                                                  PreviewTextInput="StartNumberValidationTextBox"
                                                  Visibility="{Binding InputOrderAsNumbers, Converter={StaticResource BooleanToVisibilityConverter}}"/>
-<!--TODO: implement alphabetic-->
+
+                                        <!--Numbers for input ordering-->
+                                        <Label
+                                            Content="{x:Static p:Resources.InputOrderStartLetterLabel}" 
+                                            Margin="-3,0,10,0"
+                                            FontWeight="Bold"
+                                            Foreground="{StaticResource PreferencesWindowFontColor}">
+                                            <Label.Style>
+                                                <Style>
+                                                    <Style.Triggers>
+                                                        <DataTrigger Binding="{Binding ElementName=StartNumberBox, Path=Visibility}" Value="Visible">
+                                                            <Setter Property="Label.Visibility" Value="Hidden"/>
+                                                        </DataTrigger>
+                                                    </Style.Triggers>
+                                                </Style>
+                                            </Label.Style>
+                                        </Label>
+                                        <TextBox Name="StartLetterBox"
+                                                 HorizontalAlignment="Left"
+                                                 Margin="2,0,0,0"
+                                                 MinWidth="25"
+                                                 Height="20"
+                                                 FontWeight="Regular"
+                                                 Text="{Binding InputOrderStartLetter, FallbackValue=A}"
+                                                 Background="{StaticResource PreferencesWindowBackgroundColor}"
+                                                 Foreground="{StaticResource PreferencesWindowFontColor}"
+                                                 BorderThickness="0,0,0,2"
+                                                 PreviewTextInput="StartLetterValidationTextBox">
+                                            <TextBox.Style>
+                                                <Style>
+                                                    <Style.Triggers>
+                                                        <DataTrigger Binding="{Binding ElementName=StartNumberBox, Path=Visibility}" Value="Visible">
+                                                            <Setter Property="TextBox.Visibility" Value="Hidden"/>
+                                                        </DataTrigger>
+                                                    </Style.Triggers>
+                                                </Style>
+                                            </TextBox.Style>
+                                        </TextBox>
+                                        
                                     </StackPanel>
-                                    </Grid>
-                                </ScrollViewer>
+                                </Grid>
+                            </ScrollViewer>
                         </TabItem>
                     </TabControl>
 

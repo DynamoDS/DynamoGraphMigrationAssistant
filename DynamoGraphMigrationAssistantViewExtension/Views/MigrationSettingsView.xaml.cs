@@ -16,11 +16,13 @@ namespace DynamoGraphMigrationAssistant.Views
     /// </summary>
     public partial class MigrationSettingsView : Window
     {
-        public MigrationSettingsView(MigrationSettingsViewModel migrationSettingsViewModel)
+        public MigrationSettingsView(DynamoView dynamoView, MigrationSettingsViewModel migrationSettingsViewModel)
         {
             DataContext = migrationSettingsViewModel;
 
             InitializeComponent();
+
+            Owner = dynamoView;
         }
 
         /// <summary>
@@ -47,7 +49,19 @@ namespace DynamoGraphMigrationAssistant.Views
         private void CloseButton_Click(object sender, RoutedEventArgs e)
         {
             var migrationSettingsViewModel = DataContext as MigrationSettingsViewModel;
-            MigrationSettings.SerializeModels(migrationSettingsViewModel.MigrationSettings);
+
+            var migrationSettings = migrationSettingsViewModel.MigrationSettings;
+
+            migrationSettings.InputOrderAsNumbers =
+                migrationSettingsViewModel.InputOrderAsNumbers;
+            migrationSettings.InputOrderStartLetter = migrationSettingsViewModel.InputOrderStartLetter;
+            migrationSettings.InputOrderStartNumber = migrationSettingsViewModel.InputOrderStartNumber;
+            migrationSettings.ScaleFactorX = migrationSettingsViewModel.ScaleFactorX;
+            migrationSettings.ScaleFactorY = migrationSettingsViewModel.ScaleFactorY;
+
+            MigrationSettings.SerializeModels(migrationSettings);
+            
+
             Close();
         }
         // Number input textbox validation
@@ -67,6 +81,12 @@ namespace DynamoGraphMigrationAssistant.Views
         private void StartNumberValidationTextBox(object sender, TextCompositionEventArgs e)
         {
             Regex regex = new Regex("[^0-9]+");
+            e.Handled = regex.IsMatch(e.Text);
+        }
+
+        private void StartLetterValidationTextBox(object sender, TextCompositionEventArgs e)
+        {
+            Regex regex = new Regex("[^A-Za-z]+");
             e.Handled = regex.IsMatch(e.Text);
         }
     }

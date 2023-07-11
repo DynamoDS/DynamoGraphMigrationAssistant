@@ -19,6 +19,9 @@ namespace DynamoGraphMigrationAssistant
         [XmlElement("InputOrderStartNumber")]
         public int InputOrderStartNumber { get; set; } = 0;
 
+        [XmlElement("InputOrderStartLetter")]
+        public string InputOrderStartLetter { get; set; } = "A";
+
         private static readonly string _extensionDirectory = Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location)?.Replace("bin", "extra");
         private static readonly string _settingsFile = Path.Combine(_extensionDirectory, "MigrationSettings.xml");
 

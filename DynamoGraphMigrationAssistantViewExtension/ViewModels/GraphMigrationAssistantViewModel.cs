@@ -22,7 +22,6 @@ using Dynamo.UI.Commands;
 using Dynamo.Utilities;
 using Dynamo.ViewModels;
 using Dynamo.Wpf.Extensions;
-using Dynamo.Wpf.Views;
 using DynamoGraphMigrationAssistant.Controls;
 using DynamoGraphMigrationAssistant.Models;
 using DynamoGraphMigrationAssistant.Views;
@@ -324,7 +323,6 @@ namespace DynamoGraphMigrationAssistant.ViewModels
 
             //load our settings
             MigrationSettings = MigrationSettings.DeserializeModels();
-            //TODO:Test
             MigrationSettingsViewModel = new MigrationSettingsViewModel(MigrationSettings);
 
 
@@ -1027,12 +1025,9 @@ namespace DynamoGraphMigrationAssistant.ViewModels
 
         private void EditSettings(object obj)
         {
-            //var dynamoView = viewLoadedParamsInstance.DynamoWindow as DynamoView;
-            //PreferencesView preferencesView = new PreferencesView(dynamoView);
-         
-            //preferencesView.ShowDialog();
-            MigrationSettingsView view = new MigrationSettingsView(MigrationSettingsViewModel);
-
+            var dynamoView = viewLoadedParamsInstance.DynamoWindow as DynamoView;
+            MigrationSettingsView view = new MigrationSettingsView(dynamoView,MigrationSettingsViewModel);
+           
             view.ShowDialog();
         }
 

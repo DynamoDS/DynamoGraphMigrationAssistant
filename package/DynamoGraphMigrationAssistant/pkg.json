@@ -2,7 +2,7 @@
     "license": "MIT",
     "file_hash": null,
     "name": "Graph Migration Assistant",
-    "version": "0.0.9",
+    "version": "0.0.11",
     "description": "GraphMigrationAssistant (GMA) is a View Extension for Dynamo that allows you to upgrade Dynamo graphs to other versions. The target use-case for this is for migrating Dynamo graphs from pre 2.13.x versions to 2.13.x and up. This allows you to account for node sizes, if node replacement, python migration and more. ",
     "group": "Dynamo Workspace",
     "keywords": ["migration"],
