@@ -26,11 +26,11 @@
                                  Storyboard.TargetProperty="Angle"
                                  From="5"
                                  Duration="0:0:1"
-                                 RepeatBehavior="0:0:10">
+                                 RepeatBehavior="0:0:1">
                     <DoubleAnimation.EasingFunction>
                         <ElasticEase EasingMode="EaseOut"
-                                     Oscillations="5"
-                                     Springiness="1" />
+                                     Oscillations="1"
+                                     Springiness="2" />
                     </DoubleAnimation.EasingFunction>
                 </DoubleAnimation>
             </Storyboard>
@@ -79,7 +79,7 @@
                    FontSize="13"
                    FontFamily="{StaticResource ArtifaktElementBold}"
                    Foreground="{StaticResource PreferencesWindowFontColor}" />
-            <Border Name="TrustBorder" Visibility="{Binding TrustCheckboxVisible, Converter={StaticResource BooleanToVisibilityConverter}}">
+            <Border Name="TrustBorder" Visibility="{Binding TrustCheckboxVisible, Converter={StaticResource BooleanToVisibilityConverter}}" Padding="0 4">
                 <Border.RenderTransform>
                     <RotateTransform x:Name="transform" />
                 </Border.RenderTransform>
@@ -93,28 +93,28 @@
                                    Margin="3 0 0 0"  
                                    TextWrapping="WrapWithOverflow"
                                    Foreground="{StaticResource PreferencesWindowFontColor}"
-                                   FontSize="12" />
+                                   FontSize="14"/>
                         <Label.ToolTip>
                             <ToolTip Content="{x:Static p:Resources.TrustFileLocationCheckboxTooltip}" 
                                      Style="{StaticResource GenericToolTipLight}"/>
                         </Label.ToolTip>
                     </Label>
                 </CheckBox>
-                <Border.Triggers>
-                    <EventTrigger RoutedEvent="Border.Loaded">
-                        <BeginStoryboard Storyboard="{StaticResource WiggleStoryboard}"/>
-                    </EventTrigger>
-                </Border.Triggers>
             </Border>
-          
 
-            <controls:FolderPathViewControl DataContext="{Binding SourcePathViewModel}" Margin="0 0 0 10"/>
+            <Border Name="SourceBorder" Padding="4" BorderBrush="Transparent" BorderThickness="1" CornerRadius="4">
+                <controls:FolderPathViewControl DataContext="{Binding SourcePathViewModel}"/>
+            </Border>
+
             <Label Content="{x:Static p:Resources.TargetFolderMsg}"
                    Padding="5,5,5,5"
                    FontSize="13"
                    FontFamily="{StaticResource ArtifaktElementBold}"
                    Foreground="{StaticResource PreferencesWindowFontColor}" />
-            <controls:FolderPathViewControl DataContext="{Binding TargetPathViewModel}" Margin="0 0 0 10"/>
+            <Border Name="TargetBorder" Padding="4" BorderBrush="Transparent" BorderThickness="1" CornerRadius="4">
+                <controls:FolderPathViewControl DataContext="{Binding TargetPathViewModel}" />
+            </Border>
+           
         </StackPanel>
 
         <!-- Target Dynamo Version -->
@@ -339,6 +339,7 @@
                            TextWrapping="WrapWithOverflow"
                            TextTrimming="CharacterEllipsis"
                            Foreground="{StaticResource PreferencesWindowFontColor}"/>
+                <Border Grid.Column="1" Background="Transparent" Margin="-8" MouseEnter="ExportButton_OnMouseEnter"/>
                 <Button Name="ExportButton"
                     Content="{x:Static p:Resources.ExportButtonText}"
                         Margin="0 0 -3 0"
@@ -349,9 +350,9 @@
                         BorderBrush="#0696D7"
                         Foreground="White"
                         Background="#0696D7"
-                        Style="{StaticResource CtaButtonStyle}" MouseEnter="ExportButton_OnMouseEnter">
-
+                        Style="{StaticResource CtaButtonStyle}" >
                 </Button>
+
             </Grid>
         </StackPanel>
         <Separator Margin="-25 0" Grid.Row="3" VerticalAlignment="Top" Background="{StaticResource DarkGreyBrush}" />

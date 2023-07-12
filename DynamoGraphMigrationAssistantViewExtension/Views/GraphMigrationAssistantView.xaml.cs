@@ -71,7 +71,21 @@ namespace DynamoGraphMigrationAssistant.Views
 
         private void ExportButton_OnMouseEnter(object sender, MouseEventArgs e)
         {
-           
+            if (this.TrustCheckbox.IsEnabled)
+            {
+                if (!this.TrustCheckbox.IsChecked.Value)
+                {
+                    Storyboard sb = this.FindResource("WiggleStoryboard") as Storyboard;
+                  
+                    sb.Begin();
+                }
+            }
+
+            GraphMigrationAssistantViewModel vm = this.DataContext as GraphMigrationAssistantViewModel;
+
+            this.SourceBorder.BorderBrush = vm.SourcePathViewModel.FolderPath is null ? new SolidColorBrush(Colors.Red) : new SolidColorBrush();
+
+            this.TargetBorder.BorderBrush = vm.TargetPathViewModel.FolderPath is null ? new SolidColorBrush(Colors.Red) : new SolidColorBrush();
         }
     }
 }
