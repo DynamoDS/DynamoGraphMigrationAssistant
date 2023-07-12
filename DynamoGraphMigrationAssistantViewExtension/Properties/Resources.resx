@@ -131,7 +131,7 @@
     <value>Graphs in the source folder will be migrated to the selected target version. Graphs already in the target version will be copied with no changes.</value>
   </data>
   <data name="ExportButtonText" xml:space="preserve">
-    <value>Export</value>
+    <value>Start</value>
   </data>
   <data name="ExtensionName" xml:space="preserve">
     <value>Dynamo Graph Migration Assistant</value>

@@ -98,7 +98,7 @@ namespace DynamoGraphMigrationAssistant.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Export.
+        ///   Looks up a localized string similar to Start.
         /// </summary>
         public static string ExportButtonText {
             get {
