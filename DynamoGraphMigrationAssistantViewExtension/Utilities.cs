@@ -27,11 +27,50 @@ namespace DynamoGraphMigrationAssistant
         /// <returns></returns>
         public static IEnumerable<string> GetAllFilesOfExtension(string path, string extension = ".dyn")
         {
-            var files = Directory.EnumerateFiles(path, "*.*", SearchOption.AllDirectories)
-                .Where(x => extension.Equals(Path.GetExtension(x).ToLowerInvariant()));
+            List<string> files = new List<string>();
 
+            var folders = ShowAllFoldersUnder(path);
+
+            foreach (var folder in folders)
+            {
+                try
+                {
+                    files.AddRange(Directory.EnumerateFiles(folder, "*.*", SearchOption.TopDirectoryOnly)
+                        .Where(x => extension.Equals(Path.GetExtension(x).ToLowerInvariant())));
+                }
+                catch (UnauthorizedAccessException) // ignore directories which the user does not have access to
+                { }
+
+            }
             return files;
         }
+
+        public static List<string> ShowAllFoldersUnder(string path)
+        {
+            List<string> folders = new List<string>();
+            try
+            {
+                if ((File.GetAttributes(path) & FileAttributes.ReparsePoint)
+                    != FileAttributes.ReparsePoint)
+                {
+                    foreach (string folder in Directory.GetDirectories(path))
+                    {
+                        folders.Add(folder);
+
+                        ShowAllFoldersUnder(folder);
+                    }
+                }
+            }
+            catch (UnauthorizedAccessException)
+            {
+
+            }
+
+            return folders;
+        }
+
+
+
         /// <summary>
         /// Returns the calculated version for the given graph path.
         /// </summary>

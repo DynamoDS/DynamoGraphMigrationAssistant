@@ -220,6 +220,9 @@
   <data name="NotificationMsg" xml:space="preserve">
     <value>The source folder contains {0} Dynamo graphs.</value>
   </data>
+  <data name="NotificationMsgWarningTargetCannotBeSource" xml:space="preserve">
+    <value>Target path cannot be the same path as the source path!</value>
+  </data>
   <data name="OptionalFixesMsg" xml:space="preserve">
     <value>Optional</value>
   </data>

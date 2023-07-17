@@ -368,6 +368,15 @@ namespace DynamoGraphMigrationAssistant.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Target path cannot be the same path as the source path!.
+        /// </summary>
+        public static string NotificationMsgWarningTargetCannotBeSource {
+            get {
+                return ResourceManager.GetString("NotificationMsgWarningTargetCannotBeSource", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Optional.
         /// </summary>
         public static string OptionalFixesMsg {

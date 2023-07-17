@@ -366,8 +366,8 @@ namespace DynamoGraphMigrationAssistant.ViewModels
 
             _dispatcher.Hooks.DispatcherInactive += OnDispatcherFinished;
 
-            TargetPathViewModel.PropertyChanged += SourcePathPropertyChanged;
-            SourcePathViewModel.PropertyChanged += SourcePathPropertyChanged;
+            TargetPathViewModel.PropertyChanged += PathPropertyChanged;
+            SourcePathViewModel.PropertyChanged += PathPropertyChanged;
 
             ExportGraphsCommand = new DelegateCommand(ExportGraphs);
             CancelCommand = new DelegateCommand(Cancel);
@@ -383,8 +383,8 @@ namespace DynamoGraphMigrationAssistant.ViewModels
 
 
 
-        // Handles the source path being changed
-        private void SourcePathPropertyChanged(object sender, PropertyChangedEventArgs propertyChangedEventArgs)
+        // Handles the path being changed
+        private void PathPropertyChanged(object sender, PropertyChangedEventArgs propertyChangedEventArgs)
         {
             var pathVM = sender as PathViewModel;
             if (pathVM == null) return;
@@ -486,6 +486,17 @@ namespace DynamoGraphMigrationAssistant.ViewModels
 
         private void TargetFolderChanged()
         {
+            //throw error if the user picks the source path as the target path.
+            if (TargetPathViewModel.FolderPath.Equals(SourcePathViewModel.FolderPath)) 
+            {
+                NotificationMessage = Properties.Resources.NotificationMsgWarningTargetCannotBeSource;
+                TargetPathViewModel.FolderPath = string.Empty;
+                MessageBox.Show(Properties.Resources.NotificationMsgWarningTargetCannotBeSource);
+                return;
+            }
+
+
+
             var log = GetLogFileInformation();
 
             // Do not enqueue the file if it is already in the log file
@@ -499,6 +510,7 @@ namespace DynamoGraphMigrationAssistant.ViewModels
 
             NotificationMessage = String.Format(Properties.Resources.NotificationMsg, Graphs.Count.ToString());
             RaisePropertyChanged(nameof(Graphs));
+            RaisePropertyChanged(nameof(CanExport));
         }
 
         internal void CheckVersions()
@@ -1079,8 +1091,8 @@ namespace DynamoGraphMigrationAssistant.ViewModels
         /// </summary>
         public void Dispose()
         {
-            TargetPathViewModel.PropertyChanged -= SourcePathPropertyChanged;
-            SourcePathViewModel.PropertyChanged -= SourcePathPropertyChanged;
+            TargetPathViewModel.PropertyChanged -=PathPropertyChanged;
+            SourcePathViewModel.PropertyChanged -= PathPropertyChanged;
             _dispatcher.Hooks.DispatcherInactive -= OnDispatcherFinished;
 
             CurrentWorkspace = null;
