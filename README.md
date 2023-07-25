@@ -13,6 +13,10 @@ DynamoGraphMigrationAssistant (DGMA) is a View Extension for Dynamo that allows 
 
 https://user-images.githubusercontent.com/15744724/242657381-6ac21c72-24d9-4fd2-b72d-5de5f4729853.mp4
 
+## Installation
+Installation is a manual process at this time. For an overview, check out this video and download the latest [here](https://github.com/DynamoDS/DynamoGraphMigrationAssistant/releases/latest):
+https://youtu.be/LWnrnjOqV7A
+
 ## Building
 
 ### Recommended Build Environment
