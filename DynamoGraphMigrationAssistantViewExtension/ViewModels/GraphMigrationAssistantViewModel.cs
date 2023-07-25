@@ -52,7 +52,6 @@ namespace DynamoGraphMigrationAssistant.ViewModels
         private readonly ViewLoadedParams viewLoadedParamsInstance;
         internal DynamoViewModel DynamoViewModel;
         internal HomeWorkspaceModel CurrentWorkspace;
-        private GraphMigrationAssistantModel _graphMigrationAssistantModel;
         private Dictionary<int, GraphViewModel> graphDictionary = new Dictionary<int, GraphViewModel>();
         private MigrationPhase phase = MigrationPhase.Open;
         private bool locked = false;
@@ -393,11 +392,10 @@ namespace DynamoGraphMigrationAssistant.ViewModels
         // Handles the path being changed
         private void PathPropertyChanged(object sender, PropertyChangedEventArgs propertyChangedEventArgs)
         {
-            var pathVM = sender as PathViewModel;
-            if (pathVM == null) return;
+            if (!(sender is PathViewModel pathVm)) return;
             if (propertyChangedEventArgs.PropertyName == nameof(PathViewModel.FolderPath))
             {
-                if (pathVM.Type == PathType.Source)
+                if (pathVm.Type == PathType.Source)
                 {
                     Version currentDynamoVersion = new Version(DynamoViewModel.Model.Version);
                     Version dynamoVersionWithFileTrust = new Version(2, 16, 0);
@@ -408,7 +406,7 @@ namespace DynamoGraphMigrationAssistant.ViewModels
                         MethodInfo addToTrustedLocations = typeof(PreferenceSettings).GetMethod("IsTrustedLocation",
                             BindingFlags.Public | BindingFlags.Instance);
                         var isTrusted = (bool)addToTrustedLocations.Invoke(DynamoViewModel.PreferenceSettings,
-                                new object[] { pathVM.FolderPath });
+                                new object[] { pathVm.FolderPath });
 
                         if (!isTrusted)
                         {
@@ -420,13 +418,13 @@ namespace DynamoGraphMigrationAssistant.ViewModels
                             IsTrustedFolder = true;
                         }
 
-                        SourceFolderChanged(pathVM);
+                        SourceFolderChanged(pathVm);
                     }
                     else
                     {
                         TrustCheckboxVisible = false;
                         IsTrustedFolder = true;
-                        SourceFolderChanged(pathVM);
+                        SourceFolderChanged(pathVm);
                     }
                 }
                 else
@@ -881,9 +879,9 @@ namespace DynamoGraphMigrationAssistant.ViewModels
             {
                 DynamoViewModel.FitViewCommand.Execute(null);
             }
-            catch (Exception e)
+            catch (Exception)
             {
-                string message = e.Message;
+                //suppress, the fit view command failed
             }
 
 
@@ -1060,11 +1058,6 @@ namespace DynamoGraphMigrationAssistant.ViewModels
         }
 
 
-        private void CleanUp(string image)
-        {
-            if (File.Exists(image))
-                File.Delete(image);
-        }
 
         // TODO: Should we bubble errors to Dynamo?
         private string _originalRunType = "Automatic";
@@ -1160,59 +1153,7 @@ namespace DynamoGraphMigrationAssistant.ViewModels
             return null;
         }
 
-        /// <summary>
-        /// Removes all items matching condition
-        /// Source: https://stackoverflow.com/questions/5118513/removeall-for-observablecollections
-        /// </summary>
-        /// <typeparam name="T"></typeparam>
-        /// <param name="coll"></param>
-        /// <param name="condition"></param>
-        /// <returns></returns>
-        private static int RemoveAll<T>(ObservableCollection<T> coll, Func<T, bool> condition)
-        {
-            var itemsToRemove = coll.Where(condition).ToList();
-
-            foreach (var itemToRemove in itemsToRemove)
-            {
-                coll.Remove(itemToRemove);
-            }
-
-            return itemsToRemove.Count;
-        }
-
-        private Tuple<Point2D, double, double> CalculateZoomLevel(WorkspaceViewModel workspaceViewModel)
-        {
-            // no selection, fitview all nodes and notes
-            var nodes = workspaceViewModel.Nodes.Select(x => x.NodeModel);
-            var notes = workspaceViewModel.Notes.Select(x => x.Model);
-            var models = nodes.Concat<ModelBase>(notes);
-
-            if (!models.Any()) return new Tuple<Point2D, double, double>(new Point2D(), 0, 0);
-
-            // initialize to the first model (either note or node) on the list 
-
-            var firstModel = models.First();
-            var minX = firstModel.X;
-            var maxX = firstModel.X;
-            var minY = firstModel.Y;
-            var maxY = firstModel.Y;
-
-            foreach (var model in models)
-            {
-                //calculates the min and max positions of both x and y coords of all nodes and notes
-                minX = Math.Min(model.X, minX);
-                maxX = Math.Max(model.X + model.Width, maxX);
-                minY = Math.Min(model.Y, minY);
-                maxY = Math.Max(model.Y + model.Height, maxY);
-            }
-
-            var offset = new Point2D(minX, minY);
-            double focusWidth = maxX - minX;
-            double focusHeight = maxY - minY;
-
-
-            return new Tuple<Point2D, double, double>(offset, focusWidth, focusHeight);
-        }
+        
         #endregion
     }
 }

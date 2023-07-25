@@ -94,7 +94,7 @@ namespace DynamoGraphMigrationAssistant
 
                 return $"{version.Major}.{version.Minor}";
             }
-            catch (Exception e)
+            catch (Exception)
             {
                 return "2.0";
             }
