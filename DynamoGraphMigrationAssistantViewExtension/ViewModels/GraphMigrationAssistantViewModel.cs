@@ -998,7 +998,7 @@ namespace DynamoGraphMigrationAssistant.ViewModels
                     //set the version to the user selection
                     dynamoObject["Version"] = this.TargetDynamoVersion.VersionForFile;
 
-                    //set the file to automatic TODO: see if there is a way to to store the original run mode, rather than just setting to automatic
+                    //set the file to automatic
                     dynamoObject["RunType"] = _originalRunType;
 
                     //set the view back to the file
