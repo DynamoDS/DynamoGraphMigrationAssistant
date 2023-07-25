@@ -6,6 +6,7 @@ namespace DynamoGraphMigrationAssistant
     {
         public string DisplayName => $"{Version} / {Host} {HostVersion}";
         public string Version { get; set; }
+        public string VersionForFile { get; set; }
         public string Host { get; set; }
         public string HostVersion { get; set; }
         public bool NodeSpacingSuggested { get; set; }
@@ -15,6 +16,7 @@ namespace DynamoGraphMigrationAssistant
         public TargetDynamoVersion(string version, string host, string hostVersion, bool nodeSpacingSuggested, bool ifNodeSuggested, bool pythonSuggested)
         {
             Version = version;
+            VersionForFile = $"{version}.0";
             Host = host;
             HostVersion = hostVersion;
             NodeSpacingSuggested = nodeSpacingSuggested;

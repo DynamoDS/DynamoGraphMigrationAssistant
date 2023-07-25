@@ -4,7 +4,10 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text;
+using Dynamo.Models;
+using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
+using ProtoCore.AssociativeGraph;
 
 namespace DynamoGraphMigrationAssistant
 {
@@ -28,6 +31,10 @@ namespace DynamoGraphMigrationAssistant
         public static IEnumerable<string> GetAllFilesOfExtension(string path, string extension = ".dyn")
         {
             List<string> files = new List<string>();
+
+
+            files.AddRange(Directory.EnumerateFiles(path, "*.*", SearchOption.TopDirectoryOnly)
+                .Where(x => extension.Equals(Path.GetExtension(x).ToLowerInvariant())));
 
             var folders = ShowAllFoldersUnder(path);
 
@@ -93,6 +100,29 @@ namespace DynamoGraphMigrationAssistant
             }
            
         }
+
+        public static string GetRunType(string graphPath)
+        {
+            var jsonDoc = File.ReadAllText(graphPath);
+            var jObject = (JObject)JsonConvert.DeserializeObject(jsonDoc);
+
+            if (jObject.TryGetValue("View", out var value))
+            {
+                JObject viewObject = value.ToObject<JObject>();
+                if (viewObject.TryGetValue("Dynamo", out value))
+                {
+                    JObject dynamoObject = value.ToObject<JObject>();
+
+
+                    dynamoObject.TryGetValue("RunType", out var runType);
+
+                    return runType.ToObject<string>();
+                }
+            }
+
+            return "Automatic";
+        }
+
         private static string mColumnLetters = "zabcdefghijklmnopqrstuvwxyz";
 
         // Convert Column name to 0 based index

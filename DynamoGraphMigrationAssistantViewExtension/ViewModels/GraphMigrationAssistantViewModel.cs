@@ -3,12 +3,15 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Diagnostics;
+using System.Drawing.Drawing2D;
+using System.Dynamic;
 using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Security.Permissions;
 using System.Text;
 using System.Windows;
+using System.Windows.Shapes;
 using System.Windows.Threading;
 using Dynamo.Configuration;
 using Dynamo.Controls;
@@ -25,6 +28,10 @@ using Dynamo.Wpf.Extensions;
 using DynamoGraphMigrationAssistant.Controls;
 using DynamoGraphMigrationAssistant.Models;
 using DynamoGraphMigrationAssistant.Views;
+using DynamoUnits;
+using Microsoft.Practices.Prism.Logging;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using Directory = System.IO.Directory;
 using Path = System.IO.Path;
 using String = System.String;
@@ -568,6 +575,7 @@ namespace DynamoGraphMigrationAssistant.ViewModels
                 new TargetDynamoVersion("2.13", "Revit", "2023", true, true, true),
                 new TargetDynamoVersion("2.16", "Revit", "2023.1", true, true, true),
                 new TargetDynamoVersion("2.17", "Revit", " 2024", true, true, true),
+                new TargetDynamoVersion("2.18", "Revit", " 2024.1", true, true, true),
                 new TargetDynamoVersion("2.10", "Civil3D", "2022", false, false, true),
                 new TargetDynamoVersion("2.13", "Civil3D", "2023", true, true, true),
                 new TargetDynamoVersion("2.17", "Civil3D", " 2024", true, true, true),
@@ -971,17 +979,38 @@ namespace DynamoGraphMigrationAssistant.ViewModels
         private void SaveGraph()
         {
             phase = MigrationPhase.Open;
-
+            
             var graphName = GetDynPath(CurrentWorkspace.FileName);
 
-#if DEBUG
-            //TODO: see if we can change the graph back to what the run mode was before.
-            //DynamoViewModel.CurrentSpaceViewModel.RunSettingsViewModel.Model.RunEnabled = false;
-            //DynamoViewModel.CurrentSpaceViewModel.RunSettingsViewModel.Model.RunType = RunType.Automatic;
-            //DynamoViewModel.CurrentSpaceViewModel.RunSettingsViewModel.CancelRunCommand.Execute(null);
-#endif
-
             DynamoViewModel.SaveAsCommand.Execute(graphName);
+
+            //open the dynamo graph as a json file to modify version and run settings
+            var jsonDoc = File.ReadAllText(graphName);
+            var jObject = (JObject)JsonConvert.DeserializeObject(jsonDoc);
+
+            if (jObject.TryGetValue("View", out var value))
+            {
+                JObject viewObject = value.ToObject<JObject>();
+                if (viewObject.TryGetValue("Dynamo", out value))
+                {
+                    JObject dynamoObject = value.ToObject<JObject>();
+
+                    //set the version to the user selection
+                    dynamoObject["Version"] = this.TargetDynamoVersion.VersionForFile;
+
+                    //set the file to automatic TODO: see if there is a way to to store the original run mode, rather than just setting to automatic
+                    dynamoObject["RunType"] = _originalRunType;
+
+                    //set the view back to the file
+                    viewObject["Dynamo"] = dynamoObject;
+                }
+
+                jObject["View"] = viewObject;
+            }
+            var newJson = JsonConvert.SerializeObject(jObject, Formatting.Indented);
+
+            File.WriteAllText(graphName, newJson);
+
         }
 
 
@@ -1038,13 +1067,16 @@ namespace DynamoGraphMigrationAssistant.ViewModels
         }
 
         // TODO: Should we bubble errors to Dynamo?
+        private string _originalRunType = "Automatic";
         private void OpenDynamoGraph(string path)
         {
             try
             {
-                //var command = new DynamoModel.OpenFileCommand(path, true);
                 Tuple<string, bool> openParameters = new Tuple<string, bool>(path, true);
                 DynamoViewModel.OpenCommand.Execute(openParameters);
+
+                //read the original run mode
+                _originalRunType = Utilities.GetRunType(path);
             }
             catch (Exception)
             {
