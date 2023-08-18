@@ -50,11 +50,15 @@ namespace DynamoGraphMigrationAssistant.Views
 
             GraphMigrationAssistantViewModel vm = versionCombobox.DataContext as GraphMigrationAssistantViewModel;
 
-            vm.TargetDynamoVersion = versionCombobox.SelectedItem as TargetDynamoVersion;
-            
+            if (versionCombobox.SelectedItem != null)
+            {
+                vm.TargetDynamoVersion = versionCombobox.SelectedItem as TargetDynamoVersion;
 
-            vm.FixNodeSpacing = vm.TargetDynamoVersion.NodeSpacingSuggested;
-            vm.ReplaceIfNodes = vm.TargetDynamoVersion.IfNodeSuggested;
+
+                vm.FixNodeSpacing = vm.TargetDynamoVersion.NodeSpacingSuggested;
+                vm.ReplaceIfNodes = vm.TargetDynamoVersion.IfNodeSuggested;
+            }
+
 
             if (vm.Graphs is null) return;
             

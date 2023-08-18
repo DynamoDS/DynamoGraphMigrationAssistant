@@ -22,6 +22,7 @@ namespace DynamoGraphMigrationAssistant
         {
             return Directory.Exists(path);
         }
+
         /// <summary>
         /// Returns a list of files of given path and extension
         /// </summary>
@@ -30,26 +31,39 @@ namespace DynamoGraphMigrationAssistant
         /// <returns></returns>
         public static IEnumerable<string> GetAllFilesOfExtension(string path, string extension = ".dyn")
         {
-            List<string> files = new List<string>();
-
-
-            files.AddRange(Directory.EnumerateFiles(path, "*.*", SearchOption.TopDirectoryOnly)
-                .Where(x => extension.Equals(Path.GetExtension(x).ToLowerInvariant())));
-
-            var folders = ShowAllFoldersUnder(path);
-
-            foreach (var folder in folders)
+            try
             {
-                try
-                {
-                    files.AddRange(Directory.EnumerateFiles(folder, "*.*", SearchOption.TopDirectoryOnly)
-                        .Where(x => extension.Equals(Path.GetExtension(x).ToLowerInvariant())));
-                }
-                catch (UnauthorizedAccessException) // ignore directories which the user does not have access to
-                { }
+                var files = Directory.EnumerateFiles(path, "*.*", SearchOption.AllDirectories)
+                    .Where(x => extension.Equals(Path.GetExtension(x).ToLowerInvariant()));
 
+                return files;
             }
-            return files;
+            //TODO: this method fails if a user picks an entire c drive... which you shouldn't do. but you know.
+            catch (Exception e)
+            {
+                List<string> files = new List<string>();
+
+
+                files.AddRange(Directory.EnumerateFiles(path, "*.*", SearchOption.TopDirectoryOnly)
+                    .Where(x => extension.Equals(Path.GetExtension(x).ToLowerInvariant())));
+
+                var folders = ShowAllFoldersUnder(path);
+
+                foreach (var folder in folders)
+                {
+                    try
+                    {
+                        files.AddRange(Directory.EnumerateFiles(folder, "*.*", SearchOption.TopDirectoryOnly)
+                            .Where(x => extension.Equals(Path.GetExtension(x).ToLowerInvariant())));
+                    }
+                    catch (UnauthorizedAccessException) // ignore directories which the user does not have access to
+                    {
+                    }
+
+                }
+
+                return files;
+            }
         }
 
         public static List<string> ShowAllFoldersUnder(string path)

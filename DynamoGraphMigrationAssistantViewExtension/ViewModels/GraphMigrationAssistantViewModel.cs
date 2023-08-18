@@ -3,20 +3,16 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Diagnostics;
-using System.Drawing.Drawing2D;
-using System.Dynamic;
 using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Security.Permissions;
 using System.Text;
 using System.Windows;
-using System.Windows.Shapes;
 using System.Windows.Threading;
 using Dynamo.Configuration;
 using Dynamo.Controls;
 using Dynamo.Core;
-using Dynamo.Graph;
 using Dynamo.Graph.Nodes;
 using Dynamo.Graph.Workspaces;
 using Dynamo.Models;
@@ -26,10 +22,7 @@ using Dynamo.Utilities;
 using Dynamo.ViewModels;
 using Dynamo.Wpf.Extensions;
 using DynamoGraphMigrationAssistant.Controls;
-using DynamoGraphMigrationAssistant.Models;
 using DynamoGraphMigrationAssistant.Views;
-using DynamoUnits;
-using Microsoft.Practices.Prism.Logging;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using Directory = System.IO.Directory;
@@ -82,6 +75,21 @@ namespace DynamoGraphMigrationAssistant.ViewModels
         /// </summary>
         public ObservableCollection<TargetDynamoVersion> TargetDynamoVersions { get; set; }
         public TargetDynamoVersion TargetDynamoVersion { get; set; }
+
+        private int _targetVersionIndex = 0;
+        /// <summary>
+        /// The selected index. Based on current Dynamo version.
+        /// </summary>
+        public int TargetVersionIndex
+        {
+            get => _targetVersionIndex;
+            set
+            {
+                if (_targetVersionIndex == value) return;
+                _targetVersionIndex = value; 
+                RaisePropertyChanged(nameof(CanExport));
+            }
+        }
 
         /// <summary>
         /// Collection of graphs loaded for exporting
@@ -384,7 +392,7 @@ namespace DynamoGraphMigrationAssistant.ViewModels
 
             sb = new StringBuilder();
 
-            LoadTargetDynamoVersions();
+            //LoadTargetDynamoVersions();
         }
 
 
@@ -486,13 +494,15 @@ namespace DynamoGraphMigrationAssistant.ViewModels
             NotificationMessage = String.Format(Properties.Resources.NotificationMsg, Graphs.Count.ToString());
             RaisePropertyChanged(nameof(Graphs));
 
+            LoadTargetDynamoVersions();
+
             CheckVersions();
         }
 
         private void TargetFolderChanged()
         {
             //throw error if the user picks the source path as the target path.
-            if (TargetPathViewModel.FolderPath.Equals(SourcePathViewModel.FolderPath)) 
+            if (TargetPathViewModel.FolderPath.Equals(SourcePathViewModel.FolderPath))
             {
                 NotificationMessage = Properties.Resources.NotificationMsgWarningTargetCannotBeSource;
                 TargetPathViewModel.FolderPath = string.Empty;
@@ -527,19 +537,28 @@ namespace DynamoGraphMigrationAssistant.ViewModels
             {
                 Version original = Version.Parse(graphViewModel.Version);
 
-                Version target = Version.Parse(TargetDynamoVersion.Version);
-
-                if (original >= target)
+                if (TargetDynamoVersion != null)
                 {
-                    graphViewModel.InTargetVersion = true;
+                    Version target = Version.Parse(TargetDynamoVersion.Version);
+
+                    if (original >= target)
+                    {
+                        graphViewModel.InTargetVersion = true;
+                    }
+                    else
+                    {
+                        graphViewModel.InTargetVersion = false;
+                    }
                 }
                 else
                 {
                     graphViewModel.InTargetVersion = false;
-
                 }
+
+              
             }
             TargetVersionChanged();
+
         }
 
         private void OnCurrentWorkspaceCleared(IWorkspaceModel workspace)
@@ -563,34 +582,37 @@ namespace DynamoGraphMigrationAssistant.ViewModels
         /// </summary>
         private void LoadTargetDynamoVersions()
         {
-            //Load our target versions from json TODO: make this read extra folder
-            TargetDynamoVersions = new ObservableCollection<TargetDynamoVersion>()
+            //Load our target versions from json
+            if (Graphs!= null)
             {
-                new TargetDynamoVersion("2.5", "Revit", "2021", false, false, true),
-                new TargetDynamoVersion("2.6", "Revit", "2021.1", false, false, true),
-                new TargetDynamoVersion("2.10", "Revit", "2022", false, false, true),
-                new TargetDynamoVersion("2.12", "Revit", "2022.1", false, true, true),
-                new TargetDynamoVersion("2.13", "Revit", "2023", true, true, true),
-                new TargetDynamoVersion("2.16", "Revit", "2023.1", true, true, true),
-                new TargetDynamoVersion("2.17", "Revit", " 2024", true, true, true),
-                new TargetDynamoVersion("2.18", "Revit", " 2024.1", true, true, true),
-                new TargetDynamoVersion("2.10", "Civil3D", "2022", false, false, true),
-                new TargetDynamoVersion("2.13", "Civil3D", "2023", true, true, true),
-                new TargetDynamoVersion("2.17", "Civil3D", " 2024", true, true, true),
-            };
+                //calculate which product is used most for version selection.
+                var whatProductIsUsedMost = Graphs.GroupBy(g => g.Product).OrderByDescending(g => g.Count()).FirstOrDefault()?.Key;
 
+                if (whatProductIsUsedMost is null)
+                {
+                    TargetDynamoVersions = TargetDynamoVersion.DefaultVersions();
+                }
+                else
+                {
+                    TargetDynamoVersions = TargetDynamoVersion.LoadPotentialVersions(whatProductIsUsedMost);
+                }
 
-            ////pick the potential versions from what our graphs mostly consist of
-            //var whatProductIsUsedMost = graphs.GroupBy(g => g.Product).OrderByDescending(g => g.Count()).FirstOrDefault()?.Key;
+                //now set the target based on what version is open
+                try
+                {
+                    Version currentDynamoVersion = Version.Parse(DynamoViewModel.Version);
+                    string stringVersion = $"{currentDynamoVersion.Major}.{currentDynamoVersion.Minor}";
+                    var potential = TargetDynamoVersions.First(v => v.Version.Equals(stringVersion));
+                    TargetVersionIndex = TargetDynamoVersions.IndexOf(potential);
+                }
+                catch (Exception)
+                {
+                    //couldn't select index, just leave at 0
+                }
 
-            //if (whatProductIsUsedMost is null)
-            //{
-            //    TargetVersions = PotentialTargetVersions;
-            //}
-            //else
-            //{
-            //    TargetVersions = new ObservableCollection<TargetDynamoVersion>(PotentialTargetVersions.Where(p => p.Host.Equals(whatProductIsUsedMost)));
-            //}
+                RaisePropertyChanged("TargetDynamoVersions");
+                RaisePropertyChanged("TargetVersionIndex");
+            }
         }
 
         /// <summary>
@@ -768,6 +790,8 @@ namespace DynamoGraphMigrationAssistant.ViewModels
 
             var nodeName = "CoreNodeModels.Logic.RefactoredIf";
 
+            if(DynamoViewModel.CurrentSpaceViewModel is null) return;
+
             var ifNodesToReplace = DynamoViewModel.CurrentSpaceViewModel.Nodes.Where(n =>
                 n.NodeModel.GetType().FullName.Equals("CoreNodeModels.Logic.If")).ToList();
 
@@ -919,7 +943,7 @@ namespace DynamoGraphMigrationAssistant.ViewModels
             }
         }
 
-       
+
 
         private void MigrateInputLinebreaksToPinnedNotes()
         {
@@ -977,7 +1001,7 @@ namespace DynamoGraphMigrationAssistant.ViewModels
         private void SaveGraph()
         {
             phase = MigrationPhase.Open;
-            
+
             var graphName = GetDynPath(CurrentWorkspace.FileName);
 
             DynamoViewModel.SaveAsCommand.Execute(graphName);
@@ -1096,8 +1120,8 @@ namespace DynamoGraphMigrationAssistant.ViewModels
         private void EditSettings(object obj)
         {
             var dynamoView = viewLoadedParamsInstance.DynamoWindow as DynamoView;
-            MigrationSettingsView view = new MigrationSettingsView(dynamoView,MigrationSettingsViewModel);
-           
+            MigrationSettingsView view = new MigrationSettingsView(dynamoView, MigrationSettingsViewModel);
+
             view.ShowDialog();
         }
 
@@ -1116,7 +1140,7 @@ namespace DynamoGraphMigrationAssistant.ViewModels
         /// </summary>
         public void Dispose()
         {
-            TargetPathViewModel.PropertyChanged -=PathPropertyChanged;
+            TargetPathViewModel.PropertyChanged -= PathPropertyChanged;
             SourcePathViewModel.PropertyChanged -= PathPropertyChanged;
             _dispatcher.Hooks.DispatcherInactive -= OnDispatcherFinished;
 
@@ -1153,7 +1177,7 @@ namespace DynamoGraphMigrationAssistant.ViewModels
             return null;
         }
 
-        
+
         #endregion
     }
 }

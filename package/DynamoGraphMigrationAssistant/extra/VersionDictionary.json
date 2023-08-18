@@ -56,6 +56,14 @@
     "PythonSuggested": true
   },
   {
+    "Version": "2.18",
+    "Host": "Revit",
+    "HostVersion": " 2024.1",
+    "NodeSizeSuggested": true,
+    "IfNodeSuggested": true,
+    "PythonSuggested": true
+  },
+  {
     "Version": "2.10",
     "Host": "Civil3D",
     "HostVersion": "2022",

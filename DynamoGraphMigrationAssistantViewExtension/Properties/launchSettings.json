@@ -10,6 +10,10 @@
     "Debug2.17": {
       "commandName": "Executable",
       "executablePath": "C:\\Users\\johnpierson\\Desktop\\Autodesk\\DynamoCoreRuntime2.17.0\\DynamoSandbox.exe"
+    },
+    "Debug2.18": {
+      "commandName": "Executable",
+      "executablePath": "C:\\Users\\johnpierson\\Desktop\\Autodesk\\DynamoCoreRuntime2.18.1\\DynamoSandbox.exe"
     }
   }
 }

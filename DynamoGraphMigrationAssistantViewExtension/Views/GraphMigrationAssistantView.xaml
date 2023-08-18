@@ -133,7 +133,7 @@
                           FontSize="12" 
                           SelectionChanged="Selector_OnSelectionChanged" 
                           Name="TargetVersionComboBox" 
-                          SelectedIndex="5"
+                          SelectedIndex="{Binding TargetVersionIndex}"
                           IsEnabled="{Binding Available, Mode=OneWay,UpdateSourceTrigger=PropertyChanged}"/>
             </StackPanel>
 
