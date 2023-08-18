@@ -56,4 +56,5 @@ In order to debug or run/create Unit Tests, you will have to take a few addition
 
 ## Known Issues
 - At this time (up to Dynamo 2.18.x) the extension overrides the Python notification extension and the workspace references extension until new APIs are added. Related issues are here ([#7](https://github.com/DynamoDS/DynamoGraphMigrationAssistant/issues/7) and here [#11](https://github.com/DynamoDS/DynamoGraphMigrationAssistant/issues/11))
+- This tool will not upgrade pre Dynamo 2.0.x graphs (XML based graphs) to modern versions. You need to be (at a minimum) of Dynamo 2.0 for this to work. You can try to utilize [WorkspaceUpgradeExtension](https://github.com/DynamoDS/DynamoWorkspaceUpgradeExtension/tree/master)
 - In rare circumstances, graphs could cause a silent crash. In these scenarios, try utilizing the 'log.txt' file saved in the root folder of your Target location. The Extension would allow you to attempt and Resume your run from the last recorded graph
