@@ -292,4 +292,7 @@
   <data name="ViewOutputButtonText" xml:space="preserve">
     <value>View Output</value>
   </data>
+  <data name="XmlFileCopiedLogMessage" xml:space="preserve">
+    <value>{0} was in an older XML-based Dynamo version. This cannot be upgraded and was simply copied to output folder with no changes.</value>
+  </data>
 </root>

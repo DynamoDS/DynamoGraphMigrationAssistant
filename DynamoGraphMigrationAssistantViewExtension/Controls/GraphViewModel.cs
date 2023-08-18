@@ -1,4 +1,5 @@
-﻿using System.IO;
+﻿using System;
+using System.IO;
 using Dynamo.Core;
 
 namespace DynamoGraphMigrationAssistant.Controls
@@ -58,6 +59,8 @@ namespace DynamoGraphMigrationAssistant.Controls
             }
         }
 
+  
+
         public string UniqueName { get; set; }
 
         public string Product => CalculateDynamoProduct();
@@ -77,6 +80,28 @@ namespace DynamoGraphMigrationAssistant.Controls
             }
 
             return string.Empty;
+        }
+
+        /// <summary>
+        /// Shows if the graph is legacy Dynamo version
+        /// </summary>
+        public bool IsXmlBased => CheckFileForXml();
+
+        public bool CheckFileForXml()
+        {
+            try
+            {
+                using (var sr = new StreamReader(UniqueName))
+                {
+                    var fileText = sr.ReadToEnd();
+
+                    return fileText.StartsWith("<");
+                }
+            }
+            catch (Exception)
+            {
+                return true;
+            }
         }
     }
 }

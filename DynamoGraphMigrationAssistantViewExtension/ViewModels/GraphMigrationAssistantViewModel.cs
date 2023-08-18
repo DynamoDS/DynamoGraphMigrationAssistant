@@ -649,22 +649,41 @@ namespace DynamoGraphMigrationAssistant.ViewModels
                         new object[] { SourcePathViewModel.FolderPath });
             }
 
-            foreach (var file in Graphs.Where(g => !g.InTargetVersion).ToList().Select(x => x.UniqueName).ToList())
+            foreach (var file in Graphs.Where(g => !g.InTargetVersion && !g.IsXmlBased).ToList().Select(x => x.UniqueName).ToList())
             {
                 _graphQueue.Enqueue(file);
             }
 
             //copy the ones already in the path
-            foreach (var fileInTarget in Graphs.Where(g => g.InTargetVersion))
+            foreach (var fileInTarget in Graphs.Where(g => g.InTargetVersion || g.IsXmlBased))
             {
+                string message = Properties.Resources.FileCopiedLogMessage;
                 var graphName = GetDynPath(fileInTarget.UniqueName);
+
+                if (fileInTarget.IsXmlBased)
+                {
+                    FileInfo fInfo = new FileInfo(graphName);
+                    var directory = fInfo.DirectoryName;
+
+                    var newDirectory = Path.Combine(directory, "_tooOldToMigrate");
+                    if (!Directory.Exists(newDirectory))
+                    {
+                        Directory.CreateDirectory(newDirectory);
+                    }
+
+                    graphName = graphName.Replace(directory,newDirectory);
+
+                    //for the log
+                    message = Properties.Resources.XmlFileCopiedLogMessage;
+                }
 
                 File.Copy(fileInTarget.UniqueName, graphName, true);
 
                 fileInTarget.Exported = true;
 
                 //log the changes
-                EnterLog(string.Format(Properties.Resources.FileCopiedLogMessage, fileInTarget.GraphName));
+
+                EnterLog(string.Format(message, fileInTarget.GraphName));
 
                 progress++;
             }
@@ -1095,8 +1114,9 @@ namespace DynamoGraphMigrationAssistant.ViewModels
                 //read the original run mode
                 _originalRunType = Utilities.GetRunType(path);
             }
-            catch (Exception)
+            catch (Exception e)
             {
+                string msg = e.Message;
             }
         }
 

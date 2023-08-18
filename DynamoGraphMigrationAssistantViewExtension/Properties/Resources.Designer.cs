@@ -583,5 +583,14 @@ namespace DynamoGraphMigrationAssistant.Properties {
                 return ResourceManager.GetString("ViewOutputButtonText", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to {0} was in an older XML-based Dynamo version. This cannot be upgraded and was simply copied to output folder with no changes..
+        /// </summary>
+        public static string XmlFileCopiedLogMessage {
+            get {
+                return ResourceManager.GetString("XmlFileCopiedLogMessage", resourceCulture);
+            }
+        }
     }
 }
