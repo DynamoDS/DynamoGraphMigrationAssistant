@@ -203,4 +203,11 @@
         <b>Force input order:</b> Creates an input order (for example, to use in Dynamo Player) by appending a prefix to the name of each node marked as “Is Input.” The prefix is 001|, 002|, etc. Numbering will begin with the node closest to the top of the workspace.<br />
         <b>Swap line breaks to pinned notes:</b> If a node name includes a line break, this option will take the text before the line break and turn it into a pinned note. The text after the line break will remain as the node’s name.<br />
     </p>
+    <h3>Other Considerations</h3>
+    <p>
+        Older Dynamo graphs (1.3.x versions)
+        <br />
+        <br />
+        At this time, the tool will only perform a migration on graphs that have already been updated to a 2.x (JSON based) file format. If you happen to have any 1.x versions of your Dynamo graphs, the tool will skip over those files and place them in a special output folder.
+    </p>
 </body>

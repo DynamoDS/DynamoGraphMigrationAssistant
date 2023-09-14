@@ -6,8 +6,8 @@
     <AssemblyTitle>DynamoMigrationAssistantViewExtension</AssemblyTitle>
     <Product>DynamoMigrationAssistantViewExtension</Product>
     <Copyright>Copyright ©  2023</Copyright>
-    <AssemblyVersion>1.0.0</AssemblyVersion>
-    <FileVersion>1.0.0</FileVersion>
+    <AssemblyVersion>1.0.1</AssemblyVersion>
+    <FileVersion>1.0.1</FileVersion>
     <OutputPath>bin\$(Configuration)\</OutputPath>
     <OutputType>Library</OutputType>
   </PropertyGroup>
